@@ -1,4 +1,4 @@
-import { FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope } from 'react-icons/fa';
+import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
 
 const Login = () => {
@@ -15,7 +15,7 @@ const Login = () => {
                             <div className='border-2 w-10 border-purple-600 inline-block mb-2'></div>
                             <div className='flex justify-center my-2'>
                                 <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
-                                    <FaFacebookF className='text-sm' />
+                                    <FaMicrosoft className='text-sm' />
                                 </a>
                                 <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
                                     <FaLinkedinIn className='text-sm' />
@@ -35,13 +35,13 @@ const Login = () => {
                                     <MdLockOutline className='text-gray-400 mr-2' />
                                     <input type="password" name='password' placeholder='Password' className='bg-gray-600 outline-none text-sm' />
                                 </div>
-                                <a href="#" className='border-2 border-purple-600 rounded-full px-12 py-2 inline-block hover:bg-purple-600 hover:text-black text-purple-600 mt-10'>Sign Up</a>
+                                <a href="#" className='border-2 border-purple-600 rounded-full px-12 py-2 inline-block hover:bg-purple-600 hover:text-black text-purple-600 mt-10'>Sign In</a>
                             </div>
                         </div>
                     </div>
                     {/*Sign up section*/}
                     <div className='w-2/5 p-5 bg-purple-900 rounded-tr-2xl sm:rounded-none sm:w-full rounded-br-2xl py-36 px-12'>
-                        <h2 className='text-3xl font-bold mb-2'>Hello, Friend!</h2>
+                        <h2 className='text-3xl font-bold mb-2'>Hello, Rider!</h2>
                         <div className='border-2 w-10 border-white inline-block mb-2'></div>
                         <p className='mb-10'>Fill up your personal information and start journey with us.</p>
                         <a href="#" className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-purple-900'>Sign Up</a>
