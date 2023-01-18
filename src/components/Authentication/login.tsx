@@ -5,7 +5,7 @@ const Login = () => {
     return (
         <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
             <main className='flex flex-col items-center justify-center w-full flex-1 px-20 text-center'>
-                <div className='bg-black sm:rounded-none rounded-2xl sm:flex-col shadow-2xl flex w-2/3 max-w-4xl sm:w-screen sm:h-fit md:w-screen'>
+                <div className='bg-gradient-to-r sm:bg-gradient-to-b from-black to-purple-900 sm:rounded-none rounded-2xl sm:flex-col shadow-2xl flex w-2/3 max-w-4xl sm:w-screen sm:h-fit md:w-screen'>
                     <div className='w-3/5 p-5 sm:w-full'>
                         <div className="text-left font-bold flex flex-col sm:items-center">
                             <a href="#"><span className='text-purple-600'>Crowd</span>Cruisers</a>
@@ -40,7 +40,7 @@ const Login = () => {
                         </div>
                     </div>
                     {/*Sign up section*/}
-                    <div className='w-2/5 p-5 bg-purple-900 rounded-tr-2xl sm:rounded-none sm:w-full rounded-br-2xl py-36 px-12'>
+                    <div className='w-2/5 p-5 bg-gradient-to-l sm:bg-gradient-to-t backdrop-blur bg-opacity-80 to-purple-900 from-black shadow rounded-tr-2xl sm:rounded-none sm:w-full rounded-br-2xl py-36 px-12'>
                         <h2 className='text-3xl font-bold mb-2'>Hello, Rider!</h2>
                         <div className='border-2 w-10 border-white inline-block mb-2'></div>
                         <p className='mb-10'>Fill up your personal information and start journey with us.</p>
