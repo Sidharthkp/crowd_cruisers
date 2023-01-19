@@ -1,36 +1,30 @@
 import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft, FaUserNinja } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
-import { useContext, useEffect, useState } from 'react';
-import { auth, provider } from "../../firebase/config"
-import { signInWithPopup } from 'firebase/auth'
-import { FirebaseContext } from '../../store/FirebaseContext';
-
+import { auth, provider } from '../../firebase/config'
+import { signInWithPopup } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 const Signup = () => {
-    const [states, setItem] = useState('');
+    const [googlename, setValue] = useState('');
     const [username, setName] = useState('');
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
     const [userconfirm, setConfirm] = useState('');
-    const {firebase} = useContext(FirebaseContext);
-
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        console.log(firebase);
+    const handleSubmit = (event: any) => {
+        event.preventDefault();
     }
-
+//google
     const handleClick = (e: any) => {
         e.preventDefault()
-        signInWithPopup(auth, provider).then((data: any)=>{
-            setItem(data.user.email)
+        signInWithPopup(auth,provider).then((data: any)=>{
+            setValue(data.user.email)
             localStorage.setItem("email", data.user.email)
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const email = localStorage.getItem('email') || "";
-        setItem(email);
-    })
+        setValue(email);
+    }, [])
 
     return (
         <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
