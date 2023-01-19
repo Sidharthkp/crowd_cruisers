@@ -1,17 +1,36 @@
-import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft, FaUser, FaUserNinja } from 'react-icons/fa';
+import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft, FaUserNinja } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { auth, provider } from "../../firebase/config"
+import { signInWithPopup } from 'firebase/auth'
+import { FirebaseContext } from '../../store/FirebaseContext';
 
-const Login = () => {
-    const [state, setState] = useState('');
+const Signup = () => {
+    const [states, setItem] = useState('');
     const [username, setName] = useState('');
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
+    const [userconfirm, setConfirm] = useState('');
+    const {firebase} = useContext(FirebaseContext);
+
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        console.log(username);
+        console.log(firebase);
     }
+
+    const handleClick = (e: any) => {
+        e.preventDefault()
+        signInWithPopup(auth, provider).then((data: any)=>{
+            setItem(data.user.email)
+            localStorage.setItem("email", data.user.email)
+        })
+    }
+
+    useEffect(()=>{
+        const email = localStorage.getItem('email') || "";
+        setItem(email);
+    })
 
     return (
         <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
@@ -31,7 +50,7 @@ const Login = () => {
                                 <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
                                     <FaLinkedinIn className='text-sm' />
                                 </a>
-                                <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
+                                <a href="#" onClick={handleClick} className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
                                     <FaGoogle className='text-sm' />
                                 </a>
                             </div>
@@ -41,21 +60,21 @@ const Login = () => {
                                 <div className='flex flex-col items-center'>
                                     <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
                                         <FaUserNinja className='text-purple-600 mr-2' />
-                                        <input type="text" name='name' value={username} onChange={(e) => setName(e.target.value)} placeholder='Name' className='bg-white outline-none text-sm' />
+                                        <input type="text" name='name' value={username} onChange={(e) => setName(e.target.value)} placeholder='Name' className='bg-white text-black outline-none text-sm' />
                                     </div>
                                     <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
                                         <FaRegEnvelope className='text-purple-600 mr-2' />
-                                        <input type="email" name='email' value={useremail} onChange={(e) => setEmail(e.target.value)} placeholder='Email' className='bg-white outline-none text-sm' />
+                                        <input type="email" name='email' value={useremail} onChange={(e) => setEmail(e.target.value)} placeholder='Email' className='bg-white text-black outline-none text-sm' />
                                     </div>
                                     <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
                                         <MdLockOutline className='text-purple-600 mr-2' />
-                                        <input type="password" value={userpassword} onChange={(e) => setPassword(e.target.value)} name='password' placeholder='Password' className='bg-white outline-none text-sm' />
+                                        <input type="password" value={userpassword} onChange={(e) => setPassword(e.target.value)} name='password' placeholder='Password' className='bg-white text-black outline-none text-sm' />
                                     </div>
                                     <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
                                         <MdLockOutline className='text-purple-600 mr-2' />
-                                        <input type="password" name='confirm_password' placeholder='Confirm Password' className='bg-white outline-none text-sm' />
+                                        <input type="password" value={userconfirm} onChange={(e) => setConfirm(e.target.value)} name='confirm_password' placeholder='Confirm Password' className='bg-white text-black outline-none text-sm' />
                                     </div>
-                                    <a onClick={() => setState('signup')} href="#" className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-purple-600 text-white mt-4'>Sign Up</a>
+                                    <button className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-purple-600 cursor-pointer text-white mt-4'>Sign Up</button>
                                 </div>
                             </form>
                         </div>
@@ -65,7 +84,7 @@ const Login = () => {
                         <h2 className='text-3xl font-bold mb-2'>Hello, Rider!</h2>
                         <div className='border-2 w-10 border-white inline-block mb-2'></div>
                         <p className='mb-10'>Allready have an account?</p>
-                        <a onClick={() => setState('login')} href="#" className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-black'>Sign In</a>
+                        <button className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-black'>Sign In</button>
                     </div>
                 </div>
             </main>
@@ -73,4 +92,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default Signup;

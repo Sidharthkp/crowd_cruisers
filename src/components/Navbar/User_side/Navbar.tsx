@@ -3,6 +3,9 @@ import { FaUserCircle } from "react-icons/fa";
 
 export default function NavBar() {
     const [navbar, setNavbar] = useState(false);
+    const logout = () => {
+        localStorage.clear()
+    }
 
     return (
         <nav className="w-full bg-gradient-to-b backdrop-blur bg-opacity-80 from-purple-900 to-black shadow">
@@ -10,7 +13,7 @@ export default function NavBar() {
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 lg:py-5 xl:py-5 2xl:py-5 md:block lg:block xl:block 2xl:block">
                         <a href="javascript:void(0)">
-                            <h2 className="text-lg font-bold font-mono text-white">Crowd Cruisers</h2>
+                            <img src="..\src\assets\Logo\logo.jpg" className="w-14 mb-1 rounded-full inline-block" alt="" /><h1 className="inline-block text-xl font-bold">Crowd Cruisers</h1>
                         </a>
                         <div className="md:hidden xl:hidden 2xl:hidden lg:hidden">
                             <button
