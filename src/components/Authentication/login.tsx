@@ -1,7 +1,13 @@
 import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate()
+    const handleSignIn = (e: any) => {
+        e.preventDefault()
+        navigate("/signup");
+    }
     return (
         <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
             <main className='flex flex-col items-center justify-center w-full flex-1 px-20 text-center'>
@@ -44,7 +50,7 @@ const Login = () => {
                         <h2 className='text-3xl font-bold mb-2'>Hello, Rider!</h2>
                         <div className='border-2 w-10 border-white inline-block mb-2'></div>
                         <p className='mb-10'>Fill up your personal information and start journey with us.</p>
-                        <a href="#" className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-purple-900'>Sign Up</a>
+                        <button onClick={handleSignIn} className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-purple-900 cursor-pointer'>Sign Up</button>
                     </div>
                 </div>
             </main>

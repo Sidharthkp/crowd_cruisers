@@ -12,7 +12,7 @@ export default function NavBar() {
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex lg:flex xl:flex 2xl:flex lg:px-8 xl:px-8 md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 lg:py-5 xl:py-5 2xl:py-5 md:block lg:block xl:block 2xl:block">
-                        <a href="javascript:void(0)">
+                        <a href="#">
                             <img src="..\src\assets\Logo\logo.jpg" className="w-14 mb-1 rounded-full inline-block" alt="" /><h1 className="inline-block text-xl font-bold">Crowd Cruisers</h1>
                         </a>
                         <div className="md:hidden xl:hidden 2xl:hidden lg:hidden">
@@ -60,22 +60,22 @@ export default function NavBar() {
                     >
                         <ul className="items-center justify-center space-y-8 md:flex xl:flex lg:flex lg:space-x-6 lg:space-y-0 xl:space-x-6 xl:space-y-0 md:space-x-6 md:space-y-0">
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Home</a>
+                                <a href="#">Home</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Map</a>
+                                <a href="#">Map</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Community</a>
+                                <a href="#">Community</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Rides</a>
+                                <a href="#">Rides</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Events</a>
+                                <a href="#">Events</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Apparel Store</a>
+                                <a href="#">Apparel Store</a>
                             </li>
                         </ul>
                     </div>

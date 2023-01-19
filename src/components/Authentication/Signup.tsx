@@ -2,9 +2,13 @@ import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft, FaUserNinja } from 
 import { MdLockOutline } from 'react-icons/md';
 import { auth, provider } from '../../firebase/config'
 import { signInWithPopup } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { setAuthorized } from '../../redux/reducer';
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
-    const [googlename, setValue] = useState('');
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [username, setName] = useState('');
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
@@ -16,15 +20,16 @@ const Signup = () => {
     const handleClick = (e: any) => {
         e.preventDefault()
         signInWithPopup(auth,provider).then((data: any)=>{
-            setValue(data.user.email)
             localStorage.setItem("email", data.user.email)
+            dispatch(setAuthorized())
         })
     }
 
-    useEffect(() => {
-        const email = localStorage.getItem('email') || "";
-        setValue(email);
-    }, [])
+    const handleSignIn = (e: any) => {
+        e.preventDefault()
+        navigate("/login");
+    }
+
 
     return (
         <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
@@ -78,7 +83,7 @@ const Signup = () => {
                         <h2 className='text-3xl font-bold mb-2'>Hello, Rider!</h2>
                         <div className='border-2 w-10 border-white inline-block mb-2'></div>
                         <p className='mb-10'>Allready have an account?</p>
-                        <button className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-black'>Sign In</button>
+                        <button onClick={handleSignIn} className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-black'>Sign In</button>
                     </div>
                 </div>
             </main>
