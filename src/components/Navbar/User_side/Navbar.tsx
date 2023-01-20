@@ -1,21 +1,20 @@
 import { signOut } from "@firebase/auth";
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase/config";
 import { setNotAuthenticated } from "../../../redux/Authentication/reducer";
-import { setUnauthorized } from "../../../redux/Authorization/reducer";
 
 export default function NavBar() {
     const navigate = useNavigate()
-    const [navbar, setNavbar] = useState(false);
+    const [navbar, setNavbar] = useState(false)
     const dispatch = useDispatch()
+    const authenticated = useSelector((state: any) => state.authentication.authenticated);
 
     const logout = () => {
         signOut(auth).then(() => {
             localStorage.clear();
-            dispatch(setUnauthorized())
             dispatch(setNotAuthenticated())
             navigate("/login");
         })
@@ -106,9 +105,13 @@ export default function NavBar() {
                                 <FaUserCircle className='text-2xl' />
                             </a>
                         </li>
-                        <li className="text-white hover:text-indigo-200 mt-5">
-                            <a onClick={logout} className="cursor-pointer pt-5">Logout</a>
-                        </li>
+                        {authenticated ?
+                            <li className="text-white hover:text-indigo-200 mt-5">
+                                <a onClick={logout} className="cursor-pointer pt-5">Logout</a>
+                            </li>
+                        :
+                            <li></li>
+                        }
                     </ul>
                 </div>
             </div>
