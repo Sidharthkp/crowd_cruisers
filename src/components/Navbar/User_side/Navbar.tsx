@@ -2,10 +2,12 @@ import { signOut } from "@firebase/auth";
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase/config";
 import { setUnauthorized } from "../../../redux/Authorization/reducer";
 
 export default function NavBar() {
+    const navigate = useNavigate()
     const [navbar, setNavbar] = useState(false);
     const dispatch = useDispatch()
 
@@ -13,7 +15,7 @@ export default function NavBar() {
         signOut(auth).then(()=>{
             localStorage.clear();
             dispatch(setUnauthorized())
-            window.location.pathname = "/login";
+            navigate("/login");
         })
     }
 
@@ -87,9 +89,6 @@ export default function NavBar() {
                             <li className="text-white hover:text-indigo-200">
                                 <a href="#">Apparel Store</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
-                                <a onClick={logout}>Logout</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -99,6 +98,7 @@ export default function NavBar() {
                             <a href="#">
                                 <FaUserCircle className='text-2xl' />
                             </a>
+                            <a onClick={logout} className="cursor-pointer">Logout</a>
                         </li>
                     </ul>
                 </div>
