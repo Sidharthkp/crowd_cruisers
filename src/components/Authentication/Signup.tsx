@@ -1,20 +1,27 @@
-import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaUserNinja, FaFacebookF } from 'react-icons/fa';
+import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaFacebookF } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
 import { auth, provider } from '../../firebase/config'
-import { signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { setAuthentication } from '../../redux/Authentication/reducer';
 import { useNavigate } from 'react-router-dom';
+import 'firebase/auth'
+
 const Signup = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [username, setName] = useState('');
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
-    const [userconfirm, setConfirm] = useState('');
+    const email: string = useremail
+    const password: string = userpassword
     const handleSubmit = (event: any) => {
         event.preventDefault();
+        createUserWithEmailAndPassword(auth, email, password).then((data: any) => {
+            localStorage.setItem("email", data.user.email)
+            dispatch(setAuthentication())
+            navigate('/')
+        })
     }
     //google
     const handleClick = (e: any) => {
@@ -59,20 +66,12 @@ const Signup = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className='flex flex-col items-center'>
                                     <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
-                                        <FaUserNinja className='text-purple-600 mr-2' />
-                                        <input type="text" name='name' value={username} onChange={(e) => setName(e.target.value)} placeholder='Name' className='bg-white text-black outline-none text-sm' />
-                                    </div>
-                                    <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
                                         <FaRegEnvelope className='text-purple-600 mr-2' />
                                         <input type="email" name='email' value={useremail} onChange={(e) => setEmail(e.target.value)} placeholder='Email' className='bg-white text-black outline-none text-sm' />
                                     </div>
                                     <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
                                         <MdLockOutline className='text-purple-600 mr-2' />
                                         <input type="password" value={userpassword} onChange={(e) => setPassword(e.target.value)} name='password' placeholder='Password' className='bg-white text-black outline-none text-sm' />
-                                    </div>
-                                    <div className="bg-white w-64 p-2 flex items-center rounded-2xl mb-3">
-                                        <MdLockOutline className='text-purple-600 mr-2' />
-                                        <input type="password" value={userconfirm} onChange={(e) => setConfirm(e.target.value)} name='confirm_password' placeholder='Confirm Password' className='bg-white text-black outline-none text-sm' />
                                     </div>
                                     <button className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-purple-600 cursor-pointer text-white mt-4'>Sign Up</button>
                                 </div>

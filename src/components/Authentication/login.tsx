@@ -1,14 +1,27 @@
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaFacebookF } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../../firebase/config';
+import { useState } from 'react';
 import { setAuthentication } from '../../redux/Authentication/reducer';
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [useremail, setEmail] = useState('');
+    const [userpassword, setPassword] = useState('');
+    const email: string = useremail
+    const password: string = userpassword
+    const handleSubmit = (event: any) => {
+        event.preventDefault();
+        signInWithEmailAndPassword(auth, email, password).then((data: any) => {
+            localStorage.setItem("email", data.user.email)
+            dispatch(setAuthentication())
+            navigate('/')
+        })
+    }
     const handleSignIn = (e: any) => {
         e.preventDefault()
         navigate("/signup");
@@ -47,17 +60,19 @@ const Login = () => {
                             </div>
                             {/*Social login section*/}
                             <p className='border-gray-500 my-3'>or use email account</p>
-                            <div className='flex flex-col items-center'>
-                                <div className="bg-gray-600 w-64 p-2 flex items-center rounded-2xl mb-3">
-                                    <FaRegEnvelope className='text-gray-400 mr-2' />
-                                    <input type="email" name='email' placeholder='Email' className='bg-gray-600 outline-none text-sm' />
+                            <form onSubmit={handleSubmit}>
+                                <div className='flex flex-col items-center'>
+                                    <div className="bg-gray-600 w-64 p-2 flex items-center rounded-2xl mb-3">
+                                        <FaRegEnvelope className='text-gray-400 mr-2' />
+                                        <input value={useremail} onChange={(e) => setEmail(e.target.value)} type="email" name='email' placeholder='Email' className='bg-gray-600 outline-none text-sm' />
+                                    </div>
+                                    <div className="bg-gray-600 w-64 p-2 flex items-center rounded-2xl mb-3">
+                                        <MdLockOutline className='text-gray-400 mr-2' />
+                                        <input value={userpassword} onChange={(e) => setPassword(e.target.value)} type="password" name='password' placeholder='Password' className='bg-gray-600 outline-none text-sm' />
+                                    </div>
+                                    <button className='border-2 border-purple-600 rounded-full px-12 py-2 inline-block hover:bg-purple-600 hover:text-black text-purple-600 mt-10'>Sign In</button>
                                 </div>
-                                <div className="bg-gray-600 w-64 p-2 flex items-center rounded-2xl mb-3">
-                                    <MdLockOutline className='text-gray-400 mr-2' />
-                                    <input type="password" name='password' placeholder='Password' className='bg-gray-600 outline-none text-sm' />
-                                </div>
-                                <a href="#" className='border-2 border-purple-600 rounded-full px-12 py-2 inline-block hover:bg-purple-600 hover:text-black text-purple-600 mt-10'>Sign In</a>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     {/*Sign up section*/}
