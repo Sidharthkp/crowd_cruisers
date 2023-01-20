@@ -4,7 +4,7 @@ import { auth, provider } from '../../firebase/config'
 import { signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { setAuthorized } from '../../redux/reducer';
+import { setAuthentication } from '../../redux/Authentication/reducer';
 import { useNavigate } from 'react-router-dom';
 const Signup = () => {
     const dispatch = useDispatch()
@@ -16,12 +16,13 @@ const Signup = () => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
     }
-//google
+    //google
     const handleClick = (e: any) => {
         e.preventDefault()
-        signInWithPopup(auth,provider).then((data: any)=>{
+        signInWithPopup(auth, provider).then((data: any) => {
             localStorage.setItem("email", data.user.email)
-            dispatch(setAuthorized())
+            dispatch(setAuthentication())
+            navigate("/");
         })
     }
 
