@@ -1,12 +1,27 @@
-import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft } from 'react-icons/fa';
+import { signInWithPopup } from 'firebase/auth';
+import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaFacebookF } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { auth, provider } from '../../firebase/config';
+import { setAuthentication } from '../../redux/Authentication/reducer';
 
 const Login = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleSignIn = (e: any) => {
         e.preventDefault()
         navigate("/signup");
+    }
+
+    //google
+    const handleClick = (e: any) => {
+        e.preventDefault()
+        signInWithPopup(auth, provider).then((data: any) => {
+            localStorage.setItem("email", data.user.email)
+            dispatch(setAuthentication())
+            navigate("/");
+        })
     }
     return (
         <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
@@ -20,15 +35,15 @@ const Login = () => {
                             <h2 className="text-3xl font-bold text-purple-600 mb-2">Sign in to Account</h2>
                             <div className='border-2 w-10 border-purple-600 inline-block mb-2'></div>
                             <div className='flex justify-center my-2'>
-                                <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
-                                    <FaMicrosoft className='text-sm' />
-                                </a>
-                                <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
+                                    <FaFacebookF className='text-sm' />
+                                </button>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
                                     <FaLinkedinIn className='text-sm' />
-                                </a>
-                                <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
+                                </button>
+                                <button onClick={handleClick} className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
                                     <FaGoogle className='text-sm' />
-                                </a>
+                                </button>
                             </div>
                             {/*Social login section*/}
                             <p className='border-gray-500 my-3'>or use email account</p>

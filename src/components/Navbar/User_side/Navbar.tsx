@@ -13,7 +13,7 @@ export default function NavBar() {
     const dispatch = useDispatch()
 
     const logout = () => {
-        signOut(auth).then(()=>{
+        signOut(auth).then(() => {
             localStorage.clear();
             dispatch(setUnauthorized())
             dispatch(setNotAuthenticated())
@@ -21,8 +21,13 @@ export default function NavBar() {
         })
     }
 
+    const community = (e: any) => {
+        e.preventDefault()
+        navigate('/community');
+    }
+
     return (
-        <nav className="w-full bg-gradient-to-b backdrop-blur backdrop-opacity-10 from-purple-900 to-black shadow">
+        <nav className="w-full bg-gradient-to-b backdrop-blur backdrop-opacity-10 from-black to-purple-900 shadow">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex lg:flex xl:flex 2xl:flex lg:px-8 xl:px-8 md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 lg:py-5 xl:py-5 2xl:py-5 md:block lg:block xl:block 2xl:block">
@@ -80,7 +85,7 @@ export default function NavBar() {
                                 <a href="#">Map</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="#">Community</a>
+                                <a onClick={community}>Community</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
                                 <a href="#">Rides</a>
@@ -100,7 +105,9 @@ export default function NavBar() {
                             <a href="#">
                                 <FaUserCircle className='text-2xl' />
                             </a>
-                            <a onClick={logout} className="cursor-pointer">Logout</a>
+                        </li>
+                        <li className="text-white hover:text-indigo-200 mt-5">
+                            <a onClick={logout} className="cursor-pointer pt-5">Logout</a>
                         </li>
                     </ul>
                 </div>

@@ -1,4 +1,4 @@
-import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaMicrosoft, FaUserNinja } from 'react-icons/fa';
+import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaUserNinja, FaFacebookF } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
 import { auth, provider } from '../../firebase/config'
 import { signInWithPopup } from 'firebase/auth';
@@ -44,15 +44,15 @@ const Signup = () => {
                             <h2 className="text-3xl font-bold text-white mb-2">Sign up to Account</h2>
                             <div className='border-2 w-10 border-white inline-block mb-2'></div>
                             <div className='flex justify-center my-2'>
-                                <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-black hover:text-purple-600'>
-                                    <FaMicrosoft className='text-sm' />
-                                </a>
-                                <a href="#" className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-black hover:text-purple-600'>
+                                    <FaFacebookF className='text-sm' />
+                                </button>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
                                     <FaLinkedinIn className='text-sm' />
-                                </a>
-                                <a href="#" onClick={handleClick} className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
+                                </button>
+                                <button onClick={handleClick} className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
                                     <FaGoogle className='text-sm' />
-                                </a>
+                                </button>
                             </div>
                             {/*Social login section*/}
                             <p className='border-gray-500 my-3'>or use email account</p>
