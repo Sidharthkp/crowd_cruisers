@@ -1,11 +1,11 @@
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { FaLinkedinIn, FaGoogle, FaRegEnvelope, FaFacebookF } from 'react-icons/fa';
-import { MdLockOutline } from 'react-icons/md';
+import { FaLinkedinIn, FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../../firebase/config';
 import { useState } from 'react';
 import { setAuthentication } from '../../redux/Authentication/reducer';
+import { LockClosedIcon } from '@heroicons/react/24/outline';
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -37,53 +37,96 @@ const Login = () => {
         })
     }
     return (
-        <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
-            <main className='flex flex-col items-center justify-center w-full flex-1 px-20 text-center'>
-                <div className='bg-gradient-to-r sm:bg-gradient-to-b from-black to-purple-900 sm:rounded-none rounded-2xl sm:flex-col shadow-2xl flex w-2/3 max-w-4xl sm:w-screen sm:h-fit md:w-screen'>
-                    <div className='w-3/5 p-5 sm:w-full'>
-                        <div className="text-left font-bold flex flex-col sm:items-center">
-                            <a href="#"><span className='text-purple-600'>Crowd</span>Cruisers</a>
-                        </div>
-                        <div className="py-10">
-                            <h2 className="text-3xl font-bold text-purple-600 mb-2">Sign in to Account</h2>
-                            <div className='border-2 w-10 border-purple-600 inline-block mb-2'></div>
-                            <div className='flex justify-center my-2'>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
+        <div className="bg-white w-full h-screen">
+            <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div className="w-full max-w-md space-y-8">
+                    <div>
+                        <img
+                            className="mx-auto h-12 w-auto rounded-2xl"
+                            src="src\assets\Logo\logo.jpg"
+                            alt="Your Company"
+                        />
+                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+                            Sign in to your account
+                        </h2>
+                        <div className='flex justify-center my-2'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-purple-600'>
                                     <FaFacebookF className='text-sm' />
                                 </button>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:text-purple-600 hover:bg-black'>
                                     <FaLinkedinIn className='text-sm' />
                                 </button>
-                                <button onClick={handleClick} className='border-2 border-gray-500 rounded-full p-3 mx-1 hover:bg-purple-600 hover:text-black'>
+                                <button onClick={handleClick} className='border-2 border-gray-500 text-black rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
                                     <FaGoogle className='text-sm' />
                                 </button>
                             </div>
-                            {/*Social login section*/}
-                            <p className='border-gray-500 my-3'>or use email account</p>
-                            <form onSubmit={handleSubmit}>
-                                <div className='flex flex-col items-center'>
-                                    <div className="bg-gray-600 w-64 p-2 flex items-center rounded-2xl mb-3">
-                                        <FaRegEnvelope className='text-gray-400 mr-2' />
-                                        <input value={useremail} onChange={(e) => setEmail(e.target.value)} type="email" name='email' placeholder='Email' className='bg-gray-600 outline-none text-sm' />
-                                    </div>
-                                    <div className="bg-gray-600 w-64 p-2 flex items-center rounded-2xl mb-3">
-                                        <MdLockOutline className='text-gray-400 mr-2' />
-                                        <input value={userpassword} onChange={(e) => setPassword(e.target.value)} type="password" name='password' placeholder='Password' className='bg-gray-600 outline-none text-sm' />
-                                    </div>
-                                    <button className='border-2 border-purple-600 rounded-full px-12 py-2 inline-block hover:bg-purple-600 hover:text-black text-purple-600 mt-10'>Sign In</button>
-                                </div>
-                            </form>
+                    </div>
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                        <input type="hidden" name="remember" defaultValue="true" />
+                        <div className="-space-y-px rounded-md shadow-sm">
+                            <div>
+                                <label htmlFor="email-address" className="sr-only">
+                                    Email address
+                                </label>
+                                <input value={useremail} onChange={(e) => setEmail(e.target.value)}
+                                    id="email-address"
+                                    name="email"
+                                    type="email"
+                                    autoComplete="email"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 bg-white placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Email address"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="password" className="sr-only">
+                                    Password
+                                </label>
+                                <input value={userpassword} onChange={(e) => setPassword(e.target.value)}
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    autoComplete="current-password"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none rounded-b-md border bg-white  border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Password"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    {/*Sign up section*/}
-                    <div className='w-2/5 p-5 bg-gradient-to-l sm:bg-gradient-to-t backdrop-blur bg-opacity-80 to-purple-900 from-black shadow rounded-tr-2xl sm:rounded-none sm:w-full rounded-br-2xl py-36 px-12'>
-                        <h2 className='text-3xl font-bold mb-2'>Hello, Rider!</h2>
-                        <div className='border-2 w-10 border-white inline-block mb-2'></div>
-                        <p className='mb-10'>Fill up your personal information and start journey with us.</p>
-                        <button onClick={handleSignIn} className='border-2 border-white rounded-full px-12 py-2 inline-block hover:bg-white hover:text-purple-900 cursor-pointer'>Sign Up</button>
-                    </div>
+
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <input
+                                    id="remember-me"
+                                    name="remember-me"
+                                    type="checkbox"
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                />
+                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <div className="text-sm">
+                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                    Forgot your password?
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button
+                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            >
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                                </span>
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </main>
+            </div>
         </div>
     )
 }
