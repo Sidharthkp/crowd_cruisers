@@ -4,6 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase/config";
+import { setNotAuthenticated } from "../../../redux/Authentication/reducer";
 import { setUnauthorized } from "../../../redux/Authorization/reducer";
 
 export default function NavBar() {
@@ -15,12 +16,13 @@ export default function NavBar() {
         signOut(auth).then(()=>{
             localStorage.clear();
             dispatch(setUnauthorized())
+            dispatch(setNotAuthenticated())
             navigate("/login");
         })
     }
 
     return (
-        <nav className="w-full bg-gradient-to-b backdrop-blur bg-opacity-80 from-purple-900 to-black shadow">
+        <nav className="w-full bg-gradient-to-b backdrop-blur backdrop-opacity-10 from-purple-900 to-black shadow">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex lg:flex xl:flex 2xl:flex lg:px-8 xl:px-8 md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 lg:py-5 xl:py-5 2xl:py-5 md:block lg:block xl:block 2xl:block">

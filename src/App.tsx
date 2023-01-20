@@ -7,17 +7,24 @@ import { setAuthorized } from "./redux/Authorization/reducer"
 const App = () => {
     const dispatch = useDispatch()
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
-    console.log(authenticated);
+    const authorized = useSelector((state: any) => state.authorizer.authorized);
+    console.log("Authentication"+authenticated);
+    console.log("Authorization >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+authorized);
+    console.log(".");
+    console.log(".");
+    console.log(".");
+    console.log(".");
     
-    if(authenticated){
+    
+    if(authenticated && !authorized){
         dispatch(setAuthorized())
     }
     return (
         <div>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/signup' element={!authenticated ? <Signup /> : <Home />} />
-                    <Route path='/login' element={!authenticated ? <Login /> : <Home />} />
+                    <Route path='/signup' element={!authorized ? <Signup /> : <Home />} />
+                    <Route path='/login' element={!authorized ? <Login /> : <Home />} />
                     <Route path='/' element={authenticated ? <Home /> : <Signup /> } />
                 </Routes>
             </BrowserRouter>
