@@ -47,7 +47,7 @@ const Login = () => {
                             alt="Your Company"
                         />
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Sign in to your account
+                            Sign In to your account
                         </h2>
                         <div className='flex justify-center my-2'>
                                 <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-purple-600'>
@@ -121,7 +121,7 @@ const Login = () => {
                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                     <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                                 </span>
-                                Sign in
+                                Sign In
                             </button>
                         </div>
                     </form>
