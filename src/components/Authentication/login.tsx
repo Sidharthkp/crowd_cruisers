@@ -6,6 +6,16 @@ import { auth, provider } from '../../firebase/config';
 import { useState } from 'react';
 import { setAuthentication } from '../../redux/Authentication/reducer';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
+import Swal from 'sweetalert2'
+
+const alert = (error: string) => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error,
+        footer: '<a href="">Sorry for this issue 🤗</a>'
+      })
+}
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -21,6 +31,8 @@ const Login = () => {
             localStorage.setItem("email", data.user.email)
             dispatch(setAuthentication())
             navigate('/')
+        }).catch((error)=>{
+            alert(error);
         })
     }
     const signup = (e: any) => {
@@ -43,6 +55,8 @@ const Login = () => {
             localStorage.setItem("email", data.user.email)
             dispatch(setAuthentication())
             navigate("/");
+        }).catch((error)=>{
+            alert(error);
         })
     }
     return (

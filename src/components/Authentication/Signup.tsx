@@ -7,6 +7,16 @@ import { setAuthentication } from '../../redux/Authentication/reducer';
 import { useNavigate } from 'react-router-dom';
 import 'firebase/auth'
 import { LockClosedIcon } from '@heroicons/react/24/outline';
+import Swal from 'sweetalert2'
+
+const alert = (error: string) => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error,
+        footer: '<a href="">Sorry for this issue 🤗</a>'
+      })
+}
 
 const Signup = () => {
     const dispatch = useDispatch()
@@ -22,6 +32,8 @@ const Signup = () => {
             localStorage.setItem("email", data.user.email)
             dispatch(setAuthentication())
             navigate('/')
+        }).catch((error)=>{
+            alert(error);
         })
     }
     //google
@@ -32,7 +44,7 @@ const Signup = () => {
             dispatch(setAuthentication())
             navigate("/");
         }).catch((error)=>{
-            
+            alert(error);
         })
     }
 

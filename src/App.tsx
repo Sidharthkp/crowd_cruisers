@@ -3,7 +3,7 @@ import Signup from "./components/Authentication/Signup"
 import Home from "./components/Pages/Home"
 import Community from "./components/Pages/community_main"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 const App = () => {
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
     return (
