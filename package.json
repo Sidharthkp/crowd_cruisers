@@ -22,7 +22,7 @@
     "react-router-dom": "^6.7.0",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
-    "sweetalert2": "^11.7.0"
+    "sweetalert2": "^11.4.8"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

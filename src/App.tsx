@@ -3,9 +3,16 @@ import Signup from "./components/Authentication/Signup"
 import Home from "./components/Pages/Home"
 import Community from "./components/Pages/community_main"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { setAuthentication, setNotAuthenticated } from "./redux/Authentication/reducer"
 const App = () => {
+    const dispatch = useDispatch()
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
+    if (localStorage.getItem("email") !== null) {
+        dispatch(setAuthentication())
+    } else {
+        dispatch(setNotAuthenticated())
+    }
     return (
         <div>
             <BrowserRouter>
