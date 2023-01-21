@@ -63,7 +63,7 @@ const Signup = () => {
 
 
     return (
-        <div className="bg-white w-full h-screen bg-[url('https://www.royalenfield.com/content/dam/royal-enfield/super-meteor-650/motorcycles/home/banners/desktop/l1.jpg')]">
+        <div className="bg-white w-full h-screen bg-[url('https://www.royalenfield.com/content/dam/royal-enfield/india/motorcycles/bullet/bullet-350/features/desktop/new/bullet-350-reliability.jpg')]">
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 backdrop-blur-sm" >
                 <div className="w-full max-w-md space-y-8 bg-black/20 rounded-2xl p-10 shadow-black shadow-2xl">
                     <div>
@@ -72,17 +72,17 @@ const Signup = () => {
                             src="src\assets\Logo\logo.jpg"
                             alt="Your Company"
                         />
-                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
                             Sign Up to your account
                         </h2>
                         <div className='flex justify-center my-2'>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-purple-600'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-white hover:bg-black hover:text-purple-600'>
                                     <FaFacebookF className='text-sm' />
                                 </button>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:text-purple-600 hover:bg-black'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-white hover:text-purple-600 hover:bg-black'>
                                     <FaLinkedinIn className='text-sm' />
                                 </button>
-                                <button onClick={handleClick} className='border-2 border-gray-500 text-black rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
+                                <button onClick={handleClick} className='border-2 border-gray-500 text-white rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
                                     <FaGoogle className='text-sm' />
                                 </button>
                             </div>
