@@ -14,7 +14,7 @@ const alert = (error: string) => {
         title: 'Oops...',
         text: error,
         footer: '<a href="">Sorry for this issue 🤗</a>'
-      })
+    })
 }
 
 const Login = () => {
@@ -31,7 +31,7 @@ const Login = () => {
             localStorage.setItem("email", data.user.email)
             dispatch(setAuthentication())
             navigate('/')
-        }).catch((error)=>{
+        }).catch((error) => {
             alert(error.message);
         })
     }
@@ -55,14 +55,14 @@ const Login = () => {
             localStorage.setItem("email", data.user.email)
             dispatch(setAuthentication())
             navigate("/");
-        }).catch((error)=>{
+        }).catch((error) => {
             alert(error);
         })
     }
     return (
-        <div className="bg-white w-full h-screen">
-            <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                <div className="w-full max-w-md space-y-8">
+        <div className="w-full h-screen bg-[url('https://www.royalenfield.com/content/dam/royal-enfield/super-meteor-650/motorcycles/home/banners/desktop/l1.jpg')]">
+            <div className="flex backdrop-blur-sm min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div className="w-full max-w-md space-y-8 bg-black/20 rounded-2xl p-10 shadow-black shadow-2xl">
                     <div>
                         <img
                             className="mx-auto h-12 w-auto rounded-2xl"
@@ -86,7 +86,7 @@ const Login = () => {
                     </div>
                     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <input type="hidden" name="remember" defaultValue="true" />
-                        <div className="-space-y-px rounded-md shadow-sm">
+                        <div className="space-y-2 rounded-md shadow-sm">
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
                                     Email address
@@ -126,13 +126,13 @@ const Login = () => {
                                     type="checkbox"
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                <label htmlFor="remember-me" className="ml-2 block text-sm text-white">
                                     Show/Hide password
                                 </label>
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                <a href="#" className="font-medium text-white hover:text-indigo-500">
                                     Forgot your password?
                                 </a>
                             </div>
@@ -140,7 +140,7 @@ const Login = () => {
 
                         <div>
                             <button
-                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-gradient-to-r from-amber-900 to-white py-2 px-4 text-sm font-medium text-whit focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                     <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
@@ -150,10 +150,10 @@ const Login = () => {
                         </div>
                         <div>
                             <div className="text-sm">
-                                <a className="font-medium text-black">
+                                <a className="font-medium text-white">
                                     Dont have an account?
                                 </a>
-                                <a onClick={signup} className="font-medium ml-2 cursor-pointer text-indigo-600 hover:text-red-600">
+                                <a onClick={signup} className="font-medium ml-2 cursor-pointer text-violet-300 hover:text-white">
                                     Sign Up
                                 </a>
                             </div>
