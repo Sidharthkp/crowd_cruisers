@@ -32,7 +32,7 @@ const Login = () => {
             dispatch(setAuthentication())
             navigate('/')
         }).catch((error)=>{
-            alert(error);
+            alert(error.message);
         })
     }
     const signup = (e: any) => {

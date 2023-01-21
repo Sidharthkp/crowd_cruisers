@@ -33,7 +33,7 @@ const Signup = () => {
             dispatch(setAuthentication())
             navigate('/')
         }).catch((error)=>{
-            alert(error);
+            alert(error.message);
         })
     }
     //google
