@@ -5,7 +5,6 @@ import Community from "./components/Pages/community_main"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 const App = () => {
-    const dispatch = useDispatch()
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
     return (
         <div>

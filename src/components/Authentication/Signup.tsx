@@ -30,6 +30,8 @@ const Signup = () => {
             localStorage.setItem("email", data.user.email)
             dispatch(setAuthentication())
             navigate("/");
+        }).catch((error)=>{
+            
         })
     }
 
