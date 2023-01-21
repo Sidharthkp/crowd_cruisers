@@ -13,6 +13,7 @@ const Signup = () => {
     const navigate = useNavigate()
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
+    const [passwordType, setPasswordType] = useState('password');
     const email: string = useremail
     const password: string = userpassword
     const handleSubmit = (event: any) => {
@@ -35,7 +36,15 @@ const Signup = () => {
         })
     }
 
-    const handleSignIn = (e: any) => {
+    const togglePassword = () => {
+        if (passwordType === 'password') {
+            setPasswordType('text');
+        } else {
+            setPasswordType('password');
+        }
+    }
+
+    const login = (e: any) => {
         e.preventDefault()
         navigate("/login");
     }
@@ -90,7 +99,7 @@ const Signup = () => {
                                 <input value={userpassword} onChange={(e) => setPassword(e.target.value)}
                                     id="password"
                                     name="password"
-                                    type="password"
+                                    type={passwordType}
                                     autoComplete="current-password"
                                     required
                                     className="relative block w-full appearance-none rounded-none rounded-b-md border bg-white  border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -100,15 +109,16 @@ const Signup = () => {
                         </div>
 
                         <div className="flex items-center justify-between">
-                            <div className="flex items-center">
+                        <div className="flex items-center">
                                 <input
+                                    onClick={togglePassword}
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
+                                    Show/Hide password
                                 </label>
                             </div>
 
@@ -128,6 +138,16 @@ const Signup = () => {
                                 </span>
                                 Sign Up
                             </button>
+                        </div>
+                        <div>
+                            <div className="text-sm">
+                                <a className="font-medium text-black">
+                                    Have an account?
+                                </a>
+                                <a onClick={login} className="font-medium ml-2 cursor-pointer text-indigo-600 hover:text-red-600">
+                                    Sign In
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>

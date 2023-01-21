@@ -12,6 +12,7 @@ const Login = () => {
     const navigate = useNavigate()
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
+    const [passwordType, setPasswordType] = useState('password');
     const email: string = useremail
     const password: string = userpassword
     const handleSubmit = (event: any) => {
@@ -22,9 +23,17 @@ const Login = () => {
             navigate('/')
         })
     }
-    const handleSignIn = (e: any) => {
+    const signup = (e: any) => {
         e.preventDefault()
         navigate("/signup");
+    }
+
+    const togglePassword = () => {
+        if (passwordType === 'password') {
+            setPasswordType('text');
+        } else {
+            setPasswordType('password');
+        }
     }
 
     //google
@@ -50,16 +59,16 @@ const Login = () => {
                             Sign In to your account
                         </h2>
                         <div className='flex justify-center my-2'>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-purple-600'>
-                                    <FaFacebookF className='text-sm' />
-                                </button>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:text-purple-600 hover:bg-black'>
-                                    <FaLinkedinIn className='text-sm' />
-                                </button>
-                                <button onClick={handleClick} className='border-2 border-gray-500 text-black rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
-                                    <FaGoogle className='text-sm' />
-                                </button>
-                            </div>
+                            <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-purple-600'>
+                                <FaFacebookF className='text-sm' />
+                            </button>
+                            <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:text-purple-600 hover:bg-black'>
+                                <FaLinkedinIn className='text-sm' />
+                            </button>
+                            <button onClick={handleClick} className='border-2 border-gray-500 text-black rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
+                                <FaGoogle className='text-sm' />
+                            </button>
+                        </div>
                     </div>
                     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <input type="hidden" name="remember" defaultValue="true" />
@@ -85,7 +94,7 @@ const Login = () => {
                                 <input value={userpassword} onChange={(e) => setPassword(e.target.value)}
                                     id="password"
                                     name="password"
-                                    type="password"
+                                    type={passwordType}
                                     autoComplete="current-password"
                                     required
                                     className="relative block w-full appearance-none rounded-none rounded-b-md border bg-white  border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -97,13 +106,14 @@ const Login = () => {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
+                                    onClick={togglePassword}
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
+                                    Show/Hide password
                                 </label>
                             </div>
 
@@ -123,6 +133,16 @@ const Login = () => {
                                 </span>
                                 Sign In
                             </button>
+                        </div>
+                        <div>
+                            <div className="text-sm">
+                                <a className="font-medium text-black">
+                                    Dont have an account?
+                                </a>
+                                <a onClick={signup} className="font-medium ml-2 cursor-pointer text-indigo-600 hover:text-red-600">
+                                    Sign Up
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>
