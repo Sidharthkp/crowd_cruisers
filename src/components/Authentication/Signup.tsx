@@ -9,12 +9,11 @@ import 'firebase/auth'
 import { LockClosedIcon } from '@heroicons/react/24/outline';
 import Swal from 'sweetalert2'
 
-const alert = (error: string) => {
+const alert = (error: any) => {
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: error,
-        footer: '<a href="">Sorry for this issue 🤗</a>'
       })
 }
 

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { FaLinkedinIn, FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
@@ -6,14 +7,12 @@ import { auth, provider } from '../../firebase/config';
 import { useState } from 'react';
 import { setAuthentication } from '../../redux/Authentication/reducer';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
-import Swal from 'sweetalert2'
 
-const alert = (error: string) => {
+const alert = (error: any) => {
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: error,
-        footer: '<a href="">Sorry for this issue 🤗</a>'
     })
 }
 
