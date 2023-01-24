@@ -5,7 +5,16 @@ import Community from "./components/Pages/community_main"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setAuthentication, setNotAuthenticated } from "./redux/Authentication/reducer"
+import { useEffect, useState } from "react"
 const App = () => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch("/api")
+            .then((res) => res.json())
+            .then((data) => setData(data.message));
+    }, []);
+
     const dispatch = useDispatch()
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
     if (localStorage.getItem("email") !== null) {
