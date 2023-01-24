@@ -1,5 +1,4 @@
 import { signOut } from "@firebase/auth";
-import { useState } from "react";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -17,6 +16,10 @@ const NavBar = () => {
     const community = (e: any) => {
         e.preventDefault()
         navigate('/community');
+    }
+    const maps = (e: any) => {
+        e.preventDefault()
+        navigate('/map');
     }
     const login = (e: any) => {
         e.preventDefault()
@@ -37,7 +40,7 @@ const NavBar = () => {
 
     const navigation = [
         { name: 'Home', current: true },
-        { name: 'Map', current: false },
+        { name: 'Map', onclick: maps, current: false },
         { name: 'Community', onclick: community, current: false },
         { name: 'Rides', current: false },
         { name: 'Events', current: false },

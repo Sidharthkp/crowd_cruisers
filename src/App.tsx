@@ -5,6 +5,7 @@ import Community from "./components/Pages/community_main"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setAuthentication, setNotAuthenticated } from "./redux/Authentication/reducer"
+import MapPage from "./components/Pages/Map"
 const App = () => {
     const dispatch = useDispatch()
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
@@ -17,6 +18,7 @@ const App = () => {
         <div>
             <BrowserRouter>
                 <Routes>
+                    <Route path='/map' element={authenticated ? <MapPage /> : <Signup />} />
                     <Route path='/community' element={authenticated ? <Community /> : <Signup />} />
                     <Route path='/signup' element={!authenticated ? <Signup /> : <Home />} />
                     <Route path='/login' element={!authenticated ? <Login /> : <Home />} />
