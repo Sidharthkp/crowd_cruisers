@@ -3,15 +3,16 @@ import Map, { Marker, Popup } from 'react-map-gl';
 import Navbar_user from '../Navbar/User_side/Navbar'
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import axios from 'axios'
+import { format } from 'timeago.js';
 
 const MapPage = () => {
     const [pins, setPins] = React.useState([]);
-    const [showPopup, setShowPopup] = React.useState(true);
+    const [currentPlaceId, setCurrentPlaceId] = React.useState(null);
 
     React.useEffect(() => {
         const getPins = async () => {
             try {
-                const res = await axios.get("/pins");
+                const res = await axios.get("http://localhost:3000/api/pins");
                 setPins(res.data);
             } catch (err) {
                 console.log(err);
@@ -20,6 +21,10 @@ const MapPage = () => {
         }
         getPins()
     }, [])
+
+    const handleShowPopup = (id: any) => {
+        setCurrentPlaceId(id)
+    }
 
     return (
         <>
@@ -36,26 +41,34 @@ const MapPage = () => {
                     mapStyle="mapbox://styles/mapbox/streets-v9"
                 >
                     {pins.map((p: any) => {
+                        console.log(p.longitude, "AND", p.latitude);
 
-                        <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
-                            <FmdGoodIcon style={{ fontSize: 64, color: "tomato", cursor: "pointer" }} />
-                        </Marker>
-                        {
-                            showPopup && (
-                                <Popup longitude={p.longitude} latitude={p.latitude} closeOnClick={false} onClose={() => setShowPopup(false)} closeButton={true} className="text-black" anchor="bottom" >
+                        return (<>
 
-                                    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                            <Marker longitude={p.longitude} onClick={() => handleShowPopup(p._id)} latitude={p.latitude} anchor="bottom">
+                                <FmdGoodIcon style={{ fontSize: 64, color: "tomato", cursor: "pointer" }} />
+                            </Marker>
+
+
+                            {p._id === currentPlaceId && (
+                                <Popup longitude={p.longitude} latitude={p.latitude} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
+
+                                    <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
                                         <div className="px-2 py-3">
-                                            <div className="font-bold text-xl  text-black">The Coldest Sunset</div>
+                                            <div className="font-bold text-xl">{p.title}</div>
                                             <p className="text-gray-700 text-base">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                                                {p.description}
                                             </p>
+                                            <div>{format(p.createdAt)}</div>
                                         </div>
                                     </div>
 
                                 </Popup>
-                            )
-                        }
+                    )}
+                        </>
+
+
+                        )
                     })}
                 </Map>
             </div>
