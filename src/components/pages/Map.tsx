@@ -12,6 +12,11 @@ const MapPage = () => {
     }
     const currentUser = "Ajmal"
     const [pins, setPins] = React.useState([]);
+    const [viewPort, setViewPort] = React.useState({
+        longitude: 75.922096,
+        latitude: 10.914627,
+        zoom: 3
+    })
     const [currentPlaceId, setCurrentPlaceId] = React.useState(null);
     const [newPlace, setNewPlace] = React.useState<Place | null>(null);
     React.useEffect(() => {
@@ -27,8 +32,9 @@ const MapPage = () => {
         getPins()
     }, [])
 
-    const handleShowPopup = (id: any) => {
+    const handleShowPopup = (id: any, latitude: any, longitude: any) => {
         setCurrentPlaceId(id)
+        setViewPort({ ...viewPort, latitude: latitude, longitude: longitude })
     }
 
     const handleAddClick = (e: any) => {
@@ -44,23 +50,18 @@ const MapPage = () => {
             <Navbar_user />
             <div>
                 <Map
-                    initialViewState={{
-                        longitude: 75.922096,
-                        latitude: 10.914627,
-                        zoom: 3
-                    }}
+                    initialViewState={{ ...viewPort }}
                     mapboxAccessToken={import.meta.env.VITE_MAPBOX}
                     style={{ width: '100vw', height: '100vh' }}
                     mapStyle="mapbox://styles/mapbox/streets-v9"
                     onDblClick={handleAddClick}
                 >
                     {pins.map((p: any) => {
-                        console.log(p.longitude, "AND", p.latitude);
 
                         return (<>
 
-                            <Marker longitude={p.longitude} onClick={() => handleShowPopup(p._id)} latitude={p.latitude} anchor="bottom">
-                                <FmdGoodIcon style={{ fontSize: p.username === currentUser ? 64 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
+                            <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
+                                <FmdGoodIcon onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 64 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
                             </Marker>
 
 
@@ -80,15 +81,27 @@ const MapPage = () => {
                                 </Popup>
                             )}
                             {newPlace &&
-                                <Popup longitude={newPlace.longitude} latitude={newPlace.latitude} onClose={()=>setNewPlace(null)} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
+                                <Popup longitude={newPlace.longitude} latitude={newPlace.latitude} onClose={() => setNewPlace(null)} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
 
                                     <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
-                                        <div className="px-2 py-3">
-                                            {/* <div className="font-bold text-xl">{p.title}</div> */}
-                                            <p className="text-gray-700 text-base">
-                                                HEllo
-                                            </p>
-                                            {/* <div>{format(p.createdAt)}</div> */}
+                                        <div className="w-full max-w-xs">
+                                            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Title
+                                                    </label>
+                                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title" />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                        Description
+                                                    </label>
+                                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tell me more about it" />
+                                                </div>
+                                                <div className='w-full flex justify-end'>
+                                                    <button className='rounded-2xl bg-green-400 w-14 h-6 text-white' type='submit'>Share</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
 
