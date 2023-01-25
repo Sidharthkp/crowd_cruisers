@@ -9,16 +9,16 @@ const MapPage = () => {
             <div>
                 <Map
                     initialViewState={{
-                        longitude: 48.858093,
-                        latitude: 2.294694,
-                        zoom: 4
+                        longitude: 75.922096,
+                        latitude: 10.914627,
+                        zoom: 3
                     }}
                     mapboxAccessToken={import.meta.env.VITE_MAPBOX}
                     style={{ width: '100vw', height: '100vh' }}
                     mapStyle="mapbox://styles/mapbox/streets-v9"
                 >
-                    <Marker longitude={48.858093} latitude={2.294694} anchor="bottom">
-                        <FmdGoodIcon className='text-red-600'/>
+                    <Marker longitude={75.922096} latitude={10.914627} anchor="bottom">
+                        <FmdGoodIcon style={{ fontSize: 64, color: "tomato", cursor: "pointer" }} />
                     </Marker>
                 </Map>
             </div>
