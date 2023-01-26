@@ -2,10 +2,15 @@ import { useState } from 'react';
 import { FaPlusCircle } from 'react-icons/fa';
 import Navbar_user from '../../Navbar/User_side/Navbar';
 import Join from './joinRoom';
+import { io } from "socket.io-client";
+
+const socket = io("ws://localhost:3000");
 
 const community_main = () => {
 
     const [show, setShow] = useState(false)
+    const [username, setUsername] = useState('');
+    const [room, setRoom] = useState('');
 
     return (
         <>
@@ -17,9 +22,13 @@ const community_main = () => {
                     </div>
                 </div>
                 <div className='w-4/6 h-screen flex flex-col'>
-                    
+
                 </div>
-            <Join show={show} />
+                <Join show={show} username={username} 
+                    setUsername={setUsername} 
+                    room={room} 
+                    setRoom={setRoom} 
+                    socket={socket}  />
             </div>
         </>
     )
