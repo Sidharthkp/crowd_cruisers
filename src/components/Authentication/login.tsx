@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2'
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { FaLinkedinIn, FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
@@ -11,7 +10,9 @@ import { useState } from 'react';
 
 const Login = () => {
     const [show, setShow] = useState(false)
+    const [error, setError] = useState("")
     const alert = (error: any) => {
+        setError(error)
         setShow(true)
     }
     const dispatch = useDispatch()
@@ -159,7 +160,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <Error show={show} />
+            <Error show={show} errors={error} />
         </>
     )
 }

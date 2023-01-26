@@ -12,7 +12,9 @@ import Error from '../Error/errorPage';
 
 const Signup = () => {
     const [show, setShow] = useState(false)
+    const [error, setError] = useState("")
     const alert = (error: any) => {
+        setError(error)
         setShow(true)
     }
     const dispatch = useDispatch()
@@ -162,7 +164,7 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
-            <Error show={show} />
+            <Error show={show} errors={error} />
         </>
     )
 }
