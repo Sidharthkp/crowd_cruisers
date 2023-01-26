@@ -1,11 +1,11 @@
 import Login from "./components/Authentication/Login"
 import Signup from "./components/Authentication/Signup"
 import Home from "./components/Pages/Home"
-import Community from "./components/Pages/community_main"
+import Community from "./components/Pages/community/community_main"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setAuthentication, setNotAuthenticated } from "./redux/Authentication/reducer"
-import MapPage from "./components/Pages/Map"
+import MapPage from "./components/Pages/map/Map"
 const App = () => {
     const dispatch = useDispatch()
     const authenticated = useSelector((state: any) => state.authentication.authenticated);

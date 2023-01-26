@@ -1,16 +1,18 @@
 import * as React from 'react';
 import Map, { Marker, Popup } from 'react-map-gl';
-import Navbar_user from '../Navbar/User_side/Navbar'
+import Navbar_user from '../../Navbar/User_side/Navbar'
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import axios from 'axios'
 import { format } from 'timeago.js';
 
 const MapPage = () => {
+    if (localStorage.getItem("email") !== null) {
+        var currentUser = localStorage.getItem("email")
+    }
     interface Place {
         longitude: number;
         latitude: number;
     }
-    const currentUser = "Ajmal"
     const [pins, setPins] = React.useState([]);
     const [viewPort, setViewPort] = React.useState({
         longitude: 75.922096,
@@ -82,13 +84,13 @@ const MapPage = () => {
 
                         return (<>
 
-                            <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
-                                <FmdGoodIcon onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 64 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
+                            <Marker key={p._id} longitude={p.longitude} latitude={p.latitude} anchor="bottom">
+                                <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 64 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
                             </Marker>
 
 
                             {p._id === currentPlaceId && (
-                                <Popup longitude={p.longitude} latitude={p.latitude} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
+                                <Popup key={p._id} longitude={p.longitude} latitude={p.latitude} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
 
                                     <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
                                         <div className="px-2 py-3">
