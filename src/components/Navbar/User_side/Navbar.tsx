@@ -38,8 +38,13 @@ const NavBar = () => {
         })
     }
 
+    const home = (e: any) => {
+        e.preventDefault()
+        navigate('/');
+    }
+
     const navigation = [
-        { name: 'Home', current: true },
+        { name: 'Home', onclick: home, current: true },
         { name: 'Map', onclick: maps, current: false },
         { name: 'Community', onclick: community, current: false },
         { name: 'Rides', current: false },
