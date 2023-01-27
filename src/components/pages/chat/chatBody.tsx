@@ -31,7 +31,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                 </div>
             </div>
             <div className='w-full h-full'>
-                <div className='w-full max-h-80 overflow-y-auto'>
+                <div className='w-full max-h-96 overflow-y-auto scrollbar-hide'>
                     {messages.map((message: any) =>
                         message.name === localStorage.getItem('email') ? (
                             <div className='w-full flex flex-row justify-end'>
