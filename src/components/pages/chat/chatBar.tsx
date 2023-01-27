@@ -24,7 +24,7 @@ const ChatBar = ({ socket }: any) => {
         </div>
       </div>
       <div className='w-full flex flex-col justify-between h-screen'>
-      {users.map((user: any) => (
+      {/* {users.map((user: any) => (
         
         <div key={user} className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
           <div className='rounded-full w-1/6'>
@@ -39,7 +39,7 @@ const ChatBar = ({ socket }: any) => {
             </div>
           </div>
         </div>
-        ))}
+        ))} */}
       </div>
     </div>
   )

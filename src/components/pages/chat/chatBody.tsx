@@ -20,7 +20,9 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                             Royal Enfield
                         </div>
                         <div className='text-sm font-thin'>
-                            You, John, Amal, ....
+                            <div className="text-sm text-gray-200">
+                                <p>{typingStatus}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,7 +31,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                 </div>
             </div>
             <div className='w-full h-full'>
-                <div className='w-full h-5/6'>
+                <div className='w-full max-h-80 overflow-y-auto'>
                     {messages.map((message: any) =>
                         message.name === localStorage.getItem('email') ? (
                             <div className='w-full flex flex-row justify-end'>
@@ -45,9 +47,6 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                             </div>
                         )
                     )}
-                    <div className="text-sm text-gray-200">
-                        <p>{typingStatus}</p>
-                    </div>
                     <div ref={lastMessageRef} />
                 </div>
             </div>
