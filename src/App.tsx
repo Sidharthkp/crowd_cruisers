@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setAuthentication, setNotAuthenticated } from "./redux/Authentication/reducer"
 import MapPage from "./components/Pages/map/Map"
-import ChatPage from "./components/Pages/chat/chatPage"
+import ChatPage from "./components/Pages/community/chat/chatPage"
 
 const App = () => {
     const dispatch = useDispatch()

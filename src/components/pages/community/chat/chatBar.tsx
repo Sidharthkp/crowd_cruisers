@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setSwitchOn } from "../../../redux/joinModal";
+import { setSwitchOn } from "../../../../redux/joinModal";
 
 const ChatBar = ({ socket }: any) => {
   const [users, setUsers] = useState([]);

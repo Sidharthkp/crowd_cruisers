@@ -1,6 +1,6 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useDispatch, useSelector } from "react-redux";
-import { setSwitchOff } from "../../../redux/joinModal";
+import { setSwitchOff } from "../../../../redux/joinModal";
 
 const Modal = ({ room, setRoom, socket }: any) => {
     const opened = useSelector((state: any) => state.showModal.show);

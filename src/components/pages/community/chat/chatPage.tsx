@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import Navbar_user from '../../Navbar/User_side/Navbar'
+import Navbar_user from '../../../Navbar/User_side/Navbar'
 import { io } from "socket.io-client";
 import ChatBar from './chatBar';
 import ChatBody from './chatBody';
@@ -16,7 +16,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     socket.on('messageResponse', (data) => setMessages([...messages, data]));
-    
+
   }, [socket, messages]);
 
 
