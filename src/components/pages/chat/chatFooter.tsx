@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { FaRegPaperPlane } from "react-icons/fa"
 
-const ChatFooter = () => {
+const ChatFooter = ({ socket }: any) => {
     const [message, setMessage] = useState('');
 
     const handleSendMessage = (e: any) => {
         e.preventDefault();
-        console.log({ userName: localStorage.getItem('userName'), message });
+        if (message.trim() && localStorage.getItem('email')) {
+            socket.emit('message', {
+                text: message,
+                name: localStorage.getItem('email'),
+                id: `${socket.id}${Math.random()}`,
+                socketID: socket.id,
+            });
+        }
         setMessage('');
     };
     return (

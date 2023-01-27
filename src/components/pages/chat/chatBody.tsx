@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { XCircleIcon } from '@heroicons/react/24/solid'
-const ChatBody = () => {
+const ChatBody = ({ messages }: any) => {
     const navigate = useNavigate();
 
     const handleLeaveChat = () => {
@@ -30,15 +30,23 @@ const ChatBody = () => {
             </div>
             <div className='w-full h-full'>
                 <div className='w-full h-5/6'>
-                    <div className='w-full flex flex-row justify-start'>
-                        <div className='rounded-2xl bg-slate-400 text-black p-5 m-4'>
-                            Hello Friend, I'm Sidharth 😉
-                        </div>
-                    </div>
-                    <div className='w-full flex flex-row justify-end'>
-                        <div className='rounded-2xl bg-gray-400 max-w-xs text-black p-5 m-4'>
-                            Hii, Where were you... 😜 Lets plan
-                        </div>
+                    {messages.map((message: any) =>
+                        message.name === localStorage.getItem('email') ? (
+                            <div className='w-full flex flex-row justify-start'>
+                                <div className='rounded-2xl bg-slate-400 text-black p-5 m-4'>
+                                    {message.text}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className='w-full flex flex-row justify-end'>
+                                <div className='rounded-2xl bg-gray-400 max-w-xs text-black p-5 m-4'>
+                                    {message.text}
+                                </div>
+                            </div>
+                        )
+                    )}
+                    <div className="text-sm text-gray-200">
+                        <p>Someone is typing...</p>
                     </div>
                 </div>
             </div>
