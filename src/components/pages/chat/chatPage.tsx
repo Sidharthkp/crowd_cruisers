@@ -17,7 +17,7 @@ const ChatPage = () => {
     <>
       <Navbar_user />
       <div className='w-full h-full flex flex-row'>
-        <ChatBar />
+        <ChatBar socket={socket} />
         <div className='flex flex-col w-4/6 bg-slate-600'>
           <ChatBody messages={messages} />
           <ChatFooter socket={socket} />
