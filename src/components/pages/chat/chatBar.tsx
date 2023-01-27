@@ -23,8 +23,8 @@ const ChatBar = ({ socket }: any) => {
           <button className='bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-3 rounded-full'>Create</button>
         </div>
       </div>
-      <div className='w-full flex flex-col justify-between h-screen'>
-      {/* {users.map((user: any) => (
+      <div className='w-full flex flex-col justify-between h-screen overflow-y-auto scrollbar-hide'>
+      {users.map((user: any) => (
         
         <div key={user} className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
           <div className='rounded-full w-1/6'>
@@ -39,7 +39,7 @@ const ChatBar = ({ socket }: any) => {
             </div>
           </div>
         </div>
-        ))} */}
+        ))}
       </div>
     </div>
   )
