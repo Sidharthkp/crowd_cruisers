@@ -8,6 +8,13 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
         navigate('/');
         window.location.reload();
     };
+
+    // dd/mm/yyyy, hh:mm:ss
+    const formatDateFromTimestamp = (timestamp: any) => {
+        const date = new Date(timestamp);
+        return date.toLocaleString();
+    }
+
     return (
         <>
             <div className='w-full flex flex-row items-center p-4 bg-black'>

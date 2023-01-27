@@ -4,16 +4,19 @@ import { io } from "socket.io-client";
 import ChatBar from './chatBar';
 import ChatBody from './chatBody';
 import ChatFooter from './chatFooter';
+import Modal from './joinModal';
 
 const socket = io("http://localhost:3000");
 
 const ChatPage = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [typingStatus, setTypingStatus] = useState('');
+  const [room, setRoom] = useState(''); // Add this
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     socket.on('messageResponse', (data) => setMessages([...messages, data]));
+    
   }, [socket, messages]);
 
 
@@ -35,6 +38,11 @@ const ChatPage = () => {
           <ChatBody messages={messages} typingStatus={typingStatus} lastMessageRef={lastMessageRef} />
           <ChatFooter socket={socket} />
         </div>
+        <Modal
+          room={room} // Add this
+          setRoom={setRoom} // Add this
+          socket={socket} // Add this
+        />
       </div>
     </>
   )
