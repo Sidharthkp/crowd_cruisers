@@ -36,6 +36,84 @@ const ChatHome = () => {
               </div>
               <div className='flex flex-col'>
                 <div className='font-bold text-lg'>
+                  De-off roaders
+                </div>
+                <div className='text-sm font-thin'>
+                  Jonh: Hii, everyone..😃
+                </div>
+              </div>
+            </div>
+            <div className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+              <div className='rounded-full w-1/6'>
+                <img className='rounded-full w-16' src="https://www.royalenfield.com/content/dam/royal-enfield/india/rides/marquee-rides/astral-ride-spiti/logo/astral-side-logo.png" alt="" />
+              </div>
+              <div className='flex flex-col'>
+                <div className='font-bold text-lg'>
+                  Astral Ride
+                </div>
+                <div className='text-sm font-thin'>
+                  Jonh: Hii, everyone..😃
+                </div>
+              </div>
+            </div>
+            <div className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+              <div className='rounded-full w-1/6'>
+                <img className='rounded-full w-16' src="https://www.royalenfield.com/content/dam/royal-enfield/india/rides/marquee-rides/himalayan-odyssey-2022/landing/himalayan-odyessy.png" alt="" />
+              </div>
+              <div className='flex flex-col'>
+                <div className='font-bold text-lg'>
+                  Royal Enfield
+                </div>
+                <div className='text-sm font-thin'>
+                  Jonh: Hii, everyone..😃
+                </div>
+              </div>
+            </div>
+            <div className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+              <div className='rounded-full w-1/6'>
+                <img className='rounded-full w-16' src="https://www.royalenfield.com/content/dam/royal-enfield/india/rides/marquee-rides/whiteout-2020/landing/logo.png" alt="" />
+              </div>
+              <div className='flex flex-col'>
+                <div className='font-bold text-lg'>
+                  Royal Enfield
+                </div>
+                <div className='text-sm font-thin'>
+                  Jonh: Hii, everyone..😃
+                </div>
+              </div>
+            </div>
+            <div className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+              <div className='rounded-full w-1/6'>
+                <img className='rounded-full w-16' src="https://www.royalenfield.com/content/dam/royal-enfield/india/rides/marquee-rides/home/logos/tour-of-buthan-logo.svg" alt="" />
+              </div>
+              <div className='flex flex-col'>
+                <div className='font-bold text-lg'>
+                  Royal Enfield
+                </div>
+                <div className='text-sm font-thin'>
+                  Jonh: Hii, everyone..😃
+                </div>
+              </div>
+            </div>
+            <div className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+              <div className='rounded-full w-1/6'>
+                <img className='rounded-full w-16' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
+              </div>
+              <div className='flex flex-col'>
+                <div className='font-bold text-lg'>
+                  Royal Enfield
+                </div>
+                <div className='text-sm font-thin'>
+                  Jonh: Hii, everyone..😃
+                </div>
+              </div>
+            </div>
+            <div className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+              <div className='rounded-full w-1/6'>
+                <img className='rounded-full w-16' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
+              </div>
+              <div className='flex flex-col'>
+                <div className='font-bold text-lg'>
                   Royal Enfield
                 </div>
                 <div className='text-sm font-thin'>
@@ -61,12 +139,21 @@ const ChatHome = () => {
           </div>
           <div className='w-full h-full'>
             <div className='w-full h-5/6'>
-
+              <div className='w-full flex flex-row justify-start'>
+                <div className='rounded-2xl bg-slate-400 text-black p-5 m-4'>
+                  Hello Friend, I'm Sidharth 😉
+                </div>
+              </div>
+              <div className='w-full flex flex-row justify-end'>
+                <div className='rounded-2xl bg-gray-400 max-w-xs text-black p-5 m-4'>
+                  Hii, Where were you... 😜 Lets plan
+                </div>
+              </div>
             </div>
             <div className='w-full flex justify-center align-middle'>
-              <input className='flex flex-row w-full rounded-xl bg-slate-300 p-2 h-14 mt-6 ml-6 text-black' type="text" placeholder='Write Something....'>
+              <input className='flex flex-row w-full shadow-slate-800 rounded-xl bg-slate-300 p-2 h-14 mt-6 ml-6 text-black' type="text" placeholder='Write Something....'>
               </input>
-              <button className='cursor-pointer rounded-full w-10 h-10 flex justify-center items-center mt-8 mx-2 bg-green-600'>
+              <button className='cursor-pointer shadow-lg shadow-slate-800 rounded-full w-10 h-10 flex justify-center items-center mt-8 mx-2 bg-green-600'>
                 <FaRegPaperPlane />
               </button>
             </div>

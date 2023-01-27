@@ -18,6 +18,8 @@
     "@reduxjs/toolkit": "^1.9.1",
     "@sweetalert2/themes": "^5.0.15",
     "@types/firebase": "^3.2.1",
+    "@types/socket.io": "^3.0.2",
+    "@types/socket.io-client": "^3.0.0",
     "axios": "^1.2.4",
     "emoji-picker-react": "^4.4.7",
     "firebase": "^9.15.0",
