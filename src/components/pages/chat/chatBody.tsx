@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { XCircleIcon } from '@heroicons/react/24/solid'
-const ChatBody = ({ messages }: any) => {
+const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
     const navigate = useNavigate();
 
     const handleLeaveChat = () => {
@@ -46,8 +46,9 @@ const ChatBody = ({ messages }: any) => {
                         )
                     )}
                     <div className="text-sm text-gray-200">
-                        <p>Someone is typing...</p>
+                        <p>{typingStatus}</p>
                     </div>
+                    <div ref={lastMessageRef} />
                 </div>
             </div>
         </>
