@@ -1,13 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { XCircleIcon } from '@heroicons/react/24/solid'
+import { useDispatch } from "react-redux";
+import { setCreateSwitchOn } from "../../../../redux/createPost";
 const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLeaveChat = () => {
         localStorage.removeItem('userName');
         navigate('/');
         window.location.reload();
     };
+
+    const openModal = () => {
+        dispatch(setCreateSwitchOn())
+    }
 
     // dd/mm/yyyy, hh:mm:ss
     const formatDateFromTimestamp = (timestamp: any) => {
@@ -22,8 +29,8 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                     <div className='rounded-full w-1/6'>
                         <img className='rounded-full w-20' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
                     </div>
-                    <div className='flex flex-col'>
-                        <div className='font-bold text-2xl'>
+                    <div className='flex flex-col' onClick={openModal}>
+                        <div className='font-bold text-2xl cursor-pointer'>
                             Royal Enfield
                         </div>
                         <div className='text-sm font-thin'>

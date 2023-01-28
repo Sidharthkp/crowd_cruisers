@@ -5,13 +5,14 @@ import ChatBar from './chatBar';
 import ChatBody from './chatBody';
 import ChatFooter from './chatFooter';
 import Modal from './joinModal';
+import CreatePost from '../posts/createPost';
 
 const socket = io("http://localhost:3000");
 
 const ChatPage = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [typingStatus, setTypingStatus] = useState('');
-  const [room, setRoom] = useState(''); // Add this
+  const [room, setRoom] = useState('');
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,10 +40,11 @@ const ChatPage = () => {
           <ChatFooter socket={socket} />
         </div>
         <Modal
-          room={room} // Add this
-          setRoom={setRoom} // Add this
-          socket={socket} // Add this
+          room={room} 
+          setRoom={setRoom} 
+          socket={socket}
         />
+        <CreatePost />
       </div>
     </>
   )
