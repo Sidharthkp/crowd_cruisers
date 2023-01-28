@@ -35,8 +35,11 @@ const Modal = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then((res) => closeModal)
+            .then((res) => console.log("datasend")
+            )
             .catch((err) => console.log(err));
+
+        dispatch(setCreateSwitchOff())
     }
 
     return (
