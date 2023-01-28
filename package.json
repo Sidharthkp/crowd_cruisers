@@ -21,7 +21,7 @@
     "@types/firebase": "^3.2.1",
     "@types/socket.io": "^3.0.2",
     "@types/socket.io-client": "^3.0.0",
-    "axios": "^1.2.4",
+    "axios": "^1.2.5",
     "emoji-picker-react": "^4.4.7",
     "firebase": "^9.15.0",
     "mapbox-gl": "^2.12.0",
