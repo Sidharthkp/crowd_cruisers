@@ -35,7 +35,7 @@ const Modal = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then((res) => console.log(res.data))
+            .then((res) => closeModal)
             .catch((err) => console.log(err));
     }
 
