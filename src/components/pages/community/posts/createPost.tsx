@@ -6,7 +6,7 @@ import { setCreateSwitchOff } from '../../../../redux/createPost';
 
 const Modal = () => {
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState<File | null>(null);
+    const [image, setImage] = useState<Blob | null>(null)
 
     const fileInput = useRef<HTMLInputElement>(null);
 
@@ -20,24 +20,23 @@ const Modal = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        if (fileInput.current && fileInput.current.files) {
+        const formData = new FormData()
 
+        formData.append('description', description);
 
-            const post = {
-                name: localStorage.getItem('email'),
-                description: description,
-                productImage: fileInput.current.files[0] //.name,
-            };
-
-
-            axios
-                .post("http://localhost:3000/api/userPosts/post", post)
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err));
-
-            alert(`Selected file - ${fileInput.current.files[0]}`);
-            console.log(fileInput.current.files[0]);
+        if (image) {
+            formData.append('postImage', image)
         }
+
+
+        axios
+            .post("http://localhost:3000/api/userPosts/post", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
     }
 
     return (
