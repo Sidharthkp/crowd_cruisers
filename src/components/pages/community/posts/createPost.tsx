@@ -11,6 +11,7 @@ const Modal = () => {
     const fileInput = useRef<HTMLInputElement>(null);
 
     const opened = useSelector((state: any) => state.showCreatePost.show);
+    
     const dispatch = useDispatch();
 
     const closeModal = () => {
