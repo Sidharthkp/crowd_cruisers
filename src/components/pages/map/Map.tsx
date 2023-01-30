@@ -13,7 +13,12 @@ const MapPage = () => {
         longitude: number;
         latitude: number;
     }
-    const [pins, setPins] = React.useState([]);
+    interface Pin {
+        lat: number;
+        lng: number;
+        label: string;
+      }
+    const [pins, setPins] = React.useState<Pin[]>([]);
     const [viewPort, setViewPort] = React.useState({
         longitude: 75.922096,
         latitude: 10.914627,
@@ -61,7 +66,7 @@ const MapPage = () => {
 
         try {
             const res = await axios.post("http://localhost:3000/api/pins", newPin)
-            setPins(res.data);
+            setPins([...pins, res.data]);
             setNewPlace(null);
         } catch (err) {
             console.log(err);
