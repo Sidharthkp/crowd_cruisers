@@ -13,8 +13,6 @@ const ChatBar = ({ socket }: any) => {
       try {
         const res = await axios.get("http://localhost:3000/api/createGroup/get");
 
-        console.log(res.data);
-
         setGroup(res.data);
 
       } catch (err) {
