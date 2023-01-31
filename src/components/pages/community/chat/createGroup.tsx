@@ -1,12 +1,12 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useDispatch, useSelector } from "react-redux";
-import { setSwitchOff } from "../../../../redux/joinModal";
+import { setCreateSwitchOff } from '../../../../redux/createModal';
 
-const JoinModalPage = () => {
-    const opened = useSelector((state: any) => state.showModal.show);
+const CreateModal = () => {
+    const opened = useSelector((state: any) => state.showCreateModal.show);
     const dispatch = useDispatch();
     const closeModal = () => {
-        dispatch(setSwitchOff())
+        dispatch(setCreateSwitchOff())
     }
 
     const username = localStorage.getItem('email')
@@ -57,7 +57,7 @@ const JoinModalPage = () => {
                                             <div className="md:flex md:items-center">
                                                 <div className="md:w-1/3"></div>
                                                 <div className="md:w-2/3">
-                                                    <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                                                    <button  className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                                                         Join
                                                     </button>
                                                 </div>
@@ -75,4 +75,4 @@ const JoinModalPage = () => {
     );
 }
 
-export default JoinModalPage;
+export default CreateModal;

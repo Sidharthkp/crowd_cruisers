@@ -4,15 +4,15 @@ import { io } from "socket.io-client";
 import ChatBar from './chatBar';
 import ChatBody from './chatBody';
 import ChatFooter from './chatFooter';
-import Modal from './joinModal';
+import JoinModalPage from './joinModal';
 import CreatePost from '../posts/createPost';
+import CreateModal from './createGroup';
 
 const socket = io("http://localhost:3000");
 
 const ChatPage = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [typingStatus, setTypingStatus] = useState('');
-  const [room, setRoom] = useState('');
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,11 +39,8 @@ const ChatPage = () => {
           <ChatBody messages={messages} typingStatus={typingStatus} lastMessageRef={lastMessageRef} />
           <ChatFooter socket={socket} />
         </div>
-        <Modal
-          room={room} 
-          setRoom={setRoom} 
-          socket={socket}
-        />
+        <JoinModalPage />
+        <CreateModal />
         <CreatePost />
       </div>
     </>

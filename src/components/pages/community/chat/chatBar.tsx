@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { setCreateSwitchOn } from "../../../../redux/createModal";
 import { setSwitchOn } from "../../../../redux/joinModal";
 
 const ChatBar = ({ socket }: any) => {
@@ -12,6 +13,10 @@ const ChatBar = ({ socket }: any) => {
 
   const openModal = () => {
     dispatch(setSwitchOn())
+  }
+
+  const createModal = () => {
+    dispatch(setCreateSwitchOn())
   }
 
   return (
@@ -28,7 +33,7 @@ const ChatBar = ({ socket }: any) => {
           <button onClick={openModal} className='bg-blue-500 hover:bg-blue-700 m-2 text-white font-bold py-1 px-3 rounded-full'>Join Room</button>
         </div>
         <div className='h-full w-1/6 justify-center items-center flex flex-row'>
-          <button className='bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-3 rounded-full'>Create</button>
+          <button onClick={createModal} className='bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-3 rounded-full'>Create</button>
         </div>
       </div>
       <div className='w-full flex flex-col h-screen overflow-y-auto scrollbar-hide'>
