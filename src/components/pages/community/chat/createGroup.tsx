@@ -1,15 +1,41 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import axios from 'axios';
+import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOff } from '../../../../redux/createModal';
 
 const CreateModal = () => {
+    const [roomName, setRoom] = useState('');
     const opened = useSelector((state: any) => state.showCreateModal.show);
     const dispatch = useDispatch();
     const closeModal = () => {
         dispatch(setCreateSwitchOff())
     }
 
-    const username = localStorage.getItem('email')
+    const adminName = localStorage.getItem('email') || ''
+
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+
+
+        const formData = new FormData();
+
+        formData.append('roomName', roomName);
+        
+        formData.append('adminName', adminName);
+
+        axios
+            .post("http://localhost:3000/api/createGroup/create", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then((res) => console.log("datasend"))
+            .catch((err) => console.log(err));
+
+        dispatch(setCreateSwitchOff())
+    }
 
     return (
         <>
@@ -26,43 +52,26 @@ const CreateModal = () => {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
-                                    <form action="">
-                                        <form className="w-full max-w-sm">
-                                            <div className="md:flex md:items-center mb-6">
-                                                <div className="md:w-1/3">
-                                                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                                                        Room Id:
-                                                    </label>
-                                                </div>
-                                                <div className="md:w-2/3">
-                                                    <select className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' name="" id="">
-                                                        <option value="">Select your room 👇</option>
-                                                        <option value='javascript'>JavaScript</option>
-                                                        <option value='node'>Node</option>
-                                                        <option value='express'>Express</option>
-                                                        <option value='react'>React</option>
-                                                    </select>
-                                                </div>
+                                    <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+                                        <div className="md:flex md:items-center mb-6">
+                                            <div className="md:w-1/3">
+                                                <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                                    Name:
+                                                </label>
                                             </div>
-                                            <div className="md:flex md:items-center mb-6">
-                                                <div className="md:w-1/3">
-                                                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" >
-                                                        Password
-                                                    </label>
-                                                </div>
-                                                <div className="md:w-2/3">
-                                                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="password" placeholder="******************" />
-                                                </div>
+                                            <div className="md:w-2/3">
+                                                <input type="text" onChange={(e) => setRoom(e.target.value)} className="bg-white text-black text-sm border-2" />
                                             </div>
-                                            <div className="md:flex md:items-center">
-                                                <div className="md:w-1/3"></div>
-                                                <div className="md:w-2/3">
-                                                    <button  className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-                                                        Join
-                                                    </button>
-                                                </div>
+                                        </div>
+
+                                        <div className="md:flex md:items-center">
+                                            <div className="md:w-1/3"></div>
+                                            <div className="md:w-2/3">
+                                                <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                                                    Create
+                                                </button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

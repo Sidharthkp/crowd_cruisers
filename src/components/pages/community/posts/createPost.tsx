@@ -28,8 +28,7 @@ const Modal = () => {
         if (image) {
             formData.append('postImage', image)
         }
-
-
+        
         axios
             .post("http://localhost:3000/api/userPosts/post", formData, {
                 headers: {
