@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Map, { Marker, Popup } from 'react-map-gl';
+import Map, { GeolocateControl, Marker, Popup } from 'react-map-gl';
 import Navbar_user from '../../Navbar/User_side/Navbar'
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import axios from 'axios'
@@ -17,7 +17,7 @@ const MapPage = () => {
         lat: number;
         lng: number;
         label: string;
-      }
+    }
     const [pins, setPins] = React.useState<Pin[]>([]);
     const [viewPort, setViewPort] = React.useState({
         longitude: 75.922096,
@@ -28,7 +28,16 @@ const MapPage = () => {
     const [newTitle, setNewTitle] = React.useState("");
     const [newDescription, setNewDescription] = React.useState("");
     const [newPlace, setNewPlace] = React.useState<Place | null>(null);
+
     React.useEffect(() => {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            setViewPort({
+                ...viewPort,
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude,
+                zoom: 3.5,
+            });
+        });
         const getPins = async () => {
             try {
                 const res = await axios.get("http://localhost:3000/api/pins");
@@ -78,7 +87,7 @@ const MapPage = () => {
         <>
             <Navbar_user />
             <div>
-                {pins.length > 0 && (
+                {viewPort.latitude && viewPort.longitude && pins.length > 0 && (
                     <Map
                         initialViewState={{ ...viewPort }}
                         mapboxAccessToken={import.meta.env.VITE_MAPBOX}
@@ -86,12 +95,24 @@ const MapPage = () => {
                         mapStyle="mapbox://styles/mapbox/streets-v9"
                         onDblClick={handleAddClick}
                     >
+                        <GeolocateControl
+                            positionOptions={{ enableHighAccuracy: true }}
+                            trackUserLocation={true}
+                        />
+
+                        {/* live location */}
+                        <Marker
+                            longitude={viewPort.longitude}
+                            latitude={viewPort.latitude}
+                        />
+
+
                         {pins.map((p: any) => {
 
                             return (<div key={p._id}>
 
                                 <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
-                                    <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 64 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
+                                    <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 44 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
                                 </Marker>
 
 
