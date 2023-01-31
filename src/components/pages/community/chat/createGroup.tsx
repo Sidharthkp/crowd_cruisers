@@ -17,20 +17,9 @@ const CreateModal = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-
-
-        const formData = new FormData();
-
-        formData.append('roomName', roomName);
-        
-        formData.append('adminName', adminName);
-
+    
         axios
-            .post("http://localhost:3000/api/createGroup/create", formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+            .post("http://localhost:3000/api/createGroup/create", {roomName, adminName})
             .then((res) => console.log("datasend"))
             .catch((err) => console.log(err));
 
