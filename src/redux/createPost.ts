@@ -4,10 +4,12 @@ export const createPostSlice = createSlice({
   name: "showCreatePost",
   initialState: {
     show: false,
+    dataSave: ''
   },
   reducers: {
-    setCreateSwitchOn: (state) => {
+    setCreateSwitchOn: (state, data) => {
       state.show = true;
+      state.dataSave = data.payload
     },
     setCreateSwitchOff: (state) => {
       state.show = false;

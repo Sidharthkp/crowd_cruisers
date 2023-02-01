@@ -11,6 +11,7 @@ const Modal = () => {
     const fileInput = useRef<HTMLInputElement>(null);
 
     const opened = useSelector((state: any) => state.showCreatePost.show);
+    const details = useSelector((state: any) => state.showCreatePost.dataSave);
     
     const dispatch = useDispatch();
 
@@ -24,6 +25,7 @@ const Modal = () => {
         const formData = new FormData()
 
         formData.append('description', description);
+        formData.append('details', details);
 
         if (image) {
             formData.append('postImage', image)

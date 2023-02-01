@@ -21,8 +21,8 @@ const ChatBody = ({ typingStatus }: any) => {
         dispatch(closeGroupSwitch());
     };
 
-    const openModal = () => {
-        dispatch(setCreateSwitchOn())
+    const openModal = (data: any) => {
+        dispatch(setCreateSwitchOn(data))
     }
 
     const group = () => {
@@ -66,8 +66,8 @@ const ChatBody = ({ typingStatus }: any) => {
                                 <div className='rounded-full w-1/6'>
                                     <img className='rounded-full w-20' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
                                 </div>
-                                <div className='flex flex-col' onClick={openModal}>
-                                    <div className='font-bold text-2xl cursor-pointer'>
+                                <div className='flex flex-col'>
+                                    <div className='font-bold text-2xl cursor-pointer' onClick={()=>{openModal(datas._id)}}>
                                         {datas.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>
