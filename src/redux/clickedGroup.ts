@@ -5,15 +5,18 @@ export const clickedGroup = createSlice({
   
   initialState: {
     show: false,
+    dataSave: ''
   },
   
   reducers: {
-    openGroupSwitch: (state) => {
+    openGroupSwitch: (state, data) => {
       state.show = true;
+      state.dataSave = data.payload;
+      
     },
     closeGroupSwitch: (state) => {
       state.show = false;
-    },
+    }
   },
 });
 

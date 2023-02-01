@@ -32,7 +32,7 @@ const ChatBar = ({ socket }: any) => {
   }
 
   const ClickedGroup = (data: any) => {
-    dispatch(openGroupSwitch())
+    dispatch(openGroupSwitch(data))
   }
 
   return (

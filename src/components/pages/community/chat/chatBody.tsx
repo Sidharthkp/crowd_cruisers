@@ -1,11 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import { XCircleIcon } from '@heroicons/react/24/solid'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOn } from "../../../../redux/createPost";
 import { closeGroupSwitch } from "../../../../redux/clickedGroup";
+import axios from "axios";
 const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
     const dispatch = useDispatch();
+    const [data, setData] = useState<any>({})
     const opened = useSelector((state: any) => state.showGroupPage.show);
+    const details = useSelector((state: any) => state.showGroupPage.dataSave);
 
     const handleLeaveChat = () => {
         dispatch(closeGroupSwitch());
@@ -15,15 +18,22 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
         dispatch(setCreateSwitchOn())
     }
 
-    // dd/mm/yyyy, hh:mm:ss
-    const formatDateFromTimestamp = (timestamp: any) => {
-        const date = new Date(timestamp);
-        return date.toLocaleString();
-    }
+
+    useEffect(() => {
+        try {
+            axios
+                .post("http://localhost:3000/api/createGroup/open", { details })
+                .then((res) => setData(res.data))
+                .catch((err) => console.log(err));
+
+        } catch (err) {
+            console.log(err);
+        }
+    }, [])
 
     return (
         <>
-            {opened ?
+            {opened && data ?
                 (
 
                     <>
@@ -34,7 +44,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                                 </div>
                                 <div className='flex flex-col' onClick={openModal}>
                                     <div className='font-bold text-2xl cursor-pointer'>
-                                        Royal Enfield
+                                        {data.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>
                                         <div className="text-sm text-gray-200">
@@ -68,7 +78,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                             </div>
                         </div>
                     </>
-                ) : 
+                ) :
                 <>
                     <div className="flex flex-row w-full h-screen">
                         <div>
