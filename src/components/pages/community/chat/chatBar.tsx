@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { openGroupSwitch } from "../../../../redux/clickedGroup";
 import { setCreateSwitchOn } from "../../../../redux/createModal";
 import { setSwitchOn } from "../../../../redux/joinModal";
 
@@ -30,6 +31,10 @@ const ChatBar = ({ socket }: any) => {
     dispatch(setCreateSwitchOn())
   }
 
+  const ClickedGroup = (data: any) => {
+    dispatch(openGroupSwitch())
+  }
+
   return (
     <div className='flex flex-col w-2/6 h-full bg-slate-900'>
       <div className='flex flex-row w-full h-12 justify-around items-center p-2'>
@@ -52,7 +57,7 @@ const ChatBar = ({ socket }: any) => {
 
           p.members.includes(username, 0) &&
 
-          <div key={p._id} className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+          <div key={p._id} onClick={() => { ClickedGroup(p._id) }} className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
             <div className='rounded-full w-1/6'>
               <img className='rounded-full w-16' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
             </div>
