@@ -9,7 +9,6 @@ const ChatBody = ({ typingStatus }: any) => {
 
     const [datas, setData] = useState<any>({})
     const [msg, setMessage] = useState([])
-    // console.log(datas);
 
     const lastMessageRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +53,7 @@ const ChatBody = ({ typingStatus }: any) => {
         group()
         message()
         lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [details])
+    }, [details, msg])
 
     return (
         <>
