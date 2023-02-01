@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar_user from '../../../Navbar/User_side/Navbar'
 import { io } from "socket.io-client";
 import ChatBar from './chatBar';
@@ -11,20 +11,7 @@ import CreateModal from './createGroup';
 const socket = io("http://localhost:3000");
 
 const ChatPage = () => {
-  const [messages, setMessages] = useState<string[]>([]);
-  const [typingStatus, setTypingStatus] = useState('');
-  const lastMessageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    socket.on('messageResponse', (data) => setMessages([...messages, data]));
-
-  }, [socket, messages]);
-
-
-  useEffect(() => {
-    // scroll to bottom every time messages change
-    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  const [typingStatus, setTypingStatus] = useState('');  
 
   useEffect(() => {
     socket.on('typingResponse', (data) => setTypingStatus(data));
@@ -34,9 +21,9 @@ const ChatPage = () => {
     <>
       <Navbar_user />
       <div className='w-full h-screen flex flex-row'>
-        <ChatBar socket={socket} />
+        <ChatBar />
         <div className='flex flex-col w-4/6 bg-slate-600'>
-          <ChatBody messages={messages} typingStatus={typingStatus} lastMessageRef={lastMessageRef} />
+          <ChatBody typingStatus={typingStatus}/>
           <ChatFooter socket={socket} />
         </div>
         <JoinModalPage />

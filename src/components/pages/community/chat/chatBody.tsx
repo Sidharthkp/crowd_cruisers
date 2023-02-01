@@ -1,17 +1,22 @@
 import { XCircleIcon } from '@heroicons/react/24/solid'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOn } from "../../../../redux/createPost";
 import { closeGroupSwitch } from "../../../../redux/clickedGroup";
 import axios from "axios";
-const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
+const ChatBody = ({ typingStatus }: any) => {
     const dispatch = useDispatch();
 
-    const [data, setData] = useState<any>({})
-    console.log(data);
+    const [datas, setData] = useState<any>({})
+    const [msg, setMessage] = useState([])
+    // console.log(datas);
+
+    const lastMessageRef = useRef<HTMLDivElement>(null);
+
 
     const opened = useSelector((state: any) => state.showGroupPage.show);
     const details = useSelector((state: any) => state.showGroupPage.dataSave);
+    
 
     const handleLeaveChat = () => {
         dispatch(closeGroupSwitch());
@@ -27,6 +32,19 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                 .post("http://localhost:3000/api/createGroup/open", { details })
                 .then((res) => setData(res.data))
                 .catch((err) => console.log(err));
+                console.log(">>>>>>>>>>>"+details);
+                
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const message = () => {
+        try {
+            axios
+                .post("http://localhost:3000/api/createGroup/message", { details })
+                .then((res) => setMessage(res.data))
+                .catch((err) => console.log(err));
 
         } catch (err) {
             console.log(err);
@@ -34,11 +52,13 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
     }
     useEffect(() => {
         group()
-    }, [group])
+        message()
+        lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [details])
 
     return (
         <>
-            {opened && data ?
+            {opened && datas ?
                 (
 
                     <>
@@ -49,7 +69,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                                 </div>
                                 <div className='flex flex-col' onClick={openModal}>
                                     <div className='font-bold text-2xl cursor-pointer'>
-                                        {data.groupName}
+                                        {datas.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>
                                         <div className="text-sm text-gray-200">
@@ -64,7 +84,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                         </div>
                         <div className='w-full h-full'>
                             <div className='w-full max-h-96 overflow-y-auto scrollbar-hide'>
-                                {messages.map((message: any) =>
+                                {Array.isArray(msg) ? msg.map((message: any) =>
                                     message.name === localStorage.getItem('email') ? (
                                         <div className='w-full flex flex-row justify-end'>
                                             <div className='rounded-2xl bg-gray-400 max-w-xs text-black p-5 m-4'>
@@ -78,7 +98,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                                             </div>
                                         </div>
                                     )
-                                )}
+                                ) : null}
                                 <div ref={lastMessageRef} />
                             </div>
                         </div>

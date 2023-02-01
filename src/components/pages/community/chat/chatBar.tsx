@@ -5,7 +5,7 @@ import { openGroupSwitch } from "../../../../redux/clickedGroup";
 import { setCreateSwitchOn } from "../../../../redux/createModal";
 import { setSwitchOn } from "../../../../redux/joinModal";
 
-const ChatBar = ({ socket }: any) => {
+const ChatBar = () => {
   const [groups, setGroup] = useState([]);
   const dispatch = useDispatch()
 
