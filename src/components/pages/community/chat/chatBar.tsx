@@ -8,19 +8,19 @@ const ChatBar = ({ socket }: any) => {
   const [groups, setGroup] = useState([]);
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const getGroups = async () => {
-      try {
-        const res = await axios.get("http://localhost:3000/api/createGroup/get");
+  const username = localStorage.getItem('email')
 
-        setGroup(res.data);
-
-      } catch (err) {
-        console.log(err);
-      }
+  const getGroups = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/createGroup/get");
+      setGroup(res.data);
+    } catch (err) {
+      console.log(err);
     }
+  }
+  useEffect(() => {
     getGroups()
-  }, [])
+  }, [getGroups])
 
   const openModal = () => {
     dispatch(setSwitchOn())
@@ -49,6 +49,8 @@ const ChatBar = ({ socket }: any) => {
       </div>
       <div className='w-full flex flex-col h-screen overflow-y-auto scrollbar-hide'>
         {groups.map((p: any) => (
+
+          p.members.includes(username, 0) &&
 
           <div key={p._id} className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
             <div className='rounded-full w-1/6'>
