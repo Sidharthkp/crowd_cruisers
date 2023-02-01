@@ -31,7 +31,6 @@ const ChatBody = ({ typingStatus }: any) => {
                 .post("http://localhost:3000/api/createGroup/open", { details })
                 .then((res) => setData(res.data))
                 .catch((err) => console.log(err));
-                console.log(">>>>>>>>>>>"+details);
                 
         } catch (err) {
             console.log(err);
@@ -49,6 +48,7 @@ const ChatBody = ({ typingStatus }: any) => {
             console.log(err);
         }
     }
+    
     useEffect(() => {
         group()
         message()
