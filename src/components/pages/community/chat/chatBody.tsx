@@ -6,7 +6,10 @@ import { closeGroupSwitch } from "../../../../redux/clickedGroup";
 import axios from "axios";
 const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
     const dispatch = useDispatch();
+
     const [data, setData] = useState<any>({})
+    console.log(data);
+
     const opened = useSelector((state: any) => state.showGroupPage.show);
     const details = useSelector((state: any) => state.showGroupPage.dataSave);
 
@@ -18,8 +21,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
         dispatch(setCreateSwitchOn())
     }
 
-
-    useEffect(() => {
+    const group = () => {
         try {
             axios
                 .post("http://localhost:3000/api/createGroup/open", { details })
@@ -29,7 +31,10 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
         } catch (err) {
             console.log(err);
         }
-    }, [])
+    }
+    useEffect(() => {
+        group()
+    }, [group])
 
     return (
         <>

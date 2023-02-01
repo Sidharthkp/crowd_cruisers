@@ -1,30 +1,15 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaRegPaperPlane } from "react-icons/fa"
 import { useSelector } from "react-redux";
 
 const ChatFooter = ({ socket }: any) => {
     const [message, setMessage] = useState('');
-    const [data, setData] = useState<any>({})
 
     const opened = useSelector((state: any) => state.showGroupPage.show);
     const details = useSelector((state: any) => state.showGroupPage.dataSave);
 
     const handleTyping = () =>
         socket.emit('typing', `${localStorage.getItem('userName')} is typing`);
-
-
-    useEffect(() => {
-        try {
-            axios
-                .get("http://localhost:3000/api/createGroup/messages")
-                .then((res) => setData(res.data))
-                .catch((err) => console.log(err));
-
-        } catch (err) {
-            console.log(err);
-        }
-    }, [])
 
     const handleSendMessage = (e: any) => {
         e.preventDefault();
