@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOn } from "../../../../redux/createPost";
 import { closeGroupSwitch } from "../../../../redux/clickedGroup";
 const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const opened = useSelector((state: any) => state.showGroupPage.show);
 
@@ -69,7 +68,20 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }: any) => {
                             </div>
                         </div>
                     </>
-                ) : null
+                ) : 
+                <>
+                    <div className="flex flex-row w-full h-screen">
+                        <div>
+                            <img className="h-screen" src="https://wallpapercave.com/dwp1x/wp6988787.png" alt="" />
+                        </div>
+                        <div>
+                            <img className="h-screen" src="https://wallpapercave.com/dwp1x/wp6988787.png" alt="" />
+                        </div>
+                        <div>
+                            <img className="h-screen" src="https://wallpapercave.com/dwp1x/wp6988787.png" alt="" />
+                        </div>
+                    </div>
+                </>
             }
         </>
     )
