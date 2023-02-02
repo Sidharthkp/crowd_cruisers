@@ -15,7 +15,7 @@ const home = () => {
     const saveToWishlist = (id: any) => {
         try {
             axios.post("http://localhost:3000/api/userPosts/wishList", { id, userName })
-                .then((res) => console.log("datasend")
+                .then((res) => console.log(res)
                 )
                 .catch((err) => console.log(err));
         } catch (err) {

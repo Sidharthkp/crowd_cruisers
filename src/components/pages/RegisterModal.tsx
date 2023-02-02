@@ -19,7 +19,7 @@ const Modal = () => {
 
         axios
             .post("http://localhost:3000/api/userPosts/join", {username, id})
-            .then((res) => console.log("datasend")
+            .then((res) => console.log(res)
             )
             .catch((err) => console.log(err));
 
