@@ -5,11 +5,10 @@ const Whishlist = () => {
     const [show, setshow] = useState('');
     const [switchState, setSwitch] = useState(false);
     const [posts, setPosts] = useState([]);
-    console.log(posts);
 
     const setshowF = (data: any) => {
         setSwitch(!switchState);
-        switchState?setshow(data):setshow('');
+        switchState ? setshow(data) : setshow('');
     }
 
     const username = localStorage.getItem('email')
@@ -24,6 +23,16 @@ const Whishlist = () => {
         }
         getPosts()
     }, [])
+
+    const handleSubmit = (id: any) => {
+
+        axios
+            .post("http://localhost:3000/api/userPosts/join", { username, id })
+            .then((res) => console.log("datasend")
+            )
+            .catch((err) => console.log(err));
+    }
+
     return (
         <div>
             <NavBar />
@@ -83,10 +92,10 @@ const Whishlist = () => {
                                         </div>
                                         <div className="flex jusitfy-between flex-col lg:flex-row items-center mt-10 w-full space-y-4 lg:space-y-0 lg:space-x-4 xl:space-x-8">
                                             <div className="w-full">
-                                                <button className=" focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800  bg-white border border-gray-800">More information</button>
+                                                <button className=" focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800  bg-white border border-gray-800">Remove from Wishlist</button>
                                             </div>
                                             <div className="w-full">
-                                                <button className="focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2  text-white w-full tracking-tight py-4 text-lg leading-4  hover:bg-black bg-gray-800 border border-gray-800">Add to cart</button>
+                                                <button onClick={() => handleSubmit(e.eventId._id)} className="focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2  text-white w-full tracking-tight py-4 text-lg leading-4  hover:bg-black bg-gray-800 border border-gray-800">Register Now</button>
                                             </div>
                                         </div>
                                     </div>
