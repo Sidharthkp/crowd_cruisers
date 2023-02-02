@@ -22,7 +22,7 @@ const Whishlist = () => {
             }
         }
         getPosts()
-    }, [])
+    }, [posts])
 
     const handleSubmit = (id: any) => {
 
