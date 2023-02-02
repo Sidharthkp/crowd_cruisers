@@ -60,7 +60,7 @@ const ChatBody = ({ typingStatus }: any) => {
             {opened && datas ?
                 (
 
-                    <>
+                    <div key={datas._id}>
                         <div className='w-full flex flex-row items-center p-4 bg-black'>
                             <div className="w-4/6 flex flex-row">
                                 <div className='rounded-full w-1/6'>
@@ -101,7 +101,7 @@ const ChatBody = ({ typingStatus }: any) => {
                                 <div ref={lastMessageRef} />
                             </div>
                         </div>
-                    </>
+                    </div>
                 ) :
                 <>
                     <div className="flex flex-row w-full h-screen">

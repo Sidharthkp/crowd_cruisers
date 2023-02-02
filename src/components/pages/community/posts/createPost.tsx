@@ -5,14 +5,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOff } from '../../../../redux/createPost';
 
 const Modal = () => {
+    const [event, setEvent] = useState('ride');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState<Blob | null>(null)
+
+    console.log(event);
+
+    const radio = (e: any) => {
+        setEvent(e.target.value)
+    }
 
     const fileInput = useRef<HTMLInputElement>(null);
 
     const opened = useSelector((state: any) => state.showCreatePost.show);
     const details = useSelector((state: any) => state.showCreatePost.dataSave);
-    
+
     const dispatch = useDispatch();
 
     const closeModal = () => {
@@ -30,7 +37,7 @@ const Modal = () => {
         if (image) {
             formData.append('postImage', image)
         }
-        
+
         axios
             .post("http://localhost:3000/api/userPosts/post", formData, {
                 headers: {
@@ -80,6 +87,25 @@ const Modal = () => {
                                                 <input ref={fileInput} name="postImage" onChange={(e: any) => setImage(e.target.files[0])} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file" />
                                             </div>
                                         </div>
+                                        <div className='w-full flex flex-row justify-center text-black font-bold'>
+
+                                            <div className='flex flex-row justify-center m-5'>
+                                                <input
+                                                    type="radio"
+                                                    value="event"
+                                                    checked={event === 'event'}
+                                                    onChange={radio}
+                                                /> Event
+                                            </div>
+                                            <div className='flex flex-row justify-center m-5'>
+                                                <input
+                                                    type="radio"
+                                                    value="ride"
+                                                    checked={event === 'ride'}
+                                                    onChange={radio}
+                                                /> Ride
+                                            </div>
+                                        </ div>
                                         <div className="flex flex-row justify-center my-4">
                                             <div className="flex flex-col w-5/6">
                                                 <button className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">

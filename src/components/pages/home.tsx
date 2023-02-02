@@ -1,9 +1,18 @@
 import axios from 'axios';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setRegisterSwitchOn } from '../../redux/registerPage';
 import Navbar_user from '../Navbar/User_side/Navbar'
+import RegisterPage from './RegisterModal'
 
 const home = () => {
     const [posts, setPosts] = React.useState([]);
+    const dispatch = useDispatch()
+    const openRegisterModal = (id: any) => {
+        dispatch(setRegisterSwitchOn(id))
+    }
+
+
     React.useEffect(() => {
         const getPosts = async () => {
             try {
@@ -27,12 +36,15 @@ const home = () => {
                             posts.map((p: any) => {
                                 return (
                                     <div key={p._id} className="flex flex-row">
+                                        <div className='absolute'>
+                                            <RegisterPage />
+                                        </div>
                                         <div className='w-auto'>
                                             <img src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`} alt="" />
                                         </div>
                                         <div className='absolute right-2'>
                                             <div className="registernow">
-                                                <a className="ctabtn" href="#">
+                                                <button onClick={()=>{openRegisterModal(p._id)}} className="ctabtn">
                                                     <span>Register Now</span>
                                                     <span>
                                                         <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -43,7 +55,7 @@ const home = () => {
                                                             </g>
                                                         </svg>
                                                     </span>
-                                                </a>
+                                                </button>
                                             </div>
                                             <div className="registernow">
                                                 <a className="ctabtn" href="#">

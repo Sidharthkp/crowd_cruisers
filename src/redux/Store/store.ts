@@ -4,6 +4,7 @@ import modalReducer from '../joinModal'
 import createModalReducer from '../createModal'
 import createPostReducer from '../createPost'
 import groupOpenReducer from '../clickedGroup'
+import registerOpenReducer from '../registerPage'
 
 export default configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
         showModal: modalReducer,
         showCreatePost: createPostReducer,
         showCreateModal: createModalReducer,
-        showGroupPage: groupOpenReducer
+        showGroupPage: groupOpenReducer,
+        showRegisterPage: registerOpenReducer 
     },
 })
