@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setAuthentication, setNotAuthenticated } from "./redux/Authentication/reducer"
 import MapPage from "./components/Pages/map/Map"
 import ChatPage from "./components/Pages/community/chat/chatPage"
+import Whishlist from "./components/Pages/whishlist/Whishlist"
 
 const App = () => {
     const dispatch = useDispatch()
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path='/login' element={!authenticated ? <Login /> : <Home />} />
                     <Route path='/' element={<Home />} />
                     <Route path="/community" element={authenticated ? <ChatPage /> : <Signup />} />
+                    <Route path="/wishlist" element={authenticated ? <Whishlist /> : <Signup />} />
                 </Routes>
             </BrowserRouter>
         </div>

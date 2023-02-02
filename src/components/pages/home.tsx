@@ -11,7 +11,17 @@ const home = () => {
     const openRegisterModal = (id: any) => {
         dispatch(setRegisterSwitchOn(id))
     }
-
+    const userName = localStorage.getItem("email")
+    const saveToWishlist = (id: any) => {
+        try {
+            axios.post("http://localhost:3000/api/userPosts/wishList", { id, userName })
+                .then((res) => console.log("datasend")
+                )
+                .catch((err) => console.log(err));
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     React.useEffect(() => {
         const getPosts = async () => {
@@ -44,7 +54,7 @@ const home = () => {
                                         </div>
                                         <div className='absolute right-2'>
                                             <div className="registernow">
-                                                <button onClick={()=>{openRegisterModal(p._id)}} className="ctabtn">
+                                                <button onClick={() => { openRegisterModal(p._id) }} className="ctabtn">
                                                     <span>Register Now</span>
                                                     <span>
                                                         <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -58,7 +68,7 @@ const home = () => {
                                                 </button>
                                             </div>
                                             <div className="registernow">
-                                                <a className="ctabtn" href="#">
+                                                <button className="ctabtn" onClick={() => { saveToWishlist(p._id) }}>
                                                     <span>Save for later</span>
                                                     <span>
                                                         <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -69,7 +79,7 @@ const home = () => {
                                                             </g>
                                                         </svg>
                                                     </span>
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

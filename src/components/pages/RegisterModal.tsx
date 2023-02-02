@@ -23,7 +23,7 @@ const Modal = () => {
             )
             .catch((err) => console.log(err));
 
-        dispatch(setRegisterSwitchOff)
+        dispatch(setRegisterSwitchOff())
     }
 
     return (
