@@ -9,8 +9,6 @@ const Modal = () => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState<Blob | null>(null)
 
-    console.log(event);
-
     const radio = (e: any) => {
         setEvent(e.target.value)
     }
@@ -33,6 +31,7 @@ const Modal = () => {
 
         formData.append('description', description);
         formData.append('details', details);
+        formData.append('event', event);
 
         if (image) {
             formData.append('postImage', image)
