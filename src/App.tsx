@@ -7,25 +7,34 @@ import { setAuthentication, setNotAuthenticated } from "./redux/Authentication/r
 import MapPage from "./components/Pages/map/Map"
 import ChatPage from "./components/Pages/community/chat/chatPage"
 import Whishlist from "./components/Pages/whishlist/Whishlist"
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase/config'
+import { useEffect } from "react"
 
 const App = () => {
     const dispatch = useDispatch()
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
-    if (localStorage.getItem("email") !== null) {
-        dispatch(setAuthentication())
-    } else {
-        dispatch(setNotAuthenticated())
+    const authStateListener = () => {
+        onAuthStateChanged(auth, (user) => {
+            if (!user || !user.emailVerified) {
+                return dispatch(setNotAuthenticated())
+            }
+            return dispatch(setAuthentication())
+        })
     }
+    useEffect(() => {
+        authStateListener()
+    }, [authStateListener])
     return (
         <div>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/map' element={authenticated ? <MapPage /> : <Signup />} />
+                    <Route path='/map' element={authenticated ? <MapPage /> : <Login />} />
                     <Route path='/signup' element={!authenticated ? <Signup /> : <Home />} />
                     <Route path='/login' element={!authenticated ? <Login /> : <Home />} />
                     <Route path='/' element={<Home />} />
-                    <Route path="/community" element={authenticated ? <ChatPage /> : <Signup />} />
-                    <Route path="/wishlist" element={authenticated ? <Whishlist /> : <Signup />} />
+                    <Route path="/community" element={authenticated ? <ChatPage /> : <Login />} />
+                    <Route path="/wishlist" element={authenticated ? <Whishlist /> : <Login />} />
                 </Routes>
             </BrowserRouter>
         </div>
