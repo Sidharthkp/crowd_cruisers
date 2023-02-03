@@ -85,18 +85,6 @@ const Whishlist = () => {
                                         </div>
                                     </div>
                                     <div id="menu4" className={`flex-col jusitfy-start items-start mt-12 ${show === e._id ? "flex" : "hidden"}`}>
-                                        <div>
-                                            <p className="tracking-tight text-xs leading-3 text-gray-800">MK617</p>
-                                        </div>
-                                        <div className="mt-2">
-                                            <p className="tracking-tight text-base font-medium leading-4 text-gray-800">Beige brown</p>
-                                        </div>
-                                        <div className="mt-6">
-                                            <p className="tracking-tight text-base font-medium leading-4 text-gray-800">42 size</p>
-                                        </div>
-                                        <div className="mt-6">
-                                            <p className="tracking-tight text-base font-medium leading-4 text-gray-800">$1,000</p>
-                                        </div>
                                         <div className="flex jusitfy-between flex-col lg:flex-row items-center mt-10 w-full space-y-4 lg:space-y-0 lg:space-x-4 xl:space-x-8">
                                             <div className="w-full">
                                                 <button onClick={() => remove(e._id)} className=" focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800  bg-white border border-gray-800">Remove</button>
