@@ -1,6 +1,6 @@
 import { FaLinkedinIn, FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { auth, provider } from '../../firebase/config'
-import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, sendEmailVerification } from 'firebase/auth';
 import { useDispatch } from 'react-redux'
 import { setAuthentication } from '../../redux/Authentication/reducer';
 import { useNavigate } from 'react-router-dom';
@@ -27,9 +27,17 @@ const Signup = () => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         createUserWithEmailAndPassword(auth, email, password).then((data: any) => {
-            localStorage.setItem("email", data.user.email)
-            dispatch(setAuthentication())
-            navigate('/')
+            if (!data.user.emailVerified) {
+                sendEmailVerification(data.user)
+                    .then(() => {
+                        console.log("email sent");
+                        navigate('/login')
+                    })
+                    .catch((err: any) => alert(err.message));
+            } else {
+                dispatch(setAuthentication())
+                navigate("/");
+            }
         }).catch((error) => {
             alert(error.message);
         })
@@ -42,7 +50,7 @@ const Signup = () => {
             dispatch(setAuthentication())
             navigate("/");
         }).catch((error) => {
-            alert(error);
+            alert(error.message);
         })
     }
 

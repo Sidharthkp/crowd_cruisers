@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { sendEmailVerification, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { FaLinkedinIn, FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -25,9 +25,16 @@ const Login = () => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         signInWithEmailAndPassword(auth, email, password).then((data: any) => {
-            localStorage.setItem("email", data.user.email)
-            dispatch(setAuthentication())
-            navigate('/')
+            if (!data.user.emailVerified) {
+                sendEmailVerification(data.user)
+                    .then(() => {
+                        console.log("email sent");
+                    })
+                    .catch((err: any) => alert(err.message));
+            } else {
+                dispatch(setAuthentication())
+                navigate("/");
+            }
         }).catch((error) => {
             alert(error.message);
         })
