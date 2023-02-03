@@ -33,6 +33,7 @@ const Login = () => {
                     })
                     .catch((err: any) => alert(err.message));
             } else {
+                localStorage.setItem("email", data.user.email)
                 const uid = data.user.uid;
                 axios.post("http://localhost:3000/api/profile/addNew", { uid, email })
                     .then((res) => console.log(res)
