@@ -82,7 +82,7 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
                         </div>
                         <div className='w-full h-full'>
-                            <div className='w-full max-h-96 overflow-y-auto scrollbar-hide'>
+                            <div className='w-full h-full max-h-96 overflow-y-auto scrollbar-hide'>
                                 {Array.isArray(msg) ? msg.map((message: any) =>
                                     message.name === localStorage.getItem('email') ? (
                                         <div key={message._id} className='w-full flex flex-row justify-end'>
