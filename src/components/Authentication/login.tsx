@@ -7,6 +7,7 @@ import { setAuthentication } from '../../redux/Authentication/reducer';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
 import Error from '../Error/errorPage';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
     const [show, setShow] = useState(false)
@@ -32,6 +33,11 @@ const Login = () => {
                     })
                     .catch((err: any) => alert(err.message));
             } else {
+                const uid = data.user.uid;
+                axios.post("http://localhost:3000/api/profile/addNew", { uid, email })
+                    .then((res) => console.log(res)
+                    )
+                    .catch((err) => console.log(err));
                 dispatch(setAuthentication())
                 navigate("/");
             }
