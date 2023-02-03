@@ -16,7 +16,7 @@ const App = () => {
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
     const authStateListener = () => {
         onAuthStateChanged(auth, (user) => {
-            if (!user || !user.emailVerified) {
+            if (!user) {
                 return dispatch(setNotAuthenticated())
             }
             return dispatch(setAuthentication())
