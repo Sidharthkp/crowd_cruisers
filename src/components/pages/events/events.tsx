@@ -45,21 +45,21 @@ const Events = () => {
     return (
         <div>
             <NavBar />
-            <div className="mx-auto container px-4 md:px-6 2xl:px-0 py-12 flex justify-center items-center bg-white">
+            <div className="mx-auto container px-4 md:px-6 2xl:px-0 py-12 flex justify-center items-center">
                 <div className="flex flex-col jusitfy-start items-start">
                     <div>
-                        <p className="text-sm leading-4 text-gray-600">Hi, {localStorage.getItem('email')}</p>
+                        <p className="text-sm leading-4 text-white">Hi, {localStorage.getItem('email')}</p>
                     </div>
                     <div className="mt-3">
-                        <h1 className="text-3xl lg:text-4xl tracking-tight font-semibold leading-8 lg:leading-9 text-gray-800">Your saved items</h1>
+                        <h1 className="text-3xl lg:text-4xl tracking-tight font-semibold leading-8 lg:leading-9 text-white">Events</h1>
                     </div>
                     <div className="mt-4">
-                        <p className="text-2xl tracking-tight leading-6 text-gray-600">03 items</p>
+                        <p className="text-2xl tracking-tight leading-6 text-white">03 items</p>
                     </div>
                     <div className=" mt-10 lg:mt-12 grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-10 lg:gap-y-0">
                         {posts && posts.length > 0 && posts.map((e: any) => {
                             return (
-                                <div className="flex flex-col" key={e._id}>
+                                <div className="flex flex-col mb-20" key={e._id}>
                                     <div className="relative">
                                         <img className="hidden h-60 lg:block" src={`http://localhost:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
                                         <img className="hidden h-60 w-full sm:block lg:hidden" src={`http://localhost:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
@@ -67,7 +67,7 @@ const Events = () => {
                                     </div>
                                     <div className="mt-6 flex justify-between items-center">
                                         <div className="flex justify-center items-center">
-                                            <p className="tracking-tight text-2xl font-semibold leading-6 text-gray-800">{e.description}</p>
+                                            <p className="tracking-tight text-2xl font-semibold leading-6 text-white">{e.description}</p>
                                         </div>
                                         <div className="flex justify-center items-center">
                                             <button aria-label="show menu" onClick={() => setshowF(e._id)} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-2.5 px-2 bg-gray-800 text-white hover:text-gray-400">
