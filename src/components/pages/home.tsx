@@ -11,10 +11,10 @@ const home = () => {
     const openRegisterModal = (id: any) => {
         dispatch(setRegisterSwitchOn(id))
     }
-    const userName = localStorage.getItem("email")
+    const username = localStorage.getItem("email")
     const saveToWishlist = (id: any) => {
         try {
-            axios.post("http://localhost:3000/api/userPosts/wishList", { id, userName })
+            axios.post("http://localhost:3000/api/userPosts/wishList", { id, username })
                 .then((res) => console.log(res)
                 )
                 .catch((err) => console.log(err));
