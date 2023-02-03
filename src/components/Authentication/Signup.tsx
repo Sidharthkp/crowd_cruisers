@@ -8,6 +8,7 @@ import 'firebase/auth'
 import { LockClosedIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import Error from '../Error/errorPage';
+import axios from 'axios';
 
 
 const Signup = () => {
@@ -47,6 +48,11 @@ const Signup = () => {
         e.preventDefault()
         signInWithPopup(auth, provider).then((data: any) => {
             localStorage.setItem("email", data.user.email)
+            const uid = data.user.uid;
+            axios.post("http://localhost:3000/api/profile/addNew", { uid, email })
+                .then((res) => console.log(res)
+                )
+                .catch((err) => console.log(err));
             dispatch(setAuthentication())
             navigate("/");
         }).catch((error) => {
