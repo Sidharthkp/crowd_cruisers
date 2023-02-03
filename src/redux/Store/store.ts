@@ -5,6 +5,7 @@ import createModalReducer from '../createModal'
 import createPostReducer from '../createPost'
 import groupOpenReducer from '../clickedGroup'
 import registerOpenReducer from '../registerPage'
+import membersReducer from '../members'
 
 export default configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
         showCreatePost: createPostReducer,
         showCreateModal: createModalReducer,
         showGroupPage: groupOpenReducer,
-        showRegisterPage: registerOpenReducer 
+        showRegisterPage: registerOpenReducer,
+        showMembers: membersReducer
     },
 })

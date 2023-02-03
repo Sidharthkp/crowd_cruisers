@@ -11,6 +11,8 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase/config'
 import { useEffect } from "react"
 import Profile from "./components/Pages/profile/UserProfile"
+import Events from "./components/Pages/events/events"
+import Rides from "./components/Pages/rides/Rides"
 
 const App = () => {
     const dispatch = useDispatch()
@@ -37,6 +39,8 @@ const App = () => {
                     <Route path="/community" element={authenticated ? <ChatPage /> : <Login />} />
                     <Route path="/wishlist" element={authenticated ? <Whishlist /> : <Login />} />
                     <Route path="/profile" element={authenticated ? <Profile /> : <Login />} />
+                    <Route path="/events" element={authenticated ? <Events /> : <Login />} />
+                    <Route path="/rides" element={authenticated ? <Rides /> : <Login />} />
                 </Routes>
             </BrowserRouter>
         </div>

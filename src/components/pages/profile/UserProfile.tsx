@@ -1,10 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux";
+import { setSwitchOn } from "../../../redux/members";
 import NavBar from "../../Navbar/User_side/Navbar"
+import Members from "./Members";
 
 const Profile = () => {
     const [user, setUser] = useState<{ name: string } | null>(null);
     const [community, setCommunity] = useState([]);
+    const dispatch = useDispatch()
     useEffect(() => {
         const email = localStorage.getItem("email")
         axios.post("http://localhost:3000/api/profile/showProfile", { email })
@@ -16,10 +20,15 @@ const Profile = () => {
             )
             .catch((err) => console.log(err));
     }, [user, community])
+
+    const printMembers = (data: any) => {
+        dispatch(setSwitchOn(data))
+    }
     return (
         <div>
             <NavBar />
             <div className="w-full h-screen flex flex-row bg-gray-700">
+                <Members />
                 <div className="w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
                         <div className="rounded-b-2xl w-4/6 h-3/6">
@@ -67,7 +76,7 @@ const Profile = () => {
                                             Rides
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            Action
+                                            Get Members
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Action
@@ -92,7 +101,9 @@ const Profile = () => {
                                                     {data.rides.length}
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                                    <div>
+                                                        <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
+                                                    </div>
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>

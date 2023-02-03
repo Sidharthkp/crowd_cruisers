@@ -37,6 +37,14 @@ const NavBar = () => {
         e.preventDefault()
         navigate('/profile')
     }
+    const events = (e: any) => {
+        e.preventDefault()
+        navigate('/events')
+    }
+    const rides = (e: any) => {
+        e.preventDefault()
+        navigate('/rides')
+    }
 
     const logout = () => {
         signOut(auth).then(() => {
@@ -55,8 +63,8 @@ const NavBar = () => {
         { name: 'Home', onclick: home, current: true },
         { name: 'Map', onclick: maps, current: false },
         { name: 'Community', onclick: community, current: false },
-        { name: 'Rides', current: false },
-        { name: 'Events', current: false },
+        { name: 'Rides', onclick: rides, current: false },
+        { name: 'Events', onclick: events, current: false },
         { name: 'Apparel Store', current: false },
     ]
 
