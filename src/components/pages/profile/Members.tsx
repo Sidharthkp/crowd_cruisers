@@ -10,8 +10,7 @@ const Members = () => {
     const data = useSelector((state: any) => state.showMembers.data);
     useEffect(() => {
         axios.post("http://localhost:3000/api/profile/showMembers", { data })
-            .then((res) => setDetails(res.data)
-            )
+            .then((res) => setDetails(res.data))
             .catch((err) => console.log(err));
     }, [details])
     const closeButton = () => {
