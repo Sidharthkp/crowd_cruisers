@@ -54,7 +54,7 @@ const Events = () => {
                         <h1 className="text-3xl lg:text-4xl tracking-tight font-semibold leading-8 lg:leading-9 text-white">Events</h1>
                     </div>
                     <div className="mt-4">
-                        <p className="text-2xl tracking-tight leading-6 text-white">03 items</p>
+                        <p className="text-2xl tracking-tight leading-6 text-white">{posts.length} items</p>
                     </div>
                     <div className=" mt-10 lg:mt-12 grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-10 lg:gap-y-0">
                         {posts && posts.length > 0 && posts.map((e: any) => {
