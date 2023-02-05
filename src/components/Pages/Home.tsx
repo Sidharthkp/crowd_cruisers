@@ -38,7 +38,7 @@ const home = () => {
     return (
         <div className='bg-white'>
             <Navbar_user />
-            <div>
+            <div className='h-screen'>
                 {posts.length > 0 && (
 
                     <div>
