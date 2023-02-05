@@ -106,32 +106,7 @@ const MapPage = () => {
                             latitude={viewPort.latitude}
                         />
 
-
-                        {pins.map((p: any) => {
-
-                            return (<div key={p._id}>
-
-                                <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
-                                    <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 44 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
-                                </Marker>
-
-
-                                {p._id === currentPlaceId && (
-                                    <Popup longitude={p.longitude} latitude={p.latitude} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
-
-                                        <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
-                                            <div className="px-2 py-3">
-                                                <div className="font-bold text-xl">{p.title}</div>
-                                                <p className="text-gray-700 text-base">
-                                                    {p.description}
-                                                </p>
-                                                <div>{format(p.createdAt)}</div>
-                                            </div>
-                                        </div>
-
-                                    </Popup>
-                                )}
-                                {newPlace &&
+{newPlace &&
                                     <Popup longitude={newPlace.longitude} latitude={newPlace.latitude} onClose={() => setNewPlace(null)} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
 
                                         <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
@@ -157,6 +132,32 @@ const MapPage = () => {
                                         </div>
 
                                     </Popup>}
+
+
+                        {pins.map((p: any) => {
+
+                            return (<div key={p._id}>
+
+                                <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
+                                    <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 44 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
+                                </Marker>
+
+
+                                {p._id === currentPlaceId && (
+                                    <Popup longitude={p.longitude} latitude={p.latitude} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
+
+                                        <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
+                                            <div className="px-2 py-3">
+                                                <div className="font-bold text-xl">{p.title}</div>
+                                                <p className="text-gray-700 text-base">
+                                                    {p.description}
+                                                </p>
+                                                <div>{format(p.createdAt)}</div>
+                                            </div>
+                                        </div>
+
+                                    </Popup>
+                                )}
                             </div>
 
                             )
