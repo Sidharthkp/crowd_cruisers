@@ -39,6 +39,9 @@ const home = () => {
         <div className='bg-white'>
             <Navbar_user />
             <div>
+                {posts.length === 0 
+                    retu
+                }
                 {posts.length > 0 && (
 
                     <div>
