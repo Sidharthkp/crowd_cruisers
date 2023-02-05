@@ -87,7 +87,7 @@ const MapPage = () => {
         <>
             <Navbar_user />
             <div>
-                {viewPort.latitude && viewPort.longitude && pins.length > 0 && (
+                {viewPort.latitude && viewPort.longitude && (
                     <Map
                         initialViewState={{ ...viewPort }}
                         mapboxAccessToken={import.meta.env.VITE_MAPBOX}
