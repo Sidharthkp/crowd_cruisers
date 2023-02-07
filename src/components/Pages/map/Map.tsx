@@ -105,32 +105,32 @@ const MapPage = () => {
                             latitude={viewPort.latitude}
                         />
 
-{newPlace &&
-                                    <Popup longitude={newPlace.longitude} latitude={newPlace.latitude} onClose={() => setNewPlace(null)} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
+                        {newPlace &&
+                            <Popup longitude={newPlace.longitude} latitude={newPlace.latitude} onClose={() => setNewPlace(null)} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
 
-                                        <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
-                                            <div className="w-full max-w-xs">
-                                                <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                                                    <div className="mb-4">
-                                                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                                                            Title
-                                                        </label>
-                                                        <input onChange={(e) => setNewTitle(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title" />
-                                                    </div>
-                                                    <div className="mb-4">
-                                                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                                                            Description
-                                                        </label>
-                                                        <input onChange={(e) => setNewDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tell me more about it" />
-                                                    </div>
-                                                    <div className='w-full flex justify-end'>
-                                                        <button className='rounded-2xl bg-green-400 w-14 h-6 text-white' type='submit'>Share</button>
-                                                    </div>
-                                                </form>
+                                <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
+                                    <div className="w-full max-w-xs">
+                                        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                            <div className="mb-4">
+                                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Title
+                                                </label>
+                                                <input onChange={(e) => setNewTitle(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title" />
                                             </div>
-                                        </div>
+                                            <div className="mb-4">
+                                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Description
+                                                </label>
+                                                <input onChange={(e) => setNewDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tell me more about it" />
+                                            </div>
+                                            <div className='w-full flex justify-end'>
+                                                <button className='rounded-2xl bg-green-400 w-14 h-6 text-white' type='submit'>Share</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
-                                    </Popup>}
+                            </Popup>}
 
 
                         {pins.map((p: any) => {
