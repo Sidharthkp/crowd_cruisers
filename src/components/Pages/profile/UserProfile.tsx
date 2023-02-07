@@ -96,16 +96,16 @@ const Profile = () => {
                                             <input type="number" value={distance} onChange={(e: any) => setDistance(e.target.value)} className="bg-gray-400 text text-black w-3/6 text-center" /> Km
                                         </td>
                                         <td className="px-6 py-4">
-                                            <input type="number" value={fuelEfficiency} onChange={(e: any) => setEfficiency(e.target.value)} className="bg-gray-400 text text-black w-3/6" /> Kmpl
+                                            <input type="number" value={fuelEfficiency} onChange={(e: any) => setEfficiency(e.target.value)} className="bg-gray-400 text text-black w-3/6 text-center" /> Kmpl
                                         </td>
                                         <td className="px-6 py-4">
-                                            <input type="number" value={fuelPrice} onChange={(e: any) => setPrice(e.target.value)} className="bg-gray-400 text text-black w-3/6" /> Rs
+                                            <input type="number" value={fuelPrice} onChange={(e: any) => setPrice(e.target.value)} className="bg-gray-400 text text-black w-3/6 text-center" /> Rs
                                         </td>
                                         <td className="px-6 py-4">
-                                            <input type="number" value={tripCost} className="bg-gray-400 text text-black w-3/6" /> Rs
+                                            <input type="number" value={tripCost} className="bg-green-400 text text-black w-3/6 text-center" /> Rs
                                         </td>
                                         <td className="px-6 py-4">
-                                            <input type="number" value={calculatedFuel} className="bg-gray-400 text text-black w-3/6" /> L
+                                            <input type="number" value={calculatedFuel} className="bg-yellow-400 text text-black w-3/6 text-center" /> L
                                         </td>
                                     </tr>
                                 </tbody>
