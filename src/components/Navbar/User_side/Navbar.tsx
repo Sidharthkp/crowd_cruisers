@@ -65,7 +65,6 @@ const NavBar = () => {
         { name: 'Community', onclick: community, current: false },
         { name: 'Rides', onclick: rides, current: false },
         { name: 'Events', onclick: events, current: false },
-        { name: 'Apparel Store', current: false },
     ]
 
     const classNames = (...classes: any) => {
@@ -73,7 +72,7 @@ const NavBar = () => {
     }
 
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-800 z-50 fixed w-full top-0">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 xl:px-8 2xl:px-8">
@@ -131,7 +130,7 @@ const NavBar = () => {
                                 </button>
 
                                 {/* Profile dropdown */}
-                                <Menu as="div" className="relative ml-3">
+                                <Menu as="div" className="relative ml-3 z-50">
                                     <div>
                                         <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                             <span className="sr-only">Open user menu</span>

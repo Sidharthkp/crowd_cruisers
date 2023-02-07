@@ -19,8 +19,7 @@ const ChatPage = () => {
 
   return (
     <>
-      <Navbar_user />
-      <div className='w-full h-screen flex flex-row'>
+      <div className='w-full h-screen flex flex-row mt-16'>
         <ChatBar />
         <div className='flex flex-col w-4/6 bg-slate-600'>
           <ChatBody typingStatus={typingStatus}/>

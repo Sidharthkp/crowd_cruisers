@@ -9,10 +9,11 @@ import ChatPage from "./components/Pages/community/chat/chatPage"
 import Whishlist from "./components/Pages/whishlist/Whishlist"
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase/config'
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import Profile from "./components/Pages/profile/UserProfile"
 import Events from "./components/Pages/events/events"
 import Rides from "./components/Pages/rides/Rides"
+import NavBar from "./components/Navbar/User_side/Navbar"
 
 const App = () => {
     const dispatch = useDispatch()
@@ -31,6 +32,9 @@ const App = () => {
     return (
         <div>
             <BrowserRouter>
+                <React.Fragment>
+                    <NavBar />
+                </React.Fragment>
                 <Routes>
                     <Route path='/map' element={authenticated ? <MapPage /> : <Login />} />
                     <Route path='/signup' element={!authenticated ? <Signup /> : <Home />} />

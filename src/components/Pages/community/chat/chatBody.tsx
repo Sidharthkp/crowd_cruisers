@@ -1,21 +1,25 @@
 import { XCircleIcon } from '@heroicons/react/24/solid'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOn } from "../../../../redux/createPost";
 import { closeGroupSwitch } from "../../../../redux/clickedGroup";
+import { css } from '@emotion/css'
+import ScrollToBottom from 'react-scroll-to-bottom';
 import axios from "axios";
+
+const ROOT_CSS = css({
+    height: 400,
+    width: 400,
+});
+
 const ChatBody = ({ typingStatus }: any) => {
     const dispatch = useDispatch();
 
     const [datas, setData] = useState<any>({})
     const [msg, setMessage] = useState([])
 
-    const lastMessageRef = useRef<HTMLDivElement>(null);
-
-
     const opened = useSelector((state: any) => state.showGroupPage.show);
     const details = useSelector((state: any) => state.showGroupPage.dataSave);
-    
 
     const handleLeaveChat = () => {
         dispatch(closeGroupSwitch());
@@ -31,7 +35,7 @@ const ChatBody = ({ typingStatus }: any) => {
                 .post("http://localhost:3000/api/createGroup/open", { details })
                 .then((res) => setData(res.data))
                 .catch((err) => console.log(err));
-                
+
         } catch (err) {
             console.log(err);
         }
@@ -48,11 +52,10 @@ const ChatBody = ({ typingStatus }: any) => {
             console.log(err);
         }
     }
-    
+
     useEffect(() => {
         group()
         message()
-        lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [details, msg])
 
     return (
@@ -67,7 +70,7 @@ const ChatBody = ({ typingStatus }: any) => {
                                     <img className='rounded-full w-20' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='font-bold text-2xl cursor-pointer' onClick={()=>{openModal(datas._id)}}>
+                                    <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas._id) }}>
                                         {datas.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>
@@ -83,22 +86,23 @@ const ChatBody = ({ typingStatus }: any) => {
                         </div>
                         <div className='w-full h-full'>
                             <div className='w-full h-full max-h-96 overflow-y-auto scrollbar-hide'>
-                                {Array.isArray(msg) ? msg.map((message: any) =>
-                                    message.name === localStorage.getItem('email') ? (
-                                        <div key={message._id} className='w-full flex flex-row justify-end'>
-                                            <div className='rounded-2xl bg-gray-400 max-w-xs text-black p-5 m-4'>
-                                                {message.text}
+                                <ScrollToBottom className={ROOT_CSS}>
+                                    {Array.isArray(msg) ? msg.map((message: any) =>
+                                        message.name === localStorage.getItem('email') ? (
+                                            <div key={message._id} className='w-full flex flex-row justify-end'>
+                                                <div className='rounded-2xl bg-gray-400 max-w-xs text-black p-5 m-4'>
+                                                    {message.text}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ) : (
-                                        <div key={message._id} className='w-full flex flex-row justify-start'>
-                                            <div className='rounded-2xl bg-slate-400 text-black p-5 m-4'>
-                                                {message.text}
+                                        ) : (
+                                            <div key={message._id} className='w-full flex flex-row justify-start'>
+                                                <div className='rounded-2xl bg-slate-400 text-black p-5 m-4'>
+                                                    {message.text}
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
-                                ) : null}
-                                <div ref={lastMessageRef} />
+                                        )
+                                    ) : null}
+                                </ScrollToBottom>
                             </div>
                         </div>
                     </div>

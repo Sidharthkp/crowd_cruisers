@@ -85,8 +85,7 @@ const MapPage = () => {
 
     return (
         <>
-            <Navbar_user />
-            <div>
+            <div className='mt-16'>
                 {viewPort.latitude && viewPort.longitude && (
                     <Map
                         initialViewState={{ ...viewPort }}

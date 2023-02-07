@@ -44,8 +44,7 @@ const Events = () => {
     }, [posts])
     return (
         <div>
-            <NavBar />
-            <div className="mx-auto container px-4 md:px-6 2xl:px-0 py-12 flex justify-center items-center">
+            <div className="mx-auto mt-16 container px-4 md:px-6 2xl:px-0 py-12 flex">
                 <div className="flex flex-col jusitfy-start items-start">
                     <div>
                         <p className="text-sm leading-4 text-white">Hi, {localStorage.getItem('email')}</p>
