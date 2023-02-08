@@ -53,7 +53,7 @@ const MapPage = () => {
     const handleShowPopup = async (id: any, latitude: any, longitude: any, username: any) => {
         if (username === currentUser) {
             try {
-                const res = await axios.post("http://localhost:3000/api/pins/pinDelete", {id});
+                const res = await axios.post("http://localhost:3000/api/pins/pinDelete", { id });
             } catch (err) {
                 console.log(err);
 
@@ -149,6 +149,12 @@ const MapPage = () => {
 
                                 <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
                                     <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude, p.username)} style={{ fontSize: p.username === currentUser ? 44 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
+                                    {p.username === currentUser ? (
+                                        <div className='text-red-400 font-bold italic'>
+                                            Click to remove
+                                        </div>
+                                    ) : null
+                                    }
                                 </Marker>
 
 
