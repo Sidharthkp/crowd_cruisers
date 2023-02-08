@@ -3,11 +3,14 @@ import { useRef, useState } from 'react';
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOff } from '../../../../redux/createPost';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Modal = () => {
     const [event, setEvent] = useState('ride');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState<Blob | null>(null)
+    const [date, setDate] = useState<Date | null | undefined>(null);
 
     const radio = (e: any) => {
         setEvent(e.target.value)
@@ -27,11 +30,18 @@ const Modal = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
+        console.log(date);
+        console.log(date?.toDateString());
+        
+
         const formData = new FormData()
 
         formData.append('description', description);
         formData.append('details', details);
         formData.append('event', event);
+        if (date) {
+            formData.append('registrationEndsOn', date.toISOString());
+        }
 
         if (image) {
             formData.append('postImage', image)
@@ -105,6 +115,26 @@ const Modal = () => {
                                                 /> Ride
                                             </div>
                                         </ div>
+                                        <div className='flex flex-row justify-start ml-16 w-full'>
+                                            <div>
+                                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Registration ends in</label>
+
+                                                <DatePicker placeholderText='Click here' className='text-sm bg-white text-gray-900 cursor-pointer border-black border-2 rounded-lg text-center'
+                                                    selected={date}
+                                                    onChange={(date: any) => setDate(date)}
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* <div className='flex flex-row justify-start ml-16 w-full'>
+                                            <div>
+                                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Date of the event</label>
+
+                                                <DatePicker placeholderText='Click here' className='text-sm bg-white text-gray-900 cursor-pointer border-black border-2 rounded-lg text-center'
+                                                    selected={date}
+                                                    onChange={(date: any) => setDate(date)}
+                                                />
+                                            </div>
+                                        </div> */}
                                         <div className="flex flex-row justify-center my-4">
                                             <div className="flex flex-col w-5/6">
                                                 <button className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
