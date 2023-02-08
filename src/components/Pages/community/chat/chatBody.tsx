@@ -9,7 +9,7 @@ import axios from "axios";
 
 const ROOT_CSS = css({
     height: 400,
-    width: 400,
+    width: 930,
 });
 
 const ChatBody = ({ typingStatus }: any) => {
@@ -85,7 +85,7 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
                         </div>
                         <div className='w-full h-full'>
-                            <div className='w-full h-full max-h-96 overflow-y-auto scrollbar-hide'>
+                            <div className='w-full h-full max-h-96 overflow-hidden'>
                                 <ScrollToBottom className={ROOT_CSS}>
                                     {Array.isArray(msg) ? msg.map((message: any) =>
                                         message.name === localStorage.getItem('email') ? (
