@@ -48,11 +48,20 @@ const MapPage = () => {
             }
         }
         getPins()
-    }, [])
+    }, [pins])
 
-    const handleShowPopup = (id: any, latitude: any, longitude: any) => {
-        setCurrentPlaceId(id)
-        setViewPort({ ...viewPort, latitude: latitude, longitude: longitude })
+    const handleShowPopup = async (id: any, latitude: any, longitude: any, username: any) => {
+        if (username === currentUser) {
+            try {
+                const res = await axios.post("http://localhost:3000/api/pins/pinDelete", {id});
+            } catch (err) {
+                console.log(err);
+
+            }
+        } else {
+            setCurrentPlaceId(id)
+            setViewPort({ ...viewPort, latitude: latitude, longitude: longitude })
+        }
     }
 
     const handleAddClick = (e: any) => {
@@ -139,7 +148,7 @@ const MapPage = () => {
                             return (<div key={p._id}>
 
                                 <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
-                                    <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude)} style={{ fontSize: p.username === currentUser ? 44 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
+                                    <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude, p.username)} style={{ fontSize: p.username === currentUser ? 44 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
                                 </Marker>
 
 
