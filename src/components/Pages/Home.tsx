@@ -3,7 +3,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setRegisterSwitchOn } from '../../redux/registerPage';
 import RegisterPage from './RegisterModal'
-
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 const home = () => {
     const [posts, setPosts] = React.useState([]);
     const dispatch = useDispatch()
@@ -14,7 +15,10 @@ const home = () => {
     const saveToWishlist = (id: any) => {
         try {
             axios.post("http://localhost:3000/api/userPosts/wishList", { id, username })
-                .then((res) => console.log(res)
+                .then((res) =>
+                    toast.success("Saved for later...", {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                 )
                 .catch((err) => console.log(err));
         } catch (err) {
@@ -36,6 +40,7 @@ const home = () => {
 
     return (
         <div className='bg-gray-700 z-0 pt-16'>
+            <ToastContainer />
             <RegisterPage />
             <div className='overflow-y-hidden'>
                 {posts.length > 0 ? (
