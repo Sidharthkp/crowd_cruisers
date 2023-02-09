@@ -42,7 +42,7 @@ const home = () => {
 
     return (
         <div className='bg-white z-0 pt-16'>
-            <div>
+            <div className='overflow-y-hidden'>
                 {posts.length > 0 ? (
 
                     <div>
