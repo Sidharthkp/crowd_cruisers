@@ -37,9 +37,9 @@ const Profile = () => {
     }
     return (
         <div>
-            <div className="w-full h-screen flex flex-row bg-gray-700">
+            <div className="w-full h-screen mt-16 flex flex-row bg-gray-700">
                 <Members />
-                <div className="w-2/6 h-full flex flex-row bg-gray-900 mt-16">
+                <div className="w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
                         <div className="rounded-b-2xl w-4/6 h-3/6">
                             <img className="rounded-b-2xl" src="https://avatars.githubusercontent.com/u/54587044?v=4" alt="" />
@@ -66,7 +66,7 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-4/6 h-screen flex flex-col overflow-y-auto scrollbar-hide p-5 mt-16">
+                <div className="w-4/6 h-full flex flex-col overflow-y-auto scrollbar-hide">
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Fuel Cost Calculator</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -136,9 +136,6 @@ const Profile = () => {
                                         <th scope="col" className="px-6 py-3">
                                             Get Members
                                         </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Action
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -162,9 +159,6 @@ const Profile = () => {
                                                     <div>
                                                         <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
                                                     </div>
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                                 </td>
                                             </tr>
                                         )
