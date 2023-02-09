@@ -5,14 +5,16 @@ import { setSwitchOff } from "../../../redux/members";
 
 const Members = () => {
     const [details, setDetails] = useState([])
+    
+
     const dispatch = useDispatch()
     const state = useSelector((state: any) => state.showMembers.show);
     const data = useSelector((state: any) => state.showMembers.data);
     useEffect(() => {
         axios.post("http://localhost:3000/api/profile/showMembers", { data })
-            .then((res) => setDetails(res.data))
+            .then((res) => setDetails(res.data.members))
             .catch((err) => console.log(err));
-    }, [details])
+    }, [])
     const closeButton = () => {
         dispatch(setSwitchOff());
     }
@@ -36,24 +38,11 @@ const Members = () => {
                                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
-                                                <th scope="col" className="px-6 py-3">
-                                                    Community name
-                                                </th>
+                                                
                                                 <th scope="col" className="px-6 py-3">
                                                     Members
                                                 </th>
-                                                <th scope="col" className="px-6 py-3">
-                                                    Events
-                                                </th>
-                                                <th scope="col" className="px-6 py-3">
-                                                    Rides
-                                                </th>
-                                                <th scope="col" className="px-6 py-3">
-                                                    Get Members
-                                                </th>
-                                                <th scope="col" className="px-6 py-3">
-                                                    Action
-                                                </th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,25 +51,8 @@ const Members = () => {
                                                 console.log(data);
                                                 return (
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-    
-                                                        </th>
                                                         <td className="px-6 py-4">
-                                                            {/* {data.members.length} */}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            {/* {data.events.length} */}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            {/* {data.rides.length} */}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            <div>
-                                                                {/* <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button> */}
-                                                            </div>
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            {/* <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> */}
+                                                            {data}
                                                         </td>
                                                     </tr>
                                                 )
