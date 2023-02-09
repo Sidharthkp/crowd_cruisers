@@ -82,10 +82,10 @@ const home = () => {
                             </button>
                         </div>
                         <div className='w-full flex flex-row justify-center items-center mt-10'>
-                            <div className='w-10 h-0.5 bg-gray-500'/>
+                            <div className='w-10 h-0.5 bg-gray-500' />
                             <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
-                            <div className='w-10 h-0.5 bg-gray-500'/>
-                            
+                            <div className='w-10 h-0.5 bg-gray-500' />
+
                         </div>
                         {/* ride */}
                         <div className='mt-5 bg-gray-700 p-10'>
@@ -99,7 +99,7 @@ const home = () => {
                                             return (
 
                                                 <div className='w-full'>
-                                                    <a href="#" className="group relative block bg-black w-80 h-96">
+                                                    <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
                                                             src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`}
@@ -117,11 +117,14 @@ const home = () => {
                                                                 <div
                                                                     className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
                                                                 >
-                                                                    <button></button>
+                                                                    <div className='flex flex-row w-full justify-center'>
+                                                                        <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 mx-2 bg-red-600 font-bold" >Register Now</button>
+                                                                        <button onClick={() => { saveToWishlist(p._id) }} className="w-32 h-6 mx-2 bg-yellow-600 font-bold" >Save for later</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                    </div>
 
                                                 </div>
                                             )
@@ -131,10 +134,10 @@ const home = () => {
                             </div>
                         </div>
                         <div className='w-full flex flex-row justify-center items-center'>
-                            <div className='w-10 h-0.5 bg-gray-500'/>
+                            <div className='w-10 h-0.5 bg-gray-500' />
                             <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
-                            <div className='w-10 h-0.5 bg-gray-500'/>
-                            
+                            <div className='w-10 h-0.5 bg-gray-500' />
+
                         </div>
                         {/* event */}
                         <div className='mt-5 bg-gray-700 p-10'>
@@ -148,7 +151,7 @@ const home = () => {
                                             return (
 
                                                 <div className='w-full'>
-                                                    <a href="#" className="group relative block bg-black w-80 h-96">
+                                                    <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
                                                             src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`}
@@ -166,11 +169,14 @@ const home = () => {
                                                                 <div
                                                                     className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
                                                                 >
-                                                                    <button></button>
+                                                                    <div className='flex flex-row w-full justify-center'>
+                                                                        <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 mx-2 bg-red-600 font-bold" >Register Now</button>
+                                                                        <button onClick={() => { saveToWishlist(p._id) }} className="w-32 h-6 mx-2 bg-yellow-600 font-bold" >Save for later</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                    </div>
 
                                                 </div>
                                             )
@@ -202,6 +208,3 @@ const home = () => {
     )
 }
 export default home
-
-// <button onClick={() => { openRegisterModal(p._id) }} className="ctabtn">                                 
-// <button className="ctabtn" onClick={() => { saveToWishlist(p._id) }}>
