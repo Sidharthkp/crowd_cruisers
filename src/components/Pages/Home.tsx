@@ -98,7 +98,7 @@ const home = () => {
                                         if (p.eventType === 'ride') {
                                             return (
 
-                                                <div className='w-full'>
+                                                <div className='w-full animate-marquee-infinite'>
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
@@ -150,7 +150,7 @@ const home = () => {
                                         if (p.eventType === 'event') {
                                             return (
 
-                                                <div className='w-full'>
+                                                <div className='w-full animate-marquee-infinite'>
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
