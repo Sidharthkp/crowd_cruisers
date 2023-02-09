@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Map, { GeolocateControl, Marker, Popup } from 'react-map-gl';
-import Navbar_user from '../../Navbar/User_side/Navbar'
+import Navbar_user from '../../Navbar/Navbar'
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import axios from 'axios'
 import { format } from 'timeago.js';

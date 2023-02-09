@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import NavBar from "../../Navbar/User_side/Navbar";
+import NavBar from "../../Navbar/Navbar";
 const Whishlist = () => {
     const [show, setshow] = useState('');
     const [switchState, setSwitch] = useState(false);

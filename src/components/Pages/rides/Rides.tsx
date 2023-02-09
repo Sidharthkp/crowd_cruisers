@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import NavBar from "../../Navbar/User_side/Navbar"
+import NavBar from "../../Navbar/Navbar"
 
 const Rides = () => {
     const [show, setshow] = useState('');

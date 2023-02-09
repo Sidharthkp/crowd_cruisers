@@ -13,7 +13,8 @@ import React, { useEffect } from "react"
 import Profile from "./components/Pages/profile/UserProfile"
 import Events from "./components/Pages/events/events"
 import Rides from "./components/Pages/rides/Rides"
-import NavBar from "./components/Navbar/User_side/Navbar"
+import NavBar from "./components/Navbar/Navbar"
+import Errorfour from "./components/Error/404Error"
 
 const App = () => {
     const dispatch = useDispatch()
@@ -45,6 +46,7 @@ const App = () => {
                     <Route path="/profile" element={authenticated ? <Profile /> : <Login />} />
                     <Route path="/events" element={authenticated ? <Events /> : <Login />} />
                     <Route path="/rides" element={authenticated ? <Rides /> : <Login />} />
+                    <Route path="*" element={<Errorfour />} />
                 </Routes>
             </BrowserRouter>
         </div>

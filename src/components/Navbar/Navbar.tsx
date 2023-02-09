@@ -4,8 +4,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BookmarkIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../firebase/config";
-import { setNotAuthenticated } from "../../../redux/Authentication/reducer";
+import { auth } from "../../firebase/config";
+import { setNotAuthenticated } from "../../redux/Authentication/reducer";
 import { FaUserCircle } from "react-icons/fa";
 
 const NavBar = () => {

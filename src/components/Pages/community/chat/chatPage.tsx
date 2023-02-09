@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Navbar_user from '../../../Navbar/User_side/Navbar'
+import Navbar_user from '../../../Navbar/Navbar'
 import { io } from "socket.io-client";
 import ChatBar from './chatBar';
 import ChatBody from './chatBody';
