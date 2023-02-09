@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setRegisterSwitchOn } from '../../redux/registerPage';
-import Navbar_user from '../Navbar/User_side/Navbar'
 import RegisterPage from './RegisterModal'
 
 const home = () => {
@@ -37,6 +36,7 @@ const home = () => {
 
     return (
         <div className='bg-gray-700 z-0 pt-16'>
+            <RegisterPage />
             <div className='overflow-y-hidden'>
                 {posts.length > 0 ? (
 
