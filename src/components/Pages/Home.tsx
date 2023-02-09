@@ -1,8 +1,3 @@
-import { CardBody } from '@material-tailwind/react';
-import { CardFooter } from '@material-tailwind/react/components/Card';
-import { Card, CardHeader } from '@mui/material';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -41,7 +36,7 @@ const home = () => {
     }, [])
 
     return (
-        <div className='bg-white z-0 pt-16'>
+        <div className='bg-gray-700 z-0 pt-16'>
             <div className='overflow-y-hidden'>
                 {posts.length > 0 ? (
 
@@ -86,15 +81,70 @@ const home = () => {
                                 <span className="visually-hidden">Next</span>
                             </button>
                         </div>
+                        <div className='w-full flex flex-row justify-center items-center mt-10'>
+                            <div className='w-10 h-0.5 bg-gray-500'/>
+                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                            <div className='w-10 h-0.5 bg-gray-500'/>
+                            
+                        </div>
                         {/* ride */}
-                        <div className='mt-5 bg-white p-10'>
-                            <div className='text-black font-bold p-5 text-3xl'>
+                        <div className='mt-5 bg-gray-700 p-10'>
+                            <div className='text-white font-bold p-5 text-3xl'>
                                 <h1>Rides</h1>
                             </div>
                             <div className='flex flex-row overflow-x-scroll overflow-y-hidden'>
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'ride') {
+                                            return (
+
+                                                <div className='w-full'>
+                                                    <a href="#" className="group relative block bg-black w-80 h-96">
+                                                        <img
+                                                            alt="Developer"
+                                                            src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                            className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
+                                                        />
+
+                                                        <div className="relative p-8">
+                                                            <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
+                                                                Developer
+                                                            </p>
+
+                                                            <p className="text-2xl font-bold text-white">Tony Wayne</p>
+
+                                                            <div className="mt-64">
+                                                                <div
+                                                                    className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
+                                                                >
+                                                                    <button></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                }
+                            </div>
+                        </div>
+                        <div className='w-full flex flex-row justify-center items-center'>
+                            <div className='w-10 h-0.5 bg-gray-500'/>
+                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                            <div className='w-10 h-0.5 bg-gray-500'/>
+                            
+                        </div>
+                        {/* event */}
+                        <div className='mt-5 bg-gray-700 p-10'>
+                            <div className='text-white font-bold p-5 text-3xl'>
+                                <h1>Events</h1>
+                            </div>
+                            <div className='flex flex-row overflow-x-scroll overflow-y-hidden'>
+                                {
+                                    posts.map((p: any) => {
+                                        if (p.eventType === 'event') {
                                             return (
 
                                                 <div className='w-full'>
@@ -152,7 +202,6 @@ const home = () => {
     )
 }
 export default home
-
 
 // <button onClick={() => { openRegisterModal(p._id) }} className="ctabtn">                                 
 // <button className="ctabtn" onClick={() => { saveToWishlist(p._id) }}>
