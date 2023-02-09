@@ -91,18 +91,18 @@ const home = () => {
                             <div className='text-black font-bold p-5 text-3xl'>
                                 <h1>Rides</h1>
                             </div>
-                            <div className='flex flex-row'>
+                            <div className='flex flex-row overflow-x-scroll overflow-y-hidden'>
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'ride') {
                                             return (
 
                                                 <div className='w-full'>
-                                                    <a href="#" className="group relative block bg-black w-4/6 h-96">
+                                                    <a href="#" className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
                                                             src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`}
-                                                            className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
+                                                            className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
                                                         />
 
                                                         <div className="relative p-8">
