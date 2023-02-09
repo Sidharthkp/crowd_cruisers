@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterSwitchOff } from '../../redux/registerPage';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Modal = () => {
     const opened = useSelector((state: any) => state.showRegisterPage.show);
     const id = useSelector((state: any) => state.showRegisterPage.id);
     const dispatch = useDispatch();
-    
+
     const username = localStorage.getItem("email");
 
 
@@ -18,8 +20,11 @@ const Modal = () => {
         e.preventDefault();
 
         axios
-            .post("http://localhost:3000/api/userPosts/join", {username, id})
-            .then((res) => console.log(res)
+            .post("http://localhost:3000/api/userPosts/join", { username, id })
+            .then((res) =>
+                toast.success("Registered...", {
+                    position: toast.POSITION.TOP_CENTER
+                })
             )
             .catch((err) => console.log(err));
 
@@ -28,6 +33,7 @@ const Modal = () => {
 
     return (
         <div>
+            <ToastContainer />
             {opened ? (
                 <div>
                     <div id="popup-modal" tabIndex={-1} className="fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
