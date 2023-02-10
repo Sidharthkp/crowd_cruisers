@@ -29,7 +29,7 @@ const Profile = () => {
             .catch((err) => console.log(err));
     }, [])
 
-    const printMembers = (data: any) => {        
+    const printMembers = (data: any) => {
         dispatch(setSwitchOn(data))
     }
 
@@ -124,6 +124,12 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='w-full flex flex-row justify-center items-center'>
+                        <div className='w-10 h-0.5 bg-gray-500' />
+                        <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                        <div className='w-10 h-0.5 bg-gray-500' />
+
+                    </div>
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Your Community</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -175,6 +181,12 @@ const Profile = () => {
                                 </tbody>
                             </table>
                         </div>
+
+                    </div>
+                    <div className='w-full flex flex-row justify-center items-center'>
+                        <div className='w-10 h-0.5 bg-gray-500' />
+                        <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                        <div className='w-10 h-0.5 bg-gray-500' />
 
                     </div>
 
@@ -241,6 +253,13 @@ const Profile = () => {
                         </div>
 
                     </div>
+
+                    <div className='w-full flex flex-row justify-center items-center'>
+                        <div className='w-10 h-0.5 bg-gray-500' />
+                        <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                        <div className='w-10 h-0.5 bg-gray-500' />
+
+                    </div>
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Your Events</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -304,6 +323,12 @@ const Profile = () => {
                         </div>
 
                     </div>
+                    <div className='w-full flex flex-row justify-center items-center'>
+                            <div className='w-10 h-0.5 bg-gray-500' />
+                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                            <div className='w-10 h-0.5 bg-gray-500' />
+
+                        </div>
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Joined Rides</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -367,6 +392,12 @@ const Profile = () => {
                         </div>
 
                     </div>
+                    <div className='w-full flex flex-row justify-center items-center'>
+                            <div className='w-10 h-0.5 bg-gray-500' />
+                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                            <div className='w-10 h-0.5 bg-gray-500' />
+
+                        </div>
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Joined Events</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
