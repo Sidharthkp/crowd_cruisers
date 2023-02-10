@@ -1,5 +1,5 @@
 import { signOut } from "@firebase/auth";
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BookmarkIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useDispatch, useSelector } from "react-redux";
@@ -7,11 +7,22 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/config";
 import { setNotAuthenticated } from "../../redux/Authentication/reducer";
 import { FaUserCircle } from "react-icons/fa";
+import axios from "axios";
 
 const NavBar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [user, setUser] = useState({ profileImage: '' })
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
+
+    const email = localStorage.getItem("email")
+
+    useEffect(()=>{
+        axios.post("http://localhost:3000/api/profile/showProfile", { email })
+            .then((res) => setUser(res.data)
+            )
+            .catch((err) => console.log(err));
+    }, [])
 
     const community = (e: any) => {
         e.preventDefault()
@@ -136,7 +147,7 @@ const NavBar = () => {
                                             <span className="sr-only">Open user menu</span>
                                             {authenticated ? <img
                                                 className="h-8 w-8 rounded-full"
-                                                src="https://avatars.githubusercontent.com/u/54587044?v=4"
+                                                src={`http://localhost:3000/api/profile/image?q=${user.profileImage}`}
                                                 alt=""
                                             /> : <FaUserCircle className="text-2xl" />}
                                         </Menu.Button>
