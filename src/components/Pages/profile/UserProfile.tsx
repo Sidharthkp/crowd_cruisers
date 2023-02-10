@@ -9,10 +9,9 @@ import UpdateProfile from "./UpdateProfile";
 import UserJoined from "./UserJoined";
 
 const Profile = () => {
-    const [user, setUser] = useState({email: ''})
+    const [user, setUser] = useState({ email: '', profileImage: '' })
     const [community, setCommunity] = useState([]);
     const [joinedEventsRides, setJoinedEventsRides] = useState([]);
-    const [dp, setDp] = useState({ profileImage: [] })
     const [distance, setDistance] = useState(0);
     const [fuelEfficiency, setEfficiency] = useState(0);
     const [fuelPrice, setPrice] = useState(0);
@@ -34,10 +33,7 @@ const Profile = () => {
         axios.get("http://localhost:3000/api/profile/showJoinedEventsRides")
             .then((res) => setJoinedEventsRides(res.data))
             .catch((err) => console.log(err));
-        axios.get("http://localhost:3000/api/profile/showDp")
-            .then((res) => setDp(res.data))
-            .catch((err) => console.log(err));
-    }, [])
+    }, [user])
 
     const printMembers = (data: any) => {
         dispatch(setSwitchOn(data))
@@ -66,10 +62,10 @@ const Profile = () => {
                 <div className="w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
                         <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer bg-black rounded-b-2xl w-4/6 h-3/6">
-                            {dp?.profileImage?.length > 0 &&
+                            {user?.profileImage?.length > 0 &&
                                 (
                                     <img className="rounded-b-2xl inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-                                        src={`http://localhost:3000/api/profile/showDp?q=${dp.profileImage[0]}`}
+                                        src={`http://localhost:3000/api/profile/image?q=${user.profileImage}`}
                                         alt=""
                                     />
                                 )
