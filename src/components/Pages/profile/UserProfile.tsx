@@ -9,6 +9,7 @@ import UserJoined from "./UserJoined";
 const Profile = () => {
     const [user, setUser] = useState<{ name: string } | null>(null);
     const [community, setCommunity] = useState([]);
+    const [joinedEventsRides, setJoinedEventsRides] = useState([]);
     const [distance, setDistance] = useState(0);
     const [fuelEfficiency, setEfficiency] = useState(0);
     const [fuelPrice, setPrice] = useState(0);
@@ -26,6 +27,9 @@ const Profile = () => {
         axios.post("http://localhost:3000/api/profile/showCommunity", { email })
             .then((res) => setCommunity(res.data)
             )
+            .catch((err) => console.log(err));
+        axios.get("http://localhost:3000/api/profile/showJoinedEventsRides")
+            .then((res) => setJoinedEventsRides(res.data))
             .catch((err) => console.log(err));
     }, [])
 
@@ -324,11 +328,11 @@ const Profile = () => {
 
                     </div>
                     <div className='w-full flex flex-row justify-center items-center'>
-                            <div className='w-10 h-0.5 bg-gray-500' />
-                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
-                            <div className='w-10 h-0.5 bg-gray-500' />
+                        <div className='w-10 h-0.5 bg-gray-500' />
+                        <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                        <div className='w-10 h-0.5 bg-gray-500' />
 
-                        </div>
+                    </div>
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Joined Rides</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -354,50 +358,55 @@ const Profile = () => {
                                 </thead>
                                 <tbody>
 
-                                    {community.length > 0 && community.map((data: any) => {
-                                        return (
-                                            data.events.length > 0 && data.events.map((event: any) => {
-                                                const date = new Date(event.expirationDate);
-                                                const day = date.getDate();
-                                                const month = date.getMonth() + 1;
-                                                const year = date.getFullYear();
+                                    {joinedEventsRides.length > 0 &&
+                                        joinedEventsRides.map((data: any) => {
 
-                                                return (
-                                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            {event.description}
-                                                        </th>
-                                                        <td className="px-6 py-4">
-                                                            {data.groupName}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            {`${day}-${month}-${year}`}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            <div>
-                                                                {/* <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button> */}
-                                                            </div>
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            <button onClick={() => getMembersList(event._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
-                                                        </td>
-                                                    </tr>
-                                                )
+                                            return data.regMembers.map((user: any) => {
+                                                if (user.email === email) {
 
+                                                    const date = new Date(data.expirationDate);
+                                                    const day = date.getDate();
+                                                    const month = date.getMonth() + 1;
+                                                    const year = date.getFullYear();
+                                                    return (
+                                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                {data.description}
+                                                            </th>
+                                                            <td className="px-6 py-4">
+                                                                {data.groupName}
+                                                            </td>
+                                                            <td className="px-6 py-4">
+                                                                {`${day}-${month}-${year}`}
+                                                            </td>
+                                                            <td className="px-6 py-4">
+                                                                <div>
+                                                                    {/* <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button> */}
+                                                                </div>
+                                                            </td>
+                                                            <td className="px-6 py-4">
+                                                                <button onClick={() => getMembersList(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">
+                                                                    Click
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    )
 
-                                            }))
-                                    })}
+                                                }
+                                            });
+                                        }
+                                        )}
                                 </tbody>
                             </table>
                         </div>
 
                     </div>
                     <div className='w-full flex flex-row justify-center items-center'>
-                            <div className='w-10 h-0.5 bg-gray-500' />
-                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
-                            <div className='w-10 h-0.5 bg-gray-500' />
+                        <div className='w-10 h-0.5 bg-gray-500' />
+                        <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
+                        <div className='w-10 h-0.5 bg-gray-500' />
 
-                        </div>
+                    </div>
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Joined Events</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
