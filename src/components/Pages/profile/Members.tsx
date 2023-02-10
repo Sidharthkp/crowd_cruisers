@@ -9,11 +9,13 @@ const Members = () => {
     const dispatch = useDispatch()
     const state = useSelector((state: any) => state.showMembers.show);
     const data = useSelector((state: any) => state.showMembers.data);
+    
     useEffect(() => {
+        console.log(data);
         axios.post("http://localhost:3000/api/profile/showMembers", { data })
             .then((res) => setDetails(res.data.members))
             .catch((err) => console.log(err));
-    }, [details])
+    }, [data])
     const closeButton = () => {
         dispatch(setSwitchOff());
     }
@@ -46,7 +48,7 @@ const Members = () => {
                                         </thead>
                                         <tbody>
 
-                                            {details.length > 0 && details.map((data: any) => {
+                                            {details && details.length > 0 && details.map((data: any) => {
                                                 console.log(data);
                                                 return (
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

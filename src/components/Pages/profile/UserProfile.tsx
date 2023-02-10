@@ -27,9 +27,9 @@ const Profile = () => {
             .then((res) => setCommunity(res.data)
             )
             .catch((err) => console.log(err));
-    }, [user, community])
+    }, [])
 
-    const printMembers = (data: any) => {
+    const printMembers = (data: any) => {        
         dispatch(setSwitchOn(data))
     }
 
@@ -166,7 +166,7 @@ const Profile = () => {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <div>
-                                                        <button onClick={() => printMembers(data.rides._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
+                                                        <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
                                                     </div>
                                                 </td>
                                             </tr>

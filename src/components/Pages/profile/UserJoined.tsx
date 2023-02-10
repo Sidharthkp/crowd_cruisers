@@ -13,7 +13,7 @@ const UserJoined = () => {
         axios.post("http://localhost:3000/api/profile/showJoinedMembers", { data })
             .then((res) => setDetails(res.data))
             .catch((err) => console.log(err));
-    }, [details])
+    }, [data])
     const closeButton = () => {
         dispatch(setSwitchOff());
     }
