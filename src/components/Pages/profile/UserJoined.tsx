@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { setSwitchOff } from "../../../redux/members";
+import { setSwitchOff } from "../../../redux/usersJoined";
 
-const Members = () => {
-    const [details, setDetails] = useState([])    
-
+const UserJoined = () => {
+    const [details, setDetails] = useState([])
+    
     const dispatch = useDispatch()
-    const state = useSelector((state: any) => state.showMembers.show);
-    const data = useSelector((state: any) => state.showMembers.data);
+    const state = useSelector((state: any) => state.showJoinedMembers.show);
+    const data = useSelector((state: any) => state.showJoinedMembers.data);
     useEffect(() => {
-        axios.post("http://localhost:3000/api/profile/showMembers", { data })
-            .then((res) => setDetails(res.data.members))
+        axios.post("http://localhost:3000/api/profile/showJoinedMembers", { data })
+            .then((res) => setDetails(res.data))
             .catch((err) => console.log(err));
     }, [details])
     const closeButton = () => {
@@ -37,21 +37,20 @@ const Members = () => {
                                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
-                                                
+
                                                 <th scope="col" className="px-6 py-3">
                                                     Members
                                                 </th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>
 
-                                            {details.length > 0 && details.map((data: any) => {
-                                                console.log(data);
+                                            {details &&     details.length > 0 && details.map((data: any) => {
                                                 return (
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <td className="px-6 py-4">
-                                                            {data}
+                                                            {data.email}
                                                         </td>
                                                     </tr>
                                                 )
@@ -71,4 +70,4 @@ const Members = () => {
     )
 }
 
-export default Members
+export default UserJoined

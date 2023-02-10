@@ -2,7 +2,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import { setSwitchOn } from "../../../redux/members";
+import { setJoinedSwitchOn } from "../../../redux/usersJoined";
 import Members from "./Members";
+import UserJoined from "./UserJoined";
 
 const Profile = () => {
     const [user, setUser] = useState<{ name: string } | null>(null);
@@ -13,8 +15,10 @@ const Profile = () => {
     const [tripCost, setCost] = useState(0);
     const [calculatedFuel, setFuel] = useState(0);
     const dispatch = useDispatch()
+
+    const email = localStorage.getItem("email")
+
     useEffect(() => {
-        const email = localStorage.getItem("email")
         axios.post("http://localhost:3000/api/profile/showProfile", { email })
             .then((res) => setUser(res.data)
             )
@@ -29,6 +33,10 @@ const Profile = () => {
         dispatch(setSwitchOn(data))
     }
 
+    const getMembersList = (id: any) => {
+        dispatch(setJoinedSwitchOn(id))
+    }
+
     const calculate = () => {
         let fuel: number = distance / fuelEfficiency;
         let tripCost: number = fuel * fuelPrice;
@@ -39,6 +47,7 @@ const Profile = () => {
         <div>
             <div className="w-full h-screen mt-16 flex flex-row bg-gray-700">
                 <Members />
+                <UserJoined />
                 <div className="w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
                         <div className="rounded-b-2xl w-4/6 h-3/6">
@@ -157,7 +166,7 @@ const Profile = () => {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <div>
-                                                        <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
+                                                        <button onClick={() => printMembers(data.rides._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -182,10 +191,7 @@ const Profile = () => {
                                             Community name
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            Members
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Registration Started
+                                            Registration ends in
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Flag off
@@ -200,6 +206,10 @@ const Profile = () => {
                                     {community.length > 0 && community.map((data: any) => {
                                         return (
                                             data.rides.length > 0 && data.rides.map((ride: any) => {
+                                                const date = new Date(ride.expirationDate);
+                                                const day = date.getDate();
+                                                const month = date.getMonth() + 1;
+                                                const year = date.getFullYear();
 
                                                 return (
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -210,10 +220,7 @@ const Profile = () => {
                                                             {data.groupName}
                                                         </td>
                                                         <td className="px-6 py-4">
-                                                            {data.members.length}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            {/* {data.rides.length} */}
+                                                            {`${day}-${month}-${year}`}
                                                         </td>
                                                         <td className="px-6 py-4">
                                                             <div>
@@ -221,7 +228,7 @@ const Profile = () => {
                                                             </div>
                                                         </td>
                                                         <td className="px-6 py-4">
-                                                            {/* <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> */}
+                                                            <button onClick={() => getMembersList(ride._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
                                                         </td>
                                                     </tr>
                                                 )

@@ -26,7 +26,11 @@ const Modal = () => {
                     position: toast.POSITION.TOP_CENTER
                 })
             )
-            .catch((err) => console.log(err));
+            .catch((err) => 
+                toast.warn("User already exist...", {
+                    position: toast.POSITION.TOP_CENTER
+                })
+            );
 
         dispatch(setRegisterSwitchOff())
     }
