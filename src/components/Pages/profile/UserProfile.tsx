@@ -362,7 +362,7 @@ const Profile = () => {
                                         joinedEventsRides.map((data: any) => {
 
                                             return data.regMembers.map((user: any) => {
-                                                if (user.email === email) {
+                                                if (user.email === email && data.eventType === 'ride') {
 
                                                     const date = new Date(data.expirationDate);
                                                     const day = date.getDate();
@@ -432,39 +432,44 @@ const Profile = () => {
                                 </thead>
                                 <tbody>
 
-                                    {community.length > 0 && community.map((data: any) => {
-                                        return (
-                                            data.events.length > 0 && data.events.map((event: any) => {
-                                                const date = new Date(event.expirationDate);
-                                                const day = date.getDate();
-                                                const month = date.getMonth() + 1;
-                                                const year = date.getFullYear();
+                                    {joinedEventsRides.length > 0 &&
+                                        joinedEventsRides.map((data: any) => {
 
-                                                return (
-                                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                            {event.description}
-                                                        </th>
-                                                        <td className="px-6 py-4">
-                                                            {data.groupName}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            {`${day}-${month}-${year}`}
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            <div>
-                                                                {/* <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button> */}
-                                                            </div>
-                                                        </td>
-                                                        <td className="px-6 py-4">
-                                                            <button onClick={() => getMembersList(event._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button>
-                                                        </td>
-                                                    </tr>
-                                                )
+                                            return data.regMembers.map((user: any) => {
+                                                if (user.email === email && data.eventType === 'event') {
 
+                                                    const date = new Date(data.expirationDate);
+                                                    const day = date.getDate();
+                                                    const month = date.getMonth() + 1;
+                                                    const year = date.getFullYear();
+                                                    return (
+                                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                {data.description}
+                                                            </th>
+                                                            <td className="px-6 py-4">
+                                                                {data.groupName}
+                                                            </td>
+                                                            <td className="px-6 py-4">
+                                                                {`${day}-${month}-${year}`}
+                                                            </td>
+                                                            <td className="px-6 py-4">
+                                                                <div>
+                                                                    {/* <button onClick={() => printMembers(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Click</button> */}
+                                                                </div>
+                                                            </td>
+                                                            <td className="px-6 py-4">
+                                                                <button onClick={() => getMembersList(data._id)} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">
+                                                                    Click
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    )
 
-                                            }))
-                                    })}
+                                                }
+                                            });
+                                        }
+                                        )}
                                 </tbody>
                             </table>
                         </div>
