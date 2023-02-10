@@ -51,7 +51,6 @@ const home = () => {
                             <div className="carousel-inner relative w-full overflow-hidden">
                                 {
                                     posts.map((p: any, index: number) => {
-                                        // if(p.)
                                         return (
                                             <div className={`carousel-item relative float-left w-full ${index === 0 ? 'active' : ''}`}>
                                                 <img

@@ -7,6 +7,7 @@ import groupOpenReducer from '../clickedGroup'
 import registerOpenReducer from '../registerPage'
 import membersReducer from '../members'
 import membersJoinedSlice from '../usersJoined'
+import showEditDpSlice from '../editDp'
 
 export default configureStore({
     reducer: {
@@ -17,6 +18,7 @@ export default configureStore({
         showGroupPage: groupOpenReducer,
         showRegisterPage: registerOpenReducer,
         showMembers: membersReducer,
-        showJoinedMembers: membersJoinedSlice
+        showJoinedMembers: membersJoinedSlice,
+        showEditDpModal: showEditDpSlice
     },
 })

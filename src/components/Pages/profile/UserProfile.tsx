@@ -1,15 +1,18 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
+import { setEditDpSwitchOn } from "../../../redux/editDp";
 import { setSwitchOn } from "../../../redux/members";
 import { setJoinedSwitchOn } from "../../../redux/usersJoined";
 import Members from "./Members";
+import UpdateProfile from "./UpdateProfile";
 import UserJoined from "./UserJoined";
 
 const Profile = () => {
-    const [user, setUser] = useState<{ name: string } | null>(null);
+    const [user, setUser] = useState({email: ''})
     const [community, setCommunity] = useState([]);
     const [joinedEventsRides, setJoinedEventsRides] = useState([]);
+    const [dp, setDp] = useState({ profileImage: [] })
     const [distance, setDistance] = useState(0);
     const [fuelEfficiency, setEfficiency] = useState(0);
     const [fuelPrice, setPrice] = useState(0);
@@ -31,10 +34,17 @@ const Profile = () => {
         axios.get("http://localhost:3000/api/profile/showJoinedEventsRides")
             .then((res) => setJoinedEventsRides(res.data))
             .catch((err) => console.log(err));
+        axios.get("http://localhost:3000/api/profile/showDp")
+            .then((res) => setDp(res.data))
+            .catch((err) => console.log(err));
     }, [])
 
     const printMembers = (data: any) => {
         dispatch(setSwitchOn(data))
+    }
+
+    const openModal = (name: any) => {
+        dispatch(setEditDpSwitchOn(name))
     }
 
     const getMembersList = (id: any) => {
@@ -52,14 +62,22 @@ const Profile = () => {
             <div className="w-full h-screen mt-16 flex flex-row bg-gray-700">
                 <Members />
                 <UserJoined />
+                <UpdateProfile />
                 <div className="w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
-                        <div className="rounded-b-2xl w-4/6 h-3/6">
-                            <img className="rounded-b-2xl" src="https://avatars.githubusercontent.com/u/54587044?v=4" alt="" />
+                        <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer bg-black rounded-b-2xl w-4/6 h-3/6">
+                            {dp?.profileImage?.length > 0 &&
+                                (
+                                    <img className="rounded-b-2xl inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
+                                        src={`http://localhost:3000/api/profile/showDp?q=${dp.profileImage[0]}`}
+                                        alt=""
+                                    />
+                                )
+                            }
                         </div>
                         <div className="flex flex-row items-center w-full px-5">
                             <h1 className="mx-2 text-lg font-bold">Name:</h1>
-                            <h1>{user && user.name ?
+                            {/* <h1>{user && user.name ?
                                 <div>
 
                                     <h1>{user.name}</h1>
@@ -71,7 +89,7 @@ const Profile = () => {
                                     <h1 className="text-gray-500">Please add your name</h1>
 
                                 </div>
-                            }</h1>
+                            }</h1> */}
                         </div>
                         <div className="flex flex-row items-center w-full px-5">
                             <h1 className="mx-2 text-lg font-bold">Email:</h1>
