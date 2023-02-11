@@ -14,6 +14,10 @@ import UpdateGrpProfile from './dpChange';
 const ROOT_CSS = css({
     height: 400,
     width: 400,
+    '@media only screen and (min-width: 1024px)': {
+        height: 400,
+        width: 1050,
+    }
 });
 
 const ChatBody = ({ typingStatus }: any) => {
@@ -110,7 +114,7 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
                         </div>
                         <div className='h-full'>
-                            <div className='overflow-hidden messageclass'>
+                            <div className=''>
                                 <ScrollToBottom className={ROOT_CSS}>
                                     {Array.isArray(msg) ? msg.map((message: any) =>
                                         message.name === localStorage.getItem('email') ? (

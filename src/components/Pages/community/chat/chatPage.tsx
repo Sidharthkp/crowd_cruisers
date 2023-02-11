@@ -20,10 +20,12 @@ const ChatPage = () => {
   return (
     <>
 
-      <ChatBar />
-      <div className='w-full flex flex-col'>
-        <ChatBody typingStatus={typingStatus} />
-        <ChatFooter socket={socket} />
+      <div className='flex flex-col md:flex-row'>
+        <ChatBar />
+        <div className='w-full flex flex-col md:mt-16'>
+          <ChatBody typingStatus={typingStatus} />
+          <ChatFooter socket={socket} />
+        </div>
       </div>
       <JoinModalPage />
       <CreateModal />
