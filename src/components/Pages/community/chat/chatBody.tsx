@@ -16,7 +16,7 @@ const ROOT_CSS = css({
     width: 400,
     '@media only screen and (min-width: 1024px)': {
         height: 400,
-        width: 1050,
+        width: 920,
     }
 });
 
@@ -84,7 +84,7 @@ const ChatBody = ({ typingStatus }: any) => {
     }, [details, msg])
 
     return (
-        <div className='md:max-w-screen-lg'>
+        <div>
             <ToastContainer />
             <UpdateGrpProfile />
             {opened && datas ?
