@@ -13,11 +13,12 @@ const NavBar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [user, setUser] = useState({ profileImage: '' })
+    const [currentNav, setCurrentNav] = useState(0);
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
 
     const email = localStorage.getItem("email")
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.post("http://localhost:3000/api/profile/showProfile", { email })
             .then((res) => setUser(res.data)
             )
@@ -71,12 +72,16 @@ const NavBar = () => {
     }
 
     const navigation = [
-        { name: 'Home', onclick: home, current: true },
-        { name: 'Map', onclick: maps, current: false },
-        { name: 'Community', onclick: community, current: false },
-        { name: 'Rides', onclick: rides, current: false },
-        { name: 'Events', onclick: events, current: false },
-    ]
+        { name: 'Home', onclick: home, current: currentNav === 0 },
+        { name: 'Map', onclick: maps, current: currentNav === 1 },
+        { name: 'Community', onclick: community, current: currentNav === 2 },
+        { name: 'Rides', onclick: rides, current: currentNav === 3 },
+        { name: 'Events', onclick: events, current: currentNav === 4 },
+    ];
+
+    const handleNavClick = (index: number) => {
+        setCurrentNav(index);
+    };
 
     const classNames = (...classes: any) => {
         return classes.filter(Boolean).join(' ')
@@ -114,17 +119,20 @@ const NavBar = () => {
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
-                                        {navigation.map((item) => (
+                                        {navigation.map((nav, index) => (
                                             <button
-                                                key={item.name}
-                                                onClick={item.onclick}
+                                                key={nav.name}
+                                                onClick={(e: any) => {
+                                                    handleNavClick(index);
+                                                    nav.onclick(e);
+                                                }}
                                                 className={classNames(
-                                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                    nav.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                                     'px-3 py-2 rounded-md text-sm font-medium'
                                                 )}
-                                                aria-current={item.current ? 'page' : undefined}
+                                                aria-current={nav.current ? 'page' : undefined}
                                             >
-                                                {item.name}
+                                                {nav.name}
                                             </button>
                                         ))}
                                     </div>
@@ -132,7 +140,7 @@ const NavBar = () => {
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 <button
-                                onClick={wishlist}
+                                    onClick={wishlist}
                                     type="button"
                                     className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                 >
@@ -197,7 +205,7 @@ const NavBar = () => {
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <button
-                                                        onClick={login}
+                                                            onClick={login}
                                                             className={classNames(active ? 'bg-gray-100 cursor-pointer w-full' : '', 'block px-4 py-2 w-full text-sm text-gray-700')}
                                                         >
                                                             Sign In
