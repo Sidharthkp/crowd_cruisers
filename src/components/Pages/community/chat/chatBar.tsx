@@ -59,7 +59,9 @@ const ChatBar = () => {
 
           <div key={p._id} onClick={() => { ClickedGroup(p._id) }} className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
             <div className='rounded-full w-1/6'>
-              <img className='rounded-full w-16' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
+              <img className='rounded-full w-16' 
+              src={`http://localhost:3000/api/createGroup/image?q=${p.image}`} 
+              alt="" />
             </div>
             <div className='flex flex-col'>
               <div className='font-bold text-lg'>

@@ -30,7 +30,6 @@ const ChatBody = ({ typingStatus }: any) => {
     };
 
     const openModal = (data: any) => {
-        console.log(data);
 
         if (localStorage.getItem("email") === data.admin) {
             dispatch(setCreateSwitchOn(data._id))
@@ -42,7 +41,13 @@ const ChatBody = ({ typingStatus }: any) => {
     }
 
     const openDPModal = (id: any) => {
-        dispatch(setEditGrpDpSwitchOn(id))
+        if (localStorage.getItem("email") === id.admin) {
+            dispatch(setEditGrpDpSwitchOn(id))
+        } else {
+            toast.warn("Only Admin can Edit DP...", {
+                position: toast.POSITION.TOP_CENTER
+            })
+        }
     }
 
     const group = () => {
@@ -85,9 +90,9 @@ const ChatBody = ({ typingStatus }: any) => {
                         <div className='w-full flex flex-row items-center p-4 bg-black'>
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='cursor-pointer rounded-full w-1/6 bg-black'>
-                                    <img className='rounded-full w-20' 
-                                    src={`http://localhost:3000/api/createGroup/image?q=${datas.image}`} 
-                                    alt="" />
+                                    <img className='rounded-full w-20'
+                                        src={`http://localhost:3000/api/createGroup/image?q=${datas.image}`}
+                                        alt="" />
                                 </div>
                                 <div className='flex flex-col'>
                                     <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas) }}>
