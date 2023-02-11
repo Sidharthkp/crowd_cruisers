@@ -13,11 +13,7 @@ import UpdateGrpProfile from './dpChange';
 
 const ROOT_CSS = css({
     height: 400,
-    width: 400,
-    '@media only screen and (min-width: 1024px)': {
-        height: 400,
-        width: 920,
-    }
+    width: "100%",
 });
 
 const ChatBody = ({ typingStatus }: any) => {
