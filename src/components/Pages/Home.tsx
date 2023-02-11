@@ -113,10 +113,10 @@ const home = () => {
 
                                                         <div className="relative p-8">
                                                             <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
-                                                                Developer
+                                                                {}
                                                             </p>
 
-                                                            <p className="text-2xl font-bold text-white">Tony Wayne</p>
+                                                            <p className="text-2xl font-bold text-white">{p.description}</p>
 
                                                             <div className="mt-64">
                                                                 <div
@@ -165,10 +165,10 @@ const home = () => {
 
                                                         <div className="relative p-8">
                                                             <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
-                                                                Developer
+                                                                {}
                                                             </p>
 
-                                                            <p className="text-2xl font-bold text-white">Tony Wayne</p>
+                                                            <p className="text-2xl font-bold text-white">{p.description}</p>
 
                                                             <div className="mt-64">
                                                                 <div
