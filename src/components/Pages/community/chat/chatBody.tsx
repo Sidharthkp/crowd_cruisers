@@ -84,7 +84,7 @@ const ChatBody = ({ typingStatus }: any) => {
     }, [details, msg])
 
     return (
-        <div>
+        <div className='md:max-w-screen-lg'>
             <ToastContainer />
             <UpdateGrpProfile />
             {opened && datas ?

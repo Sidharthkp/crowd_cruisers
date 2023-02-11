@@ -36,7 +36,7 @@ const ChatBar = () => {
   }
 
   return (
-    <div className='flex flex-col md:w-2/6 sm:w-full mt-16 h-full bg-slate-900'>
+    <div className='flex flex-col md:w-3/6 sm:w-full mt-16 h-full bg-slate-900'>
       <div className='flex flex-row h-12 justify-around items-center p-2'>
         <div className='h-full w-3/6 justify-center items-center flex flex-row'>
           <input type="text"
