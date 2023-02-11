@@ -55,7 +55,7 @@ const Profile = () => {
     }
     return (
         <div>
-            <div className="w-full h-screen mt-16 flex flex-col bg-gray-700">
+            <div className="w-full h-screen mt-16 flex md:flex-row bg-gray-700">
                 <Members />
                 <UserJoined />
                 <UpdateProfile />
