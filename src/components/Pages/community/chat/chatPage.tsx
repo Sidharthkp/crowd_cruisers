@@ -11,7 +11,7 @@ import CreateModal from './createGroup';
 const socket = io("http://localhost:3000");
 
 const ChatPage = () => {
-  const [typingStatus, setTypingStatus] = useState('');  
+  const [typingStatus, setTypingStatus] = useState('');
 
   useEffect(() => {
     socket.on('typingResponse', (data) => setTypingStatus(data));
@@ -19,16 +19,16 @@ const ChatPage = () => {
 
   return (
     <>
-      <div className='w-full h-screen flex flex-row mt-16'>
-        <ChatBar />
-        <div className='flex flex-col w-4/6 bg-slate-600'>
-          <ChatBody typingStatus={typingStatus}/>
-          <ChatFooter socket={socket} />
-        </div>
-        <JoinModalPage />
-        <CreateModal />
-        <CreatePost />
+
+      <ChatBar />
+      <div className='w-full flex flex-col'>
+        <ChatBody typingStatus={typingStatus} />
+        <ChatFooter socket={socket} />
       </div>
+      <JoinModalPage />
+      <CreateModal />
+      <CreatePost />
+
     </>
   )
 }

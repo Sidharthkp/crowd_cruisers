@@ -36,8 +36,8 @@ const ChatBar = () => {
   }
 
   return (
-    <div className='flex flex-col w-2/6 h-full bg-slate-900'>
-      <div className='flex flex-row w-full h-12 justify-around items-center p-2'>
+    <div className='flex flex-col md:w-2/6 sm:w-full mt-16 h-full bg-slate-900'>
+      <div className='flex flex-row h-12 justify-around items-center p-2'>
         <div className='h-full w-3/6 justify-center items-center flex flex-row'>
           <input type="text"
             placeholder='Enter Community Name'
@@ -52,12 +52,12 @@ const ChatBar = () => {
           <button onClick={createModal} className='bg-green-500 hover:bg-green-700 m-2 text-white font-bold py-1 px-3 rounded-full'>Create</button>
         </div>
       </div>
-      <div className='w-full flex flex-col h-screen overflow-y-auto scrollbar-hide'>
+      <div className='w-full flex flex-col h-screen overflow-y-hidden scrollbar-hide'>
         {groups.map((p: any) => (
 
           p.members.includes(username, 0) &&
 
-          <div key={p._id} onClick={() => { ClickedGroup(p._id) }} className='w-full flex flex-row items-center bg cursor-pointer m-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
+          <div key={p._id} onClick={() => { ClickedGroup(p._id) }} className='w-full flex flex-row items-center bg cursor-pointer mt-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
             <div className='rounded-full w-1/6'>
               <img className='rounded-full w-16' 
               src={`http://localhost:3000/api/createGroup/image?q=${p.image}`} 

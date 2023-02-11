@@ -58,10 +58,10 @@ const home = () => {
                                                     className="block w-full carousal-class"
                                                     alt="..."
                                                 />
-                                                <div className="carousel-caption hidden md:block absolute text-center">
+                                                {/* <div className="carousel-caption hidden md:block absolute text-center">
                                                     <h5 className="text-xl">Slide label</h5>
                                                     <p>{p.description}</p>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         )
                                     })

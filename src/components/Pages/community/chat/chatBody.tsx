@@ -13,7 +13,7 @@ import UpdateGrpProfile from './dpChange';
 
 const ROOT_CSS = css({
     height: 400,
-    width: 930,
+    width: 400,
 });
 
 const ChatBody = ({ typingStatus }: any) => {
@@ -80,14 +80,14 @@ const ChatBody = ({ typingStatus }: any) => {
     }, [details, msg])
 
     return (
-        <>
+        <div>
             <ToastContainer />
             <UpdateGrpProfile />
             {opened && datas ?
                 (
 
                     <div key={datas._id}>
-                        <div className='w-full flex flex-row items-center p-4 bg-black'>
+                        <div className=' w-full flex flex-row items-center p-4 bg-black'>
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='cursor-pointer rounded-full w-1/6 bg-black'>
                                     <img className='rounded-full w-20'
@@ -109,8 +109,8 @@ const ChatBody = ({ typingStatus }: any) => {
                                 <XCircleIcon onClick={handleLeaveChat} className="h-6 w-6 text-blue-500 cursor-pointer" />
                             </div>
                         </div>
-                        <div className='w-full h-full'>
-                            <div className='w-full h-full max-h-96 overflow-hidden'>
+                        <div className='h-full'>
+                            <div className='overflow-hidden messageclass'>
                                 <ScrollToBottom className={ROOT_CSS}>
                                     {Array.isArray(msg) ? msg.map((message: any) =>
                                         message.name === localStorage.getItem('email') ? (
@@ -131,22 +131,9 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
                         </div>
                     </div>
-                ) :
-                <>
-                    <div className="flex flex-row w-full h-screen">
-                        <div>
-                            <img className="h-screen" src="https://wallpapercave.com/dwp1x/wp6988787.png" alt="" />
-                        </div>
-                        <div>
-                            <img className="h-screen" src="https://wallpapercave.com/dwp1x/wp6988787.png" alt="" />
-                        </div>
-                        <div>
-                            <img className="h-screen" src="https://wallpapercave.com/dwp1x/wp6988787.png" alt="" />
-                        </div>
-                    </div>
-                </>
+                ) : null
             }
-        </>
+        </div>
     )
 }
 
