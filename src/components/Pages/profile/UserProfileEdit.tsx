@@ -21,7 +21,7 @@ const UserProfileEdit = () => {
     
 
         axios
-            .post("http://localhost:3000/api/userPosts/post", {})
+            .post("http://localhost:3000/api/profile/profileEdit", {details, userName})
             .then((res) => console.log("datasend")
             )
             .catch((err) => console.log(err));
@@ -46,14 +46,14 @@ const UserProfileEdit = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div className='flex flex-col w-full py-5'>
                                         <div className='flex flex-row w-full justify-center'>
-                                            <h1 className='text-black mb-5 text-4xl font-bold'>Create Your Post</h1>
+                                            <h1 className='text-black mb-5 text-4xl font-bold'>Edit User Details</h1>
                                         </div>
                                         <div className='flex flex-row w-full justify-center'>
                                             <div className='flex flex-col w-5/6'>
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Your message</label>
-                                                <textarea
+                                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Your Name</label>
+                                                <input
                                                     onChange={(e) => setUserName(e.target.value)}
-                                                    id="message" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                                                    id="message" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your name..."></input>
                                             </div>
                                         </div>
                                         

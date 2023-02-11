@@ -12,7 +12,7 @@ import UserJoined from "./UserJoined";
 import UserProfileEdit from "./UserProfileEdit";
 
 const Profile = () => {
-    const [user, setUser] = useState({ email: '', profileImage: '' })
+    const [user, setUser] = useState({ email: '', profileImage: '', userName: '' })
     const [community, setCommunity] = useState([]);
     const [joinedEventsRides, setJoinedEventsRides] = useState([]);
     const [distance, setDistance] = useState(0);
@@ -85,10 +85,10 @@ const Profile = () => {
                             </div>
                             <div className="flex flex-row items-center w-full px-5">
                                 <h1 className="mx-2 text-lg font-bold">Name:</h1>
-                                {/* <h1>{user && user.name ?
+                                <h1>{user && user.userName ?
                                 <div>
 
-                                    <h1>{user.name}</h1>
+                                    <h1>{user.userName}</h1>
 
                                 </div>
                                 :
@@ -97,7 +97,7 @@ const Profile = () => {
                                     <h1 className="text-gray-500">Please add your name</h1>
 
                                 </div>
-                            }</h1> */}
+                            }</h1>
                             </div>
                             <div className="flex flex-row items-center w-full px-5">
                                 <h1 className="mx-2 text-lg font-bold">Email:</h1>
