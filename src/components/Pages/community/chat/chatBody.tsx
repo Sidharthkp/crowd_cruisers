@@ -6,6 +6,8 @@ import { closeGroupSwitch } from "../../../../redux/clickedGroup";
 import { css } from '@emotion/css'
 import ScrollToBottom from 'react-scroll-to-bottom';
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const ROOT_CSS = css({
     height: 400,
@@ -26,7 +28,15 @@ const ChatBody = ({ typingStatus }: any) => {
     };
 
     const openModal = (data: any) => {
-        dispatch(setCreateSwitchOn(data))
+        console.log(data);
+
+        if (localStorage.getItem("email") === data.admin) {
+            dispatch(setCreateSwitchOn(data._id))
+        } else {
+            toast.warn("Only Admin can create post...", {
+                position: toast.POSITION.TOP_CENTER
+            })
+        }
     }
 
     const group = () => {
@@ -60,6 +70,7 @@ const ChatBody = ({ typingStatus }: any) => {
 
     return (
         <>
+            <ToastContainer />
             {opened && datas ?
                 (
 
@@ -70,7 +81,7 @@ const ChatBody = ({ typingStatus }: any) => {
                                     <img className='rounded-full w-20' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas._id) }}>
+                                    <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas) }}>
                                         {datas.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>

@@ -22,7 +22,7 @@ const NavBar = () => {
             .then((res) => setUser(res.data)
             )
             .catch((err) => console.log(err));
-    }, [])
+    }, [user])
 
     const community = (e: any) => {
         e.preventDefault()
@@ -146,7 +146,7 @@ const NavBar = () => {
                                         <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                             <span className="sr-only">Open user menu</span>
                                             {authenticated ? <img
-                                                className="h-8 w-8 rounded-full"
+                                                className="h-8 w-8 rounded-full bg-black"
                                                 src={`http://localhost:3000/api/profile/image?q=${user.profileImage}`}
                                                 alt=""
                                             /> : <FaUserCircle className="text-2xl" />}
