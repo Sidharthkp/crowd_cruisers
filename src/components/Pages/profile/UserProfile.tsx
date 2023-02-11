@@ -55,11 +55,11 @@ const Profile = () => {
     }
     return (
         <div>
-            <div className="w-full h-screen mt-16 flex flex-row bg-gray-700">
+            <div className="w-full h-screen mt-16 flex flex-col bg-gray-700">
                 <Members />
                 <UserJoined />
                 <UpdateProfile />
-                <div className="w-2/6 h-full flex flex-row bg-gray-900">
+                <div className="md:w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
                         <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer bg-black rounded-b-2xl w-4/6 h-3/6">
                             {user?.profileImage &&
@@ -93,7 +93,7 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-4/6 h-full flex flex-col overflow-y-auto scrollbar-hide">
+                <div className="md:w-4/6 h-full flex flex-col overflow-y-auto scrollbar-hide">
                     <div className="m-5">
                         <h1 className="font-bold text-lg mb-5">Fuel Cost Calculator</h1>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
