@@ -62,7 +62,7 @@ const Profile = () => {
                 <div className="w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
                         <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer bg-black rounded-b-2xl w-4/6 h-3/6">
-                            {user?.profileImage?.length > 0 &&
+                            {user?.profileImage &&
                                 (
                                     <img className="rounded-b-2xl inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
                                         src={`http://localhost:3000/api/profile/image?q=${user.profileImage}`}

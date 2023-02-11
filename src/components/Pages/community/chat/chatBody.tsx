@@ -8,6 +8,8 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { setEditGrpDpSwitchOn } from '../../../../redux/editGrpDp';
+import UpdateGrpProfile from './dpChange';
 
 const ROOT_CSS = css({
     height: 400,
@@ -37,6 +39,10 @@ const ChatBody = ({ typingStatus }: any) => {
                 position: toast.POSITION.TOP_CENTER
             })
         }
+    }
+
+    const openDPModal = (id: any) => {
+        dispatch(setEditGrpDpSwitchOn(id))
     }
 
     const group = () => {
@@ -71,14 +77,17 @@ const ChatBody = ({ typingStatus }: any) => {
     return (
         <>
             <ToastContainer />
+            <UpdateGrpProfile />
             {opened && datas ?
                 (
 
                     <div key={datas._id}>
                         <div className='w-full flex flex-row items-center p-4 bg-black'>
                             <div className="w-4/6 flex flex-row">
-                                <div className='rounded-full w-1/6'>
-                                    <img className='rounded-full w-20' src="https://static.wixstatic.com/media/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg/v1/fit/w_2500,h_1330,al_c/006bb8_14ddca3bd1354c76bbcd68157ec38191~mv2.jpg" alt="" />
+                                <div onClick={() => { openDPModal(datas._id) }} className='cursor-pointer rounded-full w-1/6 bg-black'>
+                                    <img className='rounded-full w-20' 
+                                    src={`http://localhost:3000/api/createGroup/image?q=${datas.image}`} 
+                                    alt="" />
                                 </div>
                                 <div className='flex flex-col'>
                                     <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas) }}>

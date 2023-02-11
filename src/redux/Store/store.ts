@@ -8,6 +8,7 @@ import registerOpenReducer from '../registerPage'
 import membersReducer from '../members'
 import membersJoinedSlice from '../usersJoined'
 import showEditDpSlice from '../editDp'
+import showEditGrpDpSlice from '../editGrpDp'
 
 export default configureStore({
     reducer: {
@@ -19,6 +20,7 @@ export default configureStore({
         showRegisterPage: registerOpenReducer,
         showMembers: membersReducer,
         showJoinedMembers: membersJoinedSlice,
-        showEditDpModal: showEditDpSlice
+        showEditDpModal: showEditDpSlice,
+        showEditGrpDpModal: showEditGrpDpSlice
     },
 })
