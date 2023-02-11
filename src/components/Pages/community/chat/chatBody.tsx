@@ -91,7 +91,7 @@ const ChatBody = ({ typingStatus }: any) => {
                 (
 
                     <div key={datas._id}>
-                        <div className=' w-full flex flex-row items-center p-4 bg-black'>
+                        <div className=' w-full flex flex-row items-center p-4 bg-slate-900'>
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='cursor-pointer rounded-full w-1/6 bg-black'>
                                     <img className='rounded-full w-20'
@@ -113,20 +113,29 @@ const ChatBody = ({ typingStatus }: any) => {
                                 <XCircleIcon onClick={handleLeaveChat} className="h-6 w-6 text-blue-500 cursor-pointer" />
                             </div>
                         </div>
-                        <div className='h-full'>
+                        <div className='h-full bg-slate-600'>
                             <div className=''>
                                 <ScrollToBottom className={ROOT_CSS}>
                                     {Array.isArray(msg) ? msg.map((message: any) =>
                                         message.name === localStorage.getItem('email') ? (
                                             <div key={message._id} className='w-full flex flex-row justify-end'>
-                                                <div className='rounded-2xl bg-gray-400 max-w-xs text-black p-5 m-4'>
-                                                    {message.text}
+                                                <div className='rounded-2xl bg-gray-800 max-w-xs text-black p-4 m-4'>
+                                                    <div className='flex flex-col justify-start'>
+                                                        <div className='text-white'>
+                                                            {message.text}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ) : (
                                             <div key={message._id} className='w-full flex flex-row justify-start'>
-                                                <div className='rounded-2xl bg-slate-400 text-black p-5 m-4'>
-                                                    {message.text}
+                                                <div className='rounded-2xl bg-gray-900 p-5 m-4'>
+                                                    <div className='mb-4 text-violet-400 font-bold'>
+                                                        {message.name}
+                                                    </div>
+                                                    <div className='text-white'>
+                                                        {message.text}
+                                                    </div>
                                                 </div>
                                             </div>
                                         )

@@ -9,6 +9,7 @@ import membersReducer from '../members'
 import membersJoinedSlice from '../usersJoined'
 import showEditDpSlice from '../editDp'
 import showEditGrpDpSlice from '../editGrpDp'
+import showEditUserSlice from '../editUser'
 
 export default configureStore({
     reducer: {
@@ -21,6 +22,7 @@ export default configureStore({
         showMembers: membersReducer,
         showJoinedMembers: membersJoinedSlice,
         showEditDpModal: showEditDpSlice,
-        showEditGrpDpModal: showEditGrpDpSlice
+        showEditGrpDpModal: showEditGrpDpSlice,
+        showEditUserModal: showEditUserSlice
     },
 })

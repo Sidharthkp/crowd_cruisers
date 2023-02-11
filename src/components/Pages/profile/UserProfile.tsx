@@ -1,12 +1,15 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { FaUserEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setEditDpSwitchOn } from "../../../redux/editDp";
+import { setEditUserSwitchOn } from "../../../redux/editUser";
 import { setSwitchOn } from "../../../redux/members";
 import { setJoinedSwitchOn } from "../../../redux/usersJoined";
 import Members from "./Members";
 import UpdateProfile from "./UpdateProfile";
 import UserJoined from "./UserJoined";
+import UserProfileEdit from "./UserProfileEdit";
 
 const Profile = () => {
     const [user, setUser] = useState({ email: '', profileImage: '' })
@@ -43,6 +46,10 @@ const Profile = () => {
         dispatch(setEditDpSwitchOn(name))
     }
 
+    const openUserEdit = (name: any) => {
+        dispatch(setEditUserSwitchOn(name))
+    }
+
     const getMembersList = (id: any) => {
         dispatch(setJoinedSwitchOn(id))
     }
@@ -59,6 +66,7 @@ const Profile = () => {
                 <Members />
                 <UserJoined />
                 <UpdateProfile />
+                <UserProfileEdit />
                 <div className="md:w-2/6 h-full flex flex-row bg-gray-900">
                     <div className="flex flex-col items-center w-full">
                         <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer bg-black rounded-b-2xl w-4/6 h-3/6">
@@ -71,9 +79,13 @@ const Profile = () => {
                                 )
                             }
                         </div>
-                        <div className="flex flex-row items-center w-full px-5">
-                            <h1 className="mx-2 text-lg font-bold">Name:</h1>
-                            {/* <h1>{user && user.name ?
+                        <div className="mt-5">
+                            <div className="w-full flex flex-row justify-end text-lg">
+                                <FaUserEdit className="cursor-pointer" onClick={()=>openUserEdit(user.email)}/>
+                            </div>
+                            <div className="flex flex-row items-center w-full px-5">
+                                <h1 className="mx-2 text-lg font-bold">Name:</h1>
+                                {/* <h1>{user && user.name ?
                                 <div>
 
                                     <h1>{user.name}</h1>
@@ -86,10 +98,11 @@ const Profile = () => {
 
                                 </div>
                             }</h1> */}
-                        </div>
-                        <div className="flex flex-row items-center w-full px-5">
-                            <h1 className="mx-2 text-lg font-bold">Email:</h1>
-                            <h1>{localStorage.getItem('email')}</h1>
+                            </div>
+                            <div className="flex flex-row items-center w-full px-5">
+                                <h1 className="mx-2 text-lg font-bold">Email:</h1>
+                                <h1>{localStorage.getItem('email')}</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
