@@ -8,7 +8,7 @@ import JoinModalPage from './joinModal';
 import CreatePost from '../posts/createPost';
 import CreateModal from './createGroup';
 
-const socket = io("http://localhost:3000");
+const socket = io("http://10.4.5.176:3000");
 
 const ChatPage = () => {
   const [typingStatus, setTypingStatus] = useState('');

@@ -48,7 +48,7 @@ const Modal = () => {
         }
 
         axios
-            .post("http://localhost:3000/api/userPosts/post", formData, {
+            .post("http://10.4.5.176:3000/api/userPosts/post", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

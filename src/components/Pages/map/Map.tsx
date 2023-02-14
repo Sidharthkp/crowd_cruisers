@@ -40,7 +40,7 @@ const MapPage = () => {
         });
         const getPins = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/api/pins");
+                const res = await axios.get("http://10.4.5.176:3000/api/pins");
                 setPins(res.data);
             } catch (err) {
                 console.log(err);
@@ -53,7 +53,7 @@ const MapPage = () => {
     const handleShowPopup = async (id: any, latitude: any, longitude: any, username: any) => {
         if (username === currentUser) {
             try {
-                const res = await axios.post("http://localhost:3000/api/pins/pinDelete", { id });
+                const res = await axios.post("http://10.4.5.176:3000/api/pins/pinDelete", { id });
             } catch (err) {
                 console.log(err);
 
@@ -83,7 +83,7 @@ const MapPage = () => {
         }
 
         try {
-            const res = await axios.post("http://localhost:3000/api/pins", newPin)
+            const res = await axios.post("http://10.4.5.176:3000/api/pins", newPin)
             setPins([...pins, res.data]);
             setNewPlace(null);
         } catch (err) {
@@ -132,7 +132,7 @@ const MapPage = () => {
                                                 </label>
                                                 <input onChange={(e) => setNewDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tell me more about it" />
                                             </div>
-                                            <h1 className='text-red-600'>The pin will expire in 1hr</h1>
+                                            <h1 className='text-red-600'>The pin will expire in 5m</h1>
                                             <div className='w-full flex justify-end'>
                                                 <button className='rounded-2xl bg-green-400 w-14 h-6 text-white' type='submit'>Share</button>
                                             </div>
@@ -149,12 +149,6 @@ const MapPage = () => {
 
                                 <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom">
                                     <FmdGoodIcon key={p._id} onClick={() => handleShowPopup(p._id, p.latitude, p.longitude, p.username)} style={{ fontSize: p.username === currentUser ? 44 : 40, color: p.username === currentUser ? "tomato" : "purple", cursor: "pointer" }} />
-                                    {p.username === currentUser ? (
-                                        <div className='text-red-400 font-bold italic'>
-                                            Click to remove
-                                        </div>
-                                    ) : null
-                                    }
                                 </Marker>
 
 

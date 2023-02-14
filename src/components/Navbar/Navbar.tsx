@@ -19,7 +19,7 @@ const NavBar = () => {
     const email = localStorage.getItem("email")
 
     useEffect(() => {
-        axios.post("http://localhost:3000/api/profile/showProfile", { email })
+        axios.post("http://10.4.5.176:3000/api/profile/showProfile", { email })
             .then((res) => setUser(res.data)
             )
             .catch((err) => console.log(err));
@@ -155,7 +155,7 @@ const NavBar = () => {
                                             <span className="sr-only">Open user menu</span>
                                             {authenticated ? <img
                                                 className="h-8 w-8 rounded-full bg-black"
-                                                src={`http://localhost:3000/api/profile/image?q=${user.profileImage}`}
+                                                src={`http://10.4.5.176:3000/api/profile/image?q=${user.profileImage}`}
                                                 alt=""
                                             /> : <FaUserCircle className="text-2xl" />}
                                         </Menu.Button>

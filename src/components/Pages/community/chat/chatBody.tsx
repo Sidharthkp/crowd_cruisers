@@ -53,7 +53,7 @@ const ChatBody = ({ typingStatus }: any) => {
     const group = () => {
         try {
             axios
-                .post("http://localhost:3000/api/createGroup/open", { details })
+                .post("http://10.4.5.176:3000/api/createGroup/open", { details })
                 .then((res) => setData(res.data))
                 .catch((err) => console.log(err));
 
@@ -65,7 +65,7 @@ const ChatBody = ({ typingStatus }: any) => {
     const message = () => {
         try {
             axios
-                .post("http://localhost:3000/api/createGroup/message", { details })
+                .post("http://10.4.5.176:3000/api/createGroup/message", { details })
                 .then((res) => setMessage(res.data))
                 .catch((err) => console.log(err));
 
@@ -91,7 +91,7 @@ const ChatBody = ({ typingStatus }: any) => {
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='cursor-pointer rounded-full w-1/6 bg-black'>
                                     <img className='rounded-full w-20'
-                                        src={`http://localhost:3000/api/createGroup/image?q=${datas.image}`}
+                                        src={`http://10.4.5.176:3000/api/createGroup/image?q=${datas.image}`}
                                         alt="" />
                                 </div>
                                 <div className='flex flex-col'>

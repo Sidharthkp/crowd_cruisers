@@ -19,7 +19,7 @@ const CreateModal = () => {
         e.preventDefault();
     
         axios
-            .post("http://localhost:3000/api/createGroup/create", {roomName, adminName})
+            .post("http://10.4.5.176:3000/api/createGroup/create", {roomName, adminName})
             .then((res) => console.log("datasend"))
             .catch((err) => console.log(err));
 

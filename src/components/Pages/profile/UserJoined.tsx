@@ -10,7 +10,7 @@ const UserJoined = () => {
     const state = useSelector((state: any) => state.showJoinedMembers.show);
     const data = useSelector((state: any) => state.showJoinedMembers.data);
     useEffect(() => {
-        axios.post("http://localhost:3000/api/profile/showJoinedMembers", { data })
+        axios.post("http://10.4.5.176:3000/api/profile/showJoinedMembers", { data })
             .then((res) => setDetails(res.data))
             .catch((err) => console.log(err));
     }, [data])

@@ -49,7 +49,7 @@ const Signup = () => {
         signInWithPopup(auth, provider).then((data: any) => {
             localStorage.setItem("email", data.user.email)
             const uid = data.user.uid;
-            axios.post("http://localhost:3000/api/profile/addNew", { uid, email: data.user.email })
+            axios.post("http://10.4.5.176:3000/api/profile/addNew", { uid, email: data.user.email })
                 .then((res) => console.log(res)
                 )
                 .catch((err) => console.log(err));

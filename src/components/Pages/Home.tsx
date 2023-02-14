@@ -14,7 +14,7 @@ const home = () => {
     const username = localStorage.getItem("email")
     const saveToWishlist = (id: any) => {
         try {
-            axios.post("http://localhost:3000/api/userPosts/wishList", { id, username })
+            axios.post("http://10.4.5.176:3000/api/userPosts/wishList", { id, username })
                 .then((res) =>
                     toast.success("Saved for later...", {
                         position: toast.POSITION.TOP_CENTER
@@ -29,7 +29,7 @@ const home = () => {
     React.useEffect(() => {
         const getPosts = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/api/userPosts");
+                const res = await axios.get("http://10.4.5.176:3000/api/userPosts");
                 setPosts(res.data);
             } catch (err) {
                 console.log(err);
@@ -54,7 +54,7 @@ const home = () => {
                                         return (
                                             <div className={`carousel-item relative float-left w-full ${index === 0 ? 'active' : ''}`}>
                                                 <img
-                                                    src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                    src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
                                                     className="block w-full carousal-class"
                                                     alt="..."
                                                 />
@@ -107,7 +107,7 @@ const home = () => {
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
-                                                            src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                            src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
                                                             className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
                                                         />
 
@@ -159,7 +159,7 @@ const home = () => {
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
-                                                            src={`http://localhost:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                            src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
                                                             className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
                                                         />
 
