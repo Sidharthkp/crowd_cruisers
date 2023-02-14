@@ -32,7 +32,7 @@ const UpdateGrpProfile = () => {
         formData.append('id', details)
 
         axios
-            .post("http://10.4.5.176:3000/api/createGroup/editImage", formData, {
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/editImage`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

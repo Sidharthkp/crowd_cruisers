@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import NavBar from "../../Navbar/Navbar"
 
 const Rides = () => {
     const [show, setshow] = useState('');
@@ -15,7 +14,7 @@ const Rides = () => {
     const handleSubmit = (id: any) => {
 
         axios
-            .post("http://10.4.5.176:3000/api/userPosts/join", { username, id })
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/join`, { username, id })
             .then((res) => console.log("datasend")
             )
             .catch((err) => console.log(err));
@@ -23,7 +22,7 @@ const Rides = () => {
 
     const addToWishlist = (id: any) => {
         try {
-            axios.post("http://10.4.5.176:3000/api/userPosts/wishList", { id, username })
+            axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/wishList`, { id, username })
                 .then((res) => console.log(res)
                 )
                 .catch((err) => console.log(err));
@@ -34,7 +33,7 @@ const Rides = () => {
     useEffect(() => {
         const getPosts = async () => {
             try {
-                const res = await axios.get("http://10.4.5.176:3000/api/userPosts/rides");
+                const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/rides`);
                 setPosts(res.data);
             } catch (err) {
                 console.log(err);
@@ -60,9 +59,9 @@ const Rides = () => {
                             return (
                                 <div className="flex flex-col mb-20" key={e._id}>
                                     <div className="relative">
-                                        <img className="hidden h-60 lg:block" src={`http://10.4.5.176:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
-                                        <img className="hidden h-60 w-full sm:block lg:hidden" src={`http://10.4.5.176:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
-                                        <img className="sm:hidden h-60 w-full" src={`http://10.4.5.176:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
+                                        <img className="hidden h-60 lg:block" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
+                                        <img className="hidden h-60 w-full sm:block lg:hidden" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
+                                        <img className="sm:hidden h-60 w-full" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${e.image[0]}`} alt="shoes" />
                                     </div>
                                     <div className="mt-6 flex justify-between items-center">
                                         <div className="flex justify-center items-center">

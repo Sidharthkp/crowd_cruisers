@@ -21,7 +21,7 @@ const UserProfileEdit = () => {
     
 
         axios
-            .post("http://10.4.5.176:3000/api/profile/profileEdit", {details, userName})
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/profileEdit`, {details, userName})
             .then((res) => console.log("datasend")
             )
             .catch((err) => console.log(err));

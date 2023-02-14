@@ -15,7 +15,7 @@ const NavBar = () => {
     const email = localStorage.getItem("email")
 
     useEffect(() => {
-        axios.post("http://10.4.5.176:3000/api/profile/showProfile", { email })
+        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showProfile`, { email })
             .then((res) => setUser(res.data)
             )
             .catch((err) => console.log(err));
@@ -90,12 +90,6 @@ const NavBar = () => {
                         </div>
                     }
                 </ul>
-            </div>
-            <div className="content">
-                <div className="title">
-                    Fullscreen Overlay Navigation Bar</div>
-                <p>
-                    with HTML & CSS Neon Effect</p>
             </div>
         </div>
     );

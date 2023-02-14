@@ -20,7 +20,7 @@ const Modal = () => {
         e.preventDefault();
 
         axios
-            .post("http://localhost:3000/api/userPosts/join", { username, id })
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/join`, { username, id })
             .then((res) =>
                 toast.success("Registered...", {
                     position: toast.POSITION.TOP_CENTER

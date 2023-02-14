@@ -15,7 +15,7 @@ const home = () => {
     const username = localStorage.getItem("email")
     const saveToWishlist = (id: any) => {
         try {
-            axios.post("http://10.4.5.176:3000/api/userPosts/wishList", { id, username })
+            axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/wishList`, { id, username })
                 .then((res) =>
                     toast.success("Saved for later...", {
                         position: toast.POSITION.TOP_CENTER
@@ -30,7 +30,7 @@ const home = () => {
     React.useEffect(() => {
         const getPosts = async () => {
             try {
-                const res = await axios.get("http://10.4.5.176:3000/api/userPosts");
+                const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts`);
                 setPosts(res.data);
             } catch (err) {
                 console.log(err);
@@ -65,7 +65,7 @@ const home = () => {
                                                     <div className="nft">
                                                         <div className='main'>
                                                             <img className='tokenImage'
-                                                                src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                                src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.image[0]}`}
                                                                 alt="NFT" />
                                                             <h2></h2>
                                                             <p className='description'>{p.description}</p>
@@ -107,7 +107,7 @@ const home = () => {
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
-                                                            src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                            src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.image[0]}`}
                                                             className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
                                                         />
 

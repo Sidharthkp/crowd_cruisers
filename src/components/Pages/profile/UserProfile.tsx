@@ -25,15 +25,15 @@ const Profile = () => {
     const email = localStorage.getItem("email")
 
     useEffect(() => {
-        axios.post("http://10.4.5.176:3000/api/profile/showProfile", { email })
+        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showProfile`, { email })
             .then((res) => setUser(res.data)
             )
             .catch((err) => console.log(err));
-        axios.post("http://10.4.5.176:3000/api/profile/showCommunity", { email })
+        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showCommunity`, { email })
             .then((res) => setCommunity(res.data)
             )
             .catch((err) => console.log(err));
-        axios.get("http://10.4.5.176:3000/api/profile/showJoinedEventsRides")
+        axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showJoinedEventsRides`)
             .then((res) => setJoinedEventsRides(res.data))
             .catch((err) => console.log(err));
     }, [user])
@@ -73,7 +73,7 @@ const Profile = () => {
                             {user?.profileImage &&
                                 (
                                     <img className="rounded-b-2xl inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-                                        src={`http://10.4.5.176:3000/api/profile/image?q=${user.profileImage}`}
+                                        src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/image?q=${user.profileImage}`}
                                         alt=""
                                     />
                                 )

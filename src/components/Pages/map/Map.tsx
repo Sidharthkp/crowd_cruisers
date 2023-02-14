@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Map, { GeolocateControl, Marker, Popup } from 'react-map-gl';
-import Navbar_user from '../../Navbar/Navbar'
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import axios from 'axios'
 import { format } from 'timeago.js';
@@ -40,7 +39,7 @@ const MapPage = () => {
         });
         const getPins = async () => {
             try {
-                const res = await axios.get("http://10.4.5.176:3000/api/pins");
+                const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins`);
                 setPins(res.data);
             } catch (err) {
                 console.log(err);
@@ -53,7 +52,7 @@ const MapPage = () => {
     const handleShowPopup = async (id: any, latitude: any, longitude: any, username: any) => {
         if (username === currentUser) {
             try {
-                const res = await axios.post("http://10.4.5.176:3000/api/pins/pinDelete", { id });
+                const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins/pinDelete`, { id });
             } catch (err) {
                 console.log(err);
 
@@ -83,8 +82,8 @@ const MapPage = () => {
         }
 
         try {
-            const res = await axios.post("http://10.4.5.176:3000/api/pins", newPin)
-            setPins([...pins, res.data]);
+            const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins`, newPin)
+            setPins([...pins, res.data])
             setNewPlace(null);
         } catch (err) {
             console.log(err);

@@ -13,7 +13,7 @@ const ChatBar = () => {
 
   const getGroups = async () => {
     try {
-      const res = await axios.get("http://10.4.5.176:3000/api/createGroup/get");
+      const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/get`);
       setGroup(res.data);
     } catch (err) {
       console.log(err);
@@ -60,7 +60,7 @@ const ChatBar = () => {
           <div key={p._id} onClick={() => { ClickedGroup(p._id) }} className='w-full flex flex-row items-center bg cursor-pointer mt-2 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl'>
             <div className='rounded-full w-1/6'>
               <img className='rounded-full w-16' 
-              src={`http://10.4.5.176:3000/api/createGroup/image?q=${p.image}`} 
+              src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} 
               alt="" />
             </div>
             <div className='flex flex-col'>

@@ -19,7 +19,7 @@ const JoinModalPage = () => {
     useEffect(() => {
         const getGroups = async () => {
             try {
-                const res = await axios.get("http://10.4.5.176:3000/api/createGroup/get");
+                const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/get`);
                 setGroup(res.data);
 
             } catch (err) {
@@ -32,7 +32,7 @@ const JoinModalPage = () => {
     const submitAction = (e: any) => {
         e.preventDefault()
         axios
-            .post("http://10.4.5.176:3000/api/createGroup/join", {selection, username})
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/join`, {selection, username})
             .then((res) => console.log("datasend"))
             .catch((err) => console.log(err));
 
