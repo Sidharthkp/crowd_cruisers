@@ -19,6 +19,9 @@ module.exports = {
         'spin-slow-10': 'spin 10s linear infinite',
         'marquee-infinite': 'marquee 25s linear infinite',
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [

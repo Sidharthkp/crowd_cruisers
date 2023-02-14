@@ -39,7 +39,7 @@ const home = () => {
     }, [])
 
     return (
-        <div className='bg-gray-700 z-0 pt-16'>
+        <div>
             <ToastContainer />
             <RegisterPage />
             <div className='overflow-y-hidden'>
@@ -52,7 +52,7 @@ const home = () => {
                                 {
                                     posts.map((p: any, index: number) => {
                                         return (
-                                            <div className={`carousel-item relative float-left w-full ${index === 0 ? 'active' : ''}`}>
+                                            <div key={p._id} className={`carousel-item relative float-left w-full ${index === 0 ? 'active' : ''}`}>
                                                 <img
                                                     src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
                                                     className="block w-full carousal-class"
@@ -103,7 +103,7 @@ const home = () => {
                                         if (p.eventType === 'ride') {
                                             return (
 
-                                                <div className='w-full animate-marquee-infinite'>
+                                                <div key={p._id} className='w-full animate-marquee-infinite'>
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
@@ -155,7 +155,7 @@ const home = () => {
                                         if (p.eventType === 'event') {
                                             return (
 
-                                                <div className='w-full animate-marquee-infinite'>
+                                                <div key={p._id} className='w-full animate-marquee-infinite'>
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
@@ -209,7 +209,7 @@ const home = () => {
                     </div>
                 )}
             </div>
-        </div >
+        </ div>
     )
 }
 export default home
