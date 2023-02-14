@@ -39,7 +39,7 @@ const home = () => {
     }, [])
 
     return (
-        <div>
+        <div className='z-20'>
             <ToastContainer />
             <RegisterPage />
             <div className='overflow-y-hidden'>
