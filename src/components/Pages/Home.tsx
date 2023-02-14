@@ -52,18 +52,18 @@ const home = () => {
                             <div className='text-white font-bold p-5 text-3xl'>
                                 <h1>Rides</h1>
                             </div>
-                            <div className='flex flex-row w-screen relative overflow-x-auto'>
+                            <div className='flex flex-row w-screen relative overflow-x-auto scrollbar-hide'>
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'ride') {
                                             return (
 
                                                 <div key={p._id}>
+                                                            <div className='relative flex flex-row w-full justify-end'>
+                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
+                                                            </div>
                                                     <div className="nft">
                                                         <div className='main'>
-                                                            <div className='relative'>
-                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-lg absolute m-5 font-bold" ><FaHeart /></a>
-                                                            </div>
                                                             <img className='tokenImage'
                                                                 src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
                                                                 alt="NFT" />
@@ -82,7 +82,8 @@ const home = () => {
                                                                     <ins>◷</ins>
                                                                     <p>11 days left</p>
                                                                 </div>
-                                                            </div>                                                        </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             )
