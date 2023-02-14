@@ -5,6 +5,7 @@ import { setRegisterSwitchOn } from '../../redux/registerPage';
 import RegisterPage from './RegisterModal'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { FaHeart } from 'react-icons/fa';
 const home = () => {
     const [posts, setPosts] = React.useState([]);
     const dispatch = useDispatch()
@@ -42,59 +43,53 @@ const home = () => {
         <div className='z-20 h-screen'>
             <ToastContainer />
             <RegisterPage />
-            <div className='overflow-y-hidden p-4'>
+            <div className='p-4'>
                 {posts.length > 0 ? (
 
                     <div className='relative'>
                         {/* ride */}
-                        <div className='mt-5 p-10'>
+                        <div className='mt-5 relative p-10'>
                             <div className='text-white font-bold p-5 text-3xl'>
                                 <h1>Rides</h1>
                             </div>
-                            <div className='flex flex-row overflow-x-scroll'>
+                            <div className='flex flex-row w-screen relative overflow-x-auto'>
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'ride') {
                                             return (
 
-                                                <div key={p._id} className='w-full'>
-                                                    <div className="group relative block bg-black w-80 h-96">
-                                                        <img
-                                                            alt="Developer"
-                                                            src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
-                                                            className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-                                                        />
+                                                <div key={p._id}>
+                                                    <div className="nft">
+                                                        <div className='main'>
+                                                            <div className='relative'>
+                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-lg absolute m-5 font-bold" ><FaHeart /></a>
+                                                            </div>
+                                                            <img className='tokenImage'
+                                                                src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                                alt="NFT" />
+                                                            <h2></h2>
+                                                            <p className='description'>{p.description}</p>
+                                                            <div className='tokenInfo'>
+                                                                <div className="price">
+                                                                    <div className="mt-64">
+                                                                        <div className='flex flex-col'>
 
-                                                        <div className="relative hover:block hidden p-8">
-                                                            <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
-                                                                {}
-                                                            </p>
-
-                                                            <p className="text-2xl font-bold text-white">{p.description}</p>
-
-                                                            <div className="mt-64">
-                                                                <div>
-                                                                    <div className='flex flex-row w-full justify-center'>
-                                                                        <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 mx-2 bg-red-600 font-bold" >Register Now</button>
-                                                                        <button onClick={() => { saveToWishlist(p._id) }} className="w-32 h-6 mx-2 bg-yellow-600 font-bold" >Save for later</button>
+                                                                            <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 m-5 bg-red-600 font-bold" >Register Now</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                                <div className="duration">
+                                                                    <ins>◷</ins>
+                                                                    <p>11 days left</p>
+                                                                </div>
+                                                            </div>                                                        </div>
                                                     </div>
-
                                                 </div>
                                             )
                                         }
                                     })
                                 }
                             </div>
-                        </div>
-                        <div className='w-full flex flex-row justify-center items-center'>
-                            <div className='w-10 h-0.5 bg-gray-500' />
-                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
-                            <div className='w-10 h-0.5 bg-gray-500' />
-
                         </div>
                         {/* event */}
                         <div className='mt-5 p-10'>
@@ -117,7 +112,7 @@ const home = () => {
 
                                                         <div className="relative p-8">
                                                             <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
-                                                                {}
+                                                                { }
                                                             </p>
 
                                                             <p className="text-2xl font-bold text-white">{p.description}</p>
@@ -161,7 +156,7 @@ const home = () => {
                     </div>
                 )}
             </div>
-        </ div>
+        </ div >
     )
 }
 export default home
