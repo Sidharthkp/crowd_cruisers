@@ -39,71 +39,25 @@ const home = () => {
     }, [])
 
     return (
-        <div className='z-20'>
+        <div className='z-20 h-screen'>
             <ToastContainer />
             <RegisterPage />
-            <div className='overflow-y-hidden'>
+            <div className='overflow-y-hidden p-4'>
                 {posts.length > 0 ? (
 
-                    <div>
-                        <div id="carouselExampleCaptions" className="carousel slide relative" data-bs-ride="carousel">
-
-                            <div className="carousel-inner relative w-full overflow-hidden">
-                                {
-                                    posts.map((p: any, index: number) => {
-                                        return (
-                                            <div key={p._id} className={`carousel-item relative float-left w-full ${index === 0 ? 'active' : ''}`}>
-                                                <img
-                                                    src={`http://10.4.5.176:3000/api/userPosts/image?q=${p.image[0]}`}
-                                                    className="block w-full carousal-class"
-                                                    alt="..."
-                                                />
-                                                {/* <div className="carousel-caption hidden md:block absolute text-center">
-                                                    <h5 className="text-xl">Slide label</h5>
-                                                    <p>{p.description}</p>
-                                                </div> */}
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                            <button
-                                className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
-                                type="button"
-                                data-bs-target="#carouselExampleCaptions"
-                                data-bs-slide="prev"
-                            >
-                                <span className="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button
-                                className="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
-                                type="button"
-                                data-bs-target="#carouselExampleCaptions"
-                                data-bs-slide="next"
-                            >
-                                <span className="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-                                <span className="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                        <div className='w-full flex flex-row justify-center items-center mt-10'>
-                            <div className='w-10 h-0.5 bg-gray-500' />
-                            <img src="./src/assets/Images/book-a-service.svg" className='w-12' alt="" />
-                            <div className='w-10 h-0.5 bg-gray-500' />
-
-                        </div>
+                    <div className='relative'>
                         {/* ride */}
-                        <div className='mt-5 bg-gray-700 p-10'>
+                        <div className='mt-5 p-10'>
                             <div className='text-white font-bold p-5 text-3xl'>
                                 <h1>Rides</h1>
                             </div>
-                            <div className='flex flex-row overflow-x-scroll overflow-y-hidden'>
+                            <div className='flex flex-row overflow-x-scroll'>
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'ride') {
                                             return (
 
-                                                <div key={p._id} className='w-full animate-marquee-infinite'>
+                                                <div key={p._id} className='w-full'>
                                                     <div className="group relative block bg-black w-80 h-96">
                                                         <img
                                                             alt="Developer"
@@ -111,7 +65,7 @@ const home = () => {
                                                             className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
                                                         />
 
-                                                        <div className="relative p-8">
+                                                        <div className="relative hover:block hidden p-8">
                                                             <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
                                                                 {}
                                                             </p>
@@ -119,9 +73,7 @@ const home = () => {
                                                             <p className="text-2xl font-bold text-white">{p.description}</p>
 
                                                             <div className="mt-64">
-                                                                <div
-                                                                    className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
-                                                                >
+                                                                <div>
                                                                     <div className='flex flex-row w-full justify-center'>
                                                                         <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 mx-2 bg-red-600 font-bold" >Register Now</button>
                                                                         <button onClick={() => { saveToWishlist(p._id) }} className="w-32 h-6 mx-2 bg-yellow-600 font-bold" >Save for later</button>
@@ -145,7 +97,7 @@ const home = () => {
 
                         </div>
                         {/* event */}
-                        <div className='mt-5 bg-gray-700 p-10'>
+                        <div className='mt-5 p-10'>
                             <div className='text-white font-bold p-5 text-3xl'>
                                 <h1>Events</h1>
                             </div>
