@@ -108,8 +108,10 @@ a {
 
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .registernow {
@@ -225,14 +227,15 @@ input:checked~.dot {
 /* navbar */
 
 
-.nav{
+.nav {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
   font-family: 'Oswald', sans-serif;
 }
-.wrapper{
+
+.wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -240,17 +243,19 @@ input:checked~.dot {
   width: 100%;
   background: linear-gradient(-135deg, #c850c0, #4158d0);
   /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
- /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
+  /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
   clip-path: circle(25px at calc(0% + 45px) 45px);
   /* background: #000; */
   z-index: 30;
   clip-path: circle(25px at calc(100% - 45px) 45px);
   transition: all 0.3s ease-in-out;
 }
-#active:checked ~ .wrapper{
+
+#active:checked~.wrapper {
   clip-path: circle(75%);
 }
-.menu-btn{
+
+.menu-btn {
   position: absolute;
   z-index: 2;
   right: 20px;
@@ -266,18 +271,21 @@ input:checked~.dot {
   cursor: pointer;
   /*background: linear-gradient(-135deg, #c850c0, #4158d0);*/
   /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
- /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
+  /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
   background: #000;
   z-index: 50;
   transition: all 0.3s ease-in-out;
 }
-#active:checked ~ .menu-btn{
+
+#active:checked~.menu-btn {
   color: #fff;
 }
-#active:checked ~ .menu-btn i:before{
+
+#active:checked~.menu-btn i:before {
   content: "\f00d";
 }
-.wrapper ul{
+
+.wrapper ul {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -285,10 +293,12 @@ input:checked~.dot {
   list-style: none;
   text-align: center;
 }
-.wrapper ul li{
+
+.wrapper ul li {
   margin: 15px 0;
 }
-.wrapper ul li a{
+
+.wrapper ul li a {
   color: none;
   text-decoration: none;
   font-size: 30px;
@@ -301,32 +311,38 @@ input:checked~.dot {
   line-height: 50px;
   transition: all 0.3s ease;
 }
-.wrapper ul li a:after{
+
+.wrapper ul li a:after {
   position: absolute;
   content: "";
   background: #fff;
-   background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+  background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
   /*background: linear-gradient(375deg, #1cc7d0, #2ede98);*/
   width: 104%;
   height: 110%;
   left: -2%;
-  top: -5%; /* if the font is 'Oswald'*/
+  top: -5%;
+  /* if the font is 'Oswald'*/
   border-radius: 50px;
   transform: scaleY(0);
   z-index: -1;
   animation: rotate 1.5s linear infinite;
   transition: transform 0.3s ease;
 }
-.wrapper ul li a:hover:after{
+
+.wrapper ul li a:hover:after {
   transform: scaleY(1);
 }
-.wrapper ul li a:hover{
+
+.wrapper ul li a:hover {
   color: #fff;
 }
-input[type="checkbox"]{
+
+input[type="checkbox"] {
   display: none;
 }
-.content{
+
+.content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -336,34 +352,53 @@ input[type="checkbox"]{
   width: 100%;
   color: #202020;
 }
-.content .title{
+
+.content .title {
   font-size: 40px;
   font-weight: 700;
 }
-.content p{
+
+.content p {
   font-size: 35px;
   font-weight: 600;
 }
 
 @keyframes rotate {
-  0%{
+  0% {
     filter: hue-rotate(0deg);
   }
-  100%{
+
+  100% {
     filter: hue-rotate(360deg);
   }
 }
 
-.chatStyle{
+.chatStyle {
   height: 60vh;
   width: full;
 }
 
 
 @media (max-width: 480px) {
-  .chatStyle{
+  .chatStyle {
     margin-top: 50px;
     height: 60vh;
     width: full;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatBodyStyle {
+    position: absolute;
+  }
+}
+
+.chat {
+  height: 62vh;
+}
+
+@media (max-width: 480px) {
+  .chatInput {
+    margin-top: 15%;
   }
 }

@@ -29,17 +29,17 @@ const ChatFooter = ({ socket }: any) => {
             {
                 opened ? (
                     <>
-                        <div className='w-full mt-auto flex justify-center align-middle'>
-                            <form onSubmit={handleSendMessage} className="w-full">
-                                <div className="flex flex-row">
+                        <div className='w-full mt-auto flex justify-center z-40 h-full align-middle bg-gray-300'>
+                            <form onSubmit={handleSendMessage} className="w-full chatInput">
+                                <div className="flex flex-row items-center">
                                     <input value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        className='w-full shadow-slate-800 rounded-xl bg-slate-300 p-2 h-14 mt-6 ml-6 text-black' type="text"
+                                        className='w-full shadow-slate-800 rounded-xl bg-slate-300 p-2 h-14 mt-12 ml-6 text-black' type="text"
                                         placeholder='Write Something....'
                                         onKeyDown={handleTyping}
                                     >
                                     </input>
-                                    <button className='cursor-pointer shadow-lg shadow-slate-800 rounded-full w-10 h-10 flex justify-center items-center mt-8 mx-2 bg-green-600'>
+                                    <button className='cursor-pointer shadow-lg shadow-slate-800 rounded-full w-16 h-12 flex justify-center items-center mt-12 mx-2 bg-green-600'>
                                         <FaRegPaperPlane />
                                     </button>
                                 </div>
