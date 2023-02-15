@@ -11,7 +11,7 @@ const Error = ({errors,show}: any) => {
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
+        className="absolute z-10"
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >

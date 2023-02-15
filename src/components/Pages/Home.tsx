@@ -6,11 +6,9 @@ import RegisterPage from './RegisterModal'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 const home = () => {
     const [posts, setPosts] = React.useState([]);
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const username = localStorage.getItem("email")
     const openRegisterModal = (id: any) => {
         if(username){

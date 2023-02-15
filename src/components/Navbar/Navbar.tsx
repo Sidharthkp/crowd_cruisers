@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/config";
 import { setNotAuthenticated } from "../../redux/Authentication/reducer";
 import axios from "axios";
+import { FaHeartbeat, FaHome, FaListAlt, FaMapMarker, FaMapMarkerAlt, FaMotorcycle, FaPowerOff, FaUserAlt, FaUsers } from "react-icons/fa";
 
 const NavBar = () => {
     const navigate = useNavigate()
@@ -73,15 +74,16 @@ const NavBar = () => {
             <label htmlFor="active" className="menu-btn"><i className="fas fa-bars"></i></label>
             <div className="wrapper">
                 <ul>
-                    <li><a className="cursor-pointer" onClick={home}>Home</a></li>
-                    <li><a className="cursor-pointer" onClick={maps}>Map</a></li>
-                    <li><a className="cursor-pointer" onClick={community}>Community</a></li>
-                    <li><a className="cursor-pointer" onClick={rides}>Rides</a></li>
-                    <li><a className="cursor-pointer" onClick={events}>Events</a></li>
+                    <li><a className="cursor-pointer flex flex-row justify-center" onClick={home}><FaHome /></a></li>
+                    <li><a className="cursor-pointer flex flex-row justify-center" onClick={maps}><FaMapMarkerAlt /></a></li>
+                    <li><a className="cursor-pointer flex flex-row justify-center" onClick={community}><FaUsers /></a></li>
+                    <li><a className="cursor-pointer flex flex-row justify-center" onClick={rides}><FaMotorcycle /></a></li>
+                    <li><a className="cursor-pointer flex flex-row justify-center" onClick={events}><FaListAlt /></a></li>
                     {authenticated ?
                         <div>
-                            <li><a className="cursor-pointer" onClick={profile}>Your Profile</a></li>
-                            <li><a className="cursor-pointer" onClick={logout}>Sign out</a></li>
+                            <li><a className="cursor-pointer flex flex-row justify-center" onClick={profile}><FaHeartbeat /></a></li>
+                            <li><a className="cursor-pointer flex flex-row justify-center" onClick={profile}><FaUserAlt/></a></li>
+                            <li><a className="cursor-pointer flex flex-row justify-center" onClick={logout}><FaPowerOff /></a></li>
                         </div>
                         :
                         <div>

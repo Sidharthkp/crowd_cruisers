@@ -112,11 +112,6 @@ a {
   scrollbar-width: none;  /* Firefox */
 }
 
-
-* {
-  box-sizing: border-box;
-}
-
 .registernow {
   display: flex;
   justify-content: center;

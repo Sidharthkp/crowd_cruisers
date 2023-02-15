@@ -6,7 +6,7 @@ import { auth, provider } from '../../firebase/config';
 import { setAuthentication } from '../../redux/Authentication/reducer';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
 import Error from '../Error/errorPage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Login = () => {
@@ -68,7 +68,7 @@ const Login = () => {
             axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/addNew`, { uid, email: data.user.email })
                 .then((res) => console.log(res)
                 )
-                .catch((err) => console.log(err));
+                .catch((err) => alert(err.message));
             dispatch(setAuthentication())
             navigate("/");
         }).catch((error) => {
@@ -77,9 +77,9 @@ const Login = () => {
     }
     return (
         <>
-            <div className="w-full h-screen bg-[url('https://www.royalenfield.com/content/dam/royal-enfield/super-meteor-650/motorcycles/home/banners/desktop/l1.jpg')]">
-                <div className="flex backdrop-blur-sm min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="w-full max-w-md space-y-8 bg-black/20 rounded-2xl p-10 shadow-black shadow-2xl">
+            <div className="w-full h-screen absolute">
+                <div className="flex relative backdrop-blur-2xl min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                    <div className="w-full max-w-md space-y-8 shadow-2xl">
                         <div>
                             <img
                                 className="mx-auto h-12 w-auto rounded-2xl"
@@ -90,20 +90,20 @@ const Login = () => {
                                 Sign In to your account
                             </h2>
                             <div className='flex justify-center my-2'>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-purple-600'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-white'>
                                     <FaFacebookF className='text-sm' />
                                 </button>
-                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:text-purple-600 hover:bg-black'>
+                                <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:text-white hover:bg-black'>
                                     <FaLinkedinIn className='text-sm' />
                                 </button>
-                                <button onClick={handleClick} className='border-2 border-gray-500 text-black rounded-full p-3 mx-1 hover:text-purple-600 hover:bg-black'>
+                                <button onClick={handleClick} className='border-2 border-gray-500 text-black rounded-full p-3 mx-1 hover:text-white hover:bg-black'>
                                     <FaGoogle className='text-sm' />
                                 </button>
                             </div>
                         </div>
                         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                             <input type="hidden" name="remember" defaultValue="true" />
-                            <div className="space-y-2 rounded-md shadow-sm">
+                            <div className="space-y-2 z-20 rounded-md shadow-sm">
                                 <div>
                                     <label htmlFor="email-address" className="sr-only">
                                         Email address
@@ -134,7 +134,7 @@ const Login = () => {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between">
+                            <div className="flex relative items-center justify-between">
                                 <div className="flex items-center">
                                     <input
                                         onClick={togglePassword}
@@ -155,13 +155,8 @@ const Login = () => {
                                 </div>
                             </div>
 
-                            <div>
-                                <button
-                                    className="group relative flex w-full justify-center rounded-md border border-transparent bg-gradient-to-r from-amber-900 to-white py-2 px-4 text-sm font-medium text-whit focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                >
-                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-                                    </span>
+                            <div className='relative w-full flex p-5 flex-row justify-center'>
+                                <button className='bg-black w-32'>
                                     Sign In
                                 </button>
                             </div>
@@ -170,7 +165,7 @@ const Login = () => {
                                     <a className="font-medium text-white">
                                         Dont have an account?
                                     </a>
-                                    <a onClick={signup} className="font-medium ml-2 cursor-pointer text-violet-300 hover:text-white">
+                                    <a onClick={signup} className="font-medium ml-2 cursor-pointer text-black hover:text-white">
                                         Sign Up
                                     </a>
                                 </div>
