@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/config";
 import { setNotAuthenticated } from "../../redux/Authentication/reducer";
 import axios from "axios";
-import { FaHeartbeat, FaHome, FaListAlt, FaMapMarker, FaMapMarkerAlt, FaMotorcycle, FaPowerOff, FaUserAlt, FaUsers } from "react-icons/fa";
+import { FaHeartbeat, FaHome, FaListAlt, FaMapMarkerAlt, FaMotorcycle, FaPowerOff, FaUserAlt, FaUsers } from "react-icons/fa";
 
 const NavBar = () => {
     const navigate = useNavigate()
@@ -81,7 +81,7 @@ const NavBar = () => {
                     <li><a className="cursor-pointer flex flex-row justify-center" onClick={events}><FaListAlt /></a></li>
                     {authenticated ?
                         <div>
-                            <li><a className="cursor-pointer flex flex-row justify-center" onClick={profile}><FaHeartbeat /></a></li>
+                            <li><a className="cursor-pointer flex flex-row justify-center" onClick={wishlist}><FaHeartbeat /></a></li>
                             <li><a className="cursor-pointer flex flex-row justify-center" onClick={profile}><FaUserAlt/></a></li>
                             <li><a className="cursor-pointer flex flex-row justify-center" onClick={logout}><FaPowerOff /></a></li>
                         </div>

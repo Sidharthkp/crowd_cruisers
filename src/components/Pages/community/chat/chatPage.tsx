@@ -20,9 +20,9 @@ const ChatPage = () => {
   return (
     <>
 
-      <div className='flex flex-col md:flex-row bg-slate-600'>
+      <div className='flex absolute w-full h-full flex-col md:flex-row'>
         <ChatBar />
-        <div className='w-full flex md:w-4/6 flex-col md:mt-16'>
+        <div className='w-full relative flex md:w-4/6 flex-col md:mt-16'>
           <ChatBody typingStatus={typingStatus} />
           <ChatFooter socket={socket} />
         </div>

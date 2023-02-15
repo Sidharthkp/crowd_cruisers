@@ -353,3 +353,17 @@ input[type="checkbox"]{
     filter: hue-rotate(360deg);
   }
 }
+
+.chatStyle{
+  height: 60vh;
+  width: full;
+}
+
+
+@media (max-width: 480px) {
+  .chatStyle{
+    margin-top: 50px;
+    height: 60vh;
+    width: full;
+  }
+}
