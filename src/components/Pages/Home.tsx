@@ -6,22 +6,36 @@ import RegisterPage from './RegisterModal'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 const home = () => {
     const [posts, setPosts] = React.useState([]);
     const dispatch = useDispatch()
-    const openRegisterModal = (id: any) => {
-        dispatch(setRegisterSwitchOn(id))
-    }
+    const navigate = useNavigate()
     const username = localStorage.getItem("email")
+    const openRegisterModal = (id: any) => {
+        if(username){
+            dispatch(setRegisterSwitchOn(id))
+        }else{
+            toast.warn("Please login to continue..", {
+                position: toast.POSITION.TOP_CENTER
+            })
+        }
+    }
     const saveToWishlist = (id: any) => {
         try {
-            axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/wishList`, { id, username })
+            if(username){
+                axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/wishList`, { id, username })
                 .then((res) =>
                     toast.success("Saved for later...", {
                         position: toast.POSITION.TOP_CENTER
                     })
                 )
                 .catch((err) => console.log(err));
+            }else{
+                toast.warn("Please login to continue..", {
+                    position: toast.POSITION.TOP_CENTER
+                })
+            }
         } catch (err) {
             console.log(err);
         }
