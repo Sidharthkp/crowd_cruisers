@@ -397,8 +397,22 @@ input[type="checkbox"] {
   height: 62vh;
 }
 
+
 @media (max-width: 480px) {
   .chatInput {
     margin-top: 15%;
+  }
+}
+
+.buttonSearch {
+  margin-left: 230px;
+  margin-top: 12px;
+}
+
+
+@media (max-width: 480px) {
+  .buttonSearch {
+    margin-left: 280px;
+    margin-top: 12px;
   }
 }
