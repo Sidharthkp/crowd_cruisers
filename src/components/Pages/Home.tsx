@@ -9,35 +9,50 @@ import { FaHeart } from 'react-icons/fa';
 let currentDate = new Date();
 const home = () => {
     const [posts, setPosts] = React.useState([]);
+    const [saved, setSaved] = React.useState([{ eventId: { _id: '' } }]);
     const dispatch = useDispatch()
+    const customId = "custom-id-yes";
     const username = localStorage.getItem("email")
     const openRegisterModal = (id: any) => {
-        if(username){
+        if (username) {
             dispatch(setRegisterSwitchOn(id))
-        }else{
+        } else {
             toast.warn("Please login to continue..", {
-                position: toast.POSITION.TOP_CENTER
+                position: toast.POSITION.TOP_CENTER,
+                toastId: customId
             })
         }
     }
     const saveToWishlist = (id: any) => {
         try {
-            if(username){
+            if (username) {
                 axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/wishList`, { id, username })
-                .then((res) =>
-                    toast.success("Saved for later...", {
-                        position: toast.POSITION.TOP_CENTER
-                    })
-                )
-                .catch((err) => console.log(err));
-            }else{
+                    .then((res) =>
+                        toast.success("Saved for later...", {
+                            position: toast.POSITION.TOP_CENTER,
+                            toastId: customId
+                        })
+                    )
+                    .catch((err) => console.log(err));
+            } else {
                 toast.warn("Please login to continue..", {
-                    position: toast.POSITION.TOP_CENTER
+                    position: toast.POSITION.TOP_CENTER,
+                    toastId: customId
                 })
             }
         } catch (err) {
             console.log(err);
         }
+    }
+    const remove = (id: any) => {
+        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeSaved`, { username, id })
+            .then((res) => {
+                toast.success("Succesfully removed from whishlist !", {
+                    position: toast.POSITION.TOP_CENTER,
+                    toastId: customId
+                });
+            })
+            .catch((err) => console.log(err));
     }
 
     React.useEffect(() => {
@@ -48,9 +63,19 @@ const home = () => {
             } catch (err) {
                 console.log(err);
             }
+
         }
         getPosts()
-    }, [])
+        const getSaved = async () => {
+            try {
+                const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/savedItems`, { username });
+                setSaved(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getSaved()
+    }, [saved])
 
     return (
         <div className='z-20 h-screen'>
@@ -75,9 +100,15 @@ const home = () => {
                                             return (
 
                                                 <div key={p._id}>
-                                                            <div className='relative flex flex-row w-full justify-end'>
-                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
-                                                            </div>
+                                                    <div className='relative flex flex-row w-full justify-end'>
+                                                        {saved.some((x) => x.eventId._id == p._id)
+                                                            ? (
+                                                                <a onClick={() => { remove(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
+                                                            ) : (
+                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-2xl absolute m-5 font-bold text-white" ><FaHeart className='cursor-pointer' /></a>
+                                                            )
+                                                        }
+                                                    </div>
                                                     <div className="nft">
                                                         <div className='main'>
                                                             <img className='tokenImage'
@@ -122,9 +153,15 @@ const home = () => {
                                             return (
 
                                                 <div key={p._id}>
-                                                            <div className='relative flex flex-row w-full justify-end'>
-                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
-                                                            </div>
+                                                    <div className='relative flex flex-row w-full justify-end'>
+                                                        {saved.some((x) => x.eventId._id == p._id)
+                                                            ? (
+                                                                <a onClick={() => { remove(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
+                                                            ) : (
+                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-2xl absolute m-5 font-bold text-white" ><FaHeart className='cursor-pointer' /></a>
+                                                            )
+                                                        }
+                                                    </div>
                                                     <div className="nft">
                                                         <div className='main'>
                                                             <img className='tokenImage'

@@ -62,7 +62,7 @@ const Whishlist = () => {
                                         <img className="hidden h-60 lg:block" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${e.eventId.image[0]}`} alt="shoes" />
                                         <img className="hidden h-60 w-full sm:block lg:hidden" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${e.eventId.image[0]}`} alt="shoes" />
                                         <img className="sm:hidden h-60 w-full" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${e.eventId.image[0]}`} alt="shoes" />
-                                        <button onClick={() => remove(e._id)} aria-label="close" className="top-4 right-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 absolute  p-1.5 bg-gray-800 text-white hover:text-gray-400">
+                                        <button onClick={() => remove(e.eventId._id)} aria-label="close" className="top-4 right-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 absolute  p-1.5 bg-gray-800 text-white hover:text-gray-400">
                                             <svg className="fil-current" width={14} height={14} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M13 1L1 13" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M1 1L13 13" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
