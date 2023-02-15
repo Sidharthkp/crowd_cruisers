@@ -92,45 +92,43 @@ const home = () => {
                                 }
                             </div>
                         </div>
-                        {/* event */}
-                        <div className='mt-5 p-10'>
+                        <div className='mt-5 relative p-10'>
                             <div className='text-white font-bold p-5 text-3xl'>
                                 <h1>Events</h1>
                             </div>
-                            <div className='flex flex-row overflow-x-scroll overflow-y-hidden'>
+                            <div className='flex flex-row w-screen relative overflow-x-auto scrollbar-hide'>
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'event') {
                                             return (
 
-                                                <div key={p._id} className='w-full animate-marquee-infinite'>
-                                                    <div className="group relative block bg-black w-80 h-96">
-                                                        <img
-                                                            alt="Developer"
-                                                            src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.image[0]}`}
-                                                            className="absolute inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-                                                        />
+                                                <div key={p._id}>
+                                                            <div className='relative flex flex-row w-full justify-end'>
+                                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
+                                                            </div>
+                                                    <div className="nft">
+                                                        <div className='main'>
+                                                            <img className='tokenImage'
+                                                                src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                                alt="NFT" />
+                                                            <h2></h2>
+                                                            <p className='description'>{p.description}</p>
+                                                            <div className='tokenInfo'>
+                                                                <div className="price">
+                                                                    <div className="mt-64">
+                                                                        <div className='flex flex-col'>
 
-                                                        <div className="relative p-8">
-                                                            <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
-                                                                { }
-                                                            </p>
-
-                                                            <p className="text-2xl font-bold text-white">{p.description}</p>
-
-                                                            <div className="mt-64">
-                                                                <div
-                                                                    className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
-                                                                >
-                                                                    <div className='flex flex-row w-full justify-center'>
-                                                                        <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 mx-2 bg-red-600 font-bold" >Register Now</button>
-                                                                        <button onClick={() => { saveToWishlist(p._id) }} className="w-32 h-6 mx-2 bg-yellow-600 font-bold" >Save for later</button>
+                                                                            <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 m-5 bg-red-600 font-bold" >Register Now</button>
+                                                                        </div>
                                                                     </div>
+                                                                </div>
+                                                                <div className="duration">
+                                                                    <ins>◷</ins>
+                                                                    <p>11 days left</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             )
                                         }
