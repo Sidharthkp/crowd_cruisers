@@ -6,6 +6,7 @@ import RegisterPage from './RegisterModal'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart } from 'react-icons/fa';
+let currentDate = new Date();
 const home = () => {
     const [posts, setPosts] = React.useState([]);
     const dispatch = useDispatch()
@@ -68,6 +69,9 @@ const home = () => {
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'ride') {
+                                            let newDate = new Date(p.expirationDate)
+                                            let difference = newDate.getTime() - currentDate.getTime();
+                                            let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
                                             return (
 
                                                 <div key={p._id}>
@@ -92,7 +96,7 @@ const home = () => {
                                                                 </div>
                                                                 <div className="duration">
                                                                     <ins>◷</ins>
-                                                                    <p>11 days left</p>
+                                                                    <p>{TotalDays} days left</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -112,6 +116,9 @@ const home = () => {
                                 {
                                     posts.map((p: any) => {
                                         if (p.eventType === 'event') {
+                                            let newDate = new Date(p.expirationDate)
+                                            let difference = newDate.getTime() - currentDate.getTime();
+                                            let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
                                             return (
 
                                                 <div key={p._id}>
@@ -136,7 +143,7 @@ const home = () => {
                                                                 </div>
                                                                 <div className="duration">
                                                                     <ins>◷</ins>
-                                                                    <p>11 days left</p>
+                                                                    <p>{TotalDays} days left</p>
                                                                 </div>
                                                             </div>
                                                         </div>
