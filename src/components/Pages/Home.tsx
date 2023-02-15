@@ -49,7 +49,7 @@ const home = () => {
                     <div className='relative'>
                         {/* ride */}
                         <div className='mt-5 relative p-10'>
-                            <div className='text-white font-bold p-5 text-3xl'>
+                            <div className='text-white font-bold flex flex-row w-full justify-center p-5 text-3xl'>
                                 <h1>Rides</h1>
                             </div>
                             <div className='flex flex-row w-screen relative overflow-x-auto scrollbar-hide'>
@@ -93,7 +93,7 @@ const home = () => {
                             </div>
                         </div>
                         <div className='mt-5 relative p-10'>
-                            <div className='text-white font-bold p-5 text-3xl'>
+                            <div className='text-white font-bold flex flex-row w-full justify-center p-5 text-3xl'>
                                 <h1>Events</h1>
                             </div>
                             <div className='flex flex-row w-screen relative overflow-x-auto scrollbar-hide'>
