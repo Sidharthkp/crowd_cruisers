@@ -1,16 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaWindowClose } from "react-icons/fa";
 let currentDate = new Date();
 const Whishlist = () => {
-    const [show, setshow] = useState('');
-    const [switchState, setSwitch] = useState(false);
-    const [posts, setPosts] = useState([]);
-
-    const setshowF = (data: any) => {
-        setSwitch(!switchState);
-        switchState ? setshow(data) : setshow('');
-    }
-
+    const [posts, setPosts] = useState([]);    
     const username = localStorage.getItem('email')
     useEffect(() => {
         const getPosts = async () => {
@@ -104,11 +97,13 @@ const Whishlist = () => {
 
         <div className='mt-5 relative p-10'>
             <div className='text-white font-bold flex flex-row w-full justify-center p-5 text-3xl'>
-                <h1>Rides</h1>
+                <h1>Wish List</h1>
             </div>
             <div className='flex flex-row w-screen relative overflow-x-auto scrollbar-hide'>
                 {
-                    posts.map((p: any) => {
+                    posts.length>0 && posts.map((p: any) => {
+                        console.log(p);
+                        
                         let newDate = new Date(p.expirationDate)
                         let difference = newDate.getTime() - currentDate.getTime();
                         let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
@@ -116,18 +111,12 @@ const Whishlist = () => {
 
                             <div key={p._id}>
                                 <div className='relative flex flex-row w-full justify-end'>
-                                    {/* {saved.some((x) => x.eventId._id == p._id)
-                                            ? (
-                                                <a onClick={() => { remove(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
-                                            ) : (
-                                                <a onClick={() => { saveToWishlist(p._id) }} className="text-2xl absolute m-5 font-bold text-white" ><FaHeart className='cursor-pointer' /></a>
-                                            )
-                                        } */}
+                                    <a onClick={() => { remove(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaWindowClose className='cursor-pointer' /></a>
                                 </div>
                                 <div className="nft">
                                     <div className='main'>
                                         <img className='tokenImage'
-                                            src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.eventId.image[0]}`}
+                                            src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.image[0]}`}
                                             alt="NFT" />
                                         <h2></h2>
                                         <p className='description'>{p.description}</p>
@@ -135,11 +124,11 @@ const Whishlist = () => {
                                             <div className="price">
                                                 <div className="mt-64">
                                                     <div className='flex flex-col'>
-                                                        {p.regMembers.some((x: any) => x.email == username) ? (
-                                                            <button onClick={() => { reg(p._id) }} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
+                                                        {/* {p.regMembers.email != username ? (
+                                                            <button onClick={() => remove(p._id)} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
                                                         ) : (
-                                                            <button onClick={() => handleSubmit(p.eventId._id)} className="w-32 h-6 m-5 bg-green-600 font-bold" >Register Now</button>
-                                                        )}
+                                                            <button onClick={() => handleSubmit(p._id)} className="w-32 h-6 m-5 bg-green-600 font-bold" >Register Now</button>
+                                                        )} */}
                                                     </div>
                                                 </div>
                                             </div>

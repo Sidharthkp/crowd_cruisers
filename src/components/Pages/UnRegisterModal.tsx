@@ -3,17 +3,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRegisterSwitchOff } from '../../redux/registerPage';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { setUnRegisterSwitchOff } from "../../redux/unregister";
 
-const Modal = () => {
-    const opened = useSelector((state: any) => state.showRegisterPage.show);
-    const id = useSelector((state: any) => state.showRegisterPage.id);
+const Unregister = () => {
+    const opened = useSelector((state: any) => state.showUnRegisterPage.show);
+    const id = useSelector((state: any) => state.showUnRegisterPage.id);
     const dispatch = useDispatch();
 
     const username = localStorage.getItem("email");
 
 
     const closeModal = () => {
-        dispatch(setRegisterSwitchOff())
+        dispatch(setUnRegisterSwitchOff())
+    }
+
+    const handleSubmitWish = (e: any) => {
+        e.preventDefault();
+
+        axios
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeAndAddInWishlist`, { username, id })
+            .then((res) =>
+                toast.success("Un Registered And Added To Wishlist", {
+                    position: toast.POSITION.TOP_CENTER
+                })
+            )
+            .catch((err) => 
+                toast.warn("Already removed", {
+                    position: toast.POSITION.TOP_CENTER
+                })
+            );
+
+        dispatch(setUnRegisterSwitchOff())
     }
 
     const handleSubmit = (e: any) => {
@@ -22,17 +42,17 @@ const Modal = () => {
         axios
             .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/remove`, { username, id })
             .then((res) =>
-                toast.success("Registered...", {
+                toast.success("Un Registered...", {
                     position: toast.POSITION.TOP_CENTER
                 })
             )
             .catch((err) => 
-                toast.warn("User already exist...", {
+                toast.warn("Already removed", {
                     position: toast.POSITION.TOP_CENTER
                 })
             );
 
-        dispatch(setRegisterSwitchOff())
+        dispatch(setUnRegisterSwitchOff())
     }
 
     return (
@@ -51,10 +71,10 @@ const Modal = () => {
                                     <svg aria-hidden="true" className="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to Un enroll for this program?</h3>
                                     <button onClick={handleSubmit} data-modal-hide="popup-modal" type="button" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                                        Yes, I'm sure
+                                        Yes, remove
                                     </button>
-                                    <button onClick={closeModal} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                                        No, cancel
+                                    <button onClick={handleSubmitWish} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                        Add to wishlist and remove
                                     </button>
                                 </div>
                             </div>
@@ -67,4 +87,4 @@ const Modal = () => {
     );
 }
 
-export default Modal;
+export default Unregister;
