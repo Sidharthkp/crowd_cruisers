@@ -81,9 +81,6 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-}
-
-body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom,
       transparent,
@@ -414,5 +411,17 @@ input[type="checkbox"] {
   .buttonSearch {
     margin-left: 280px;
     margin-top: 12px;
+  }
+
+  .smallerscreen{
+    display: none
+  }
+
+  .smallScreenChatZ{
+    z-index: 50;
+  }
+
+  .smallScreenSide{
+    display: none;
   }
 }

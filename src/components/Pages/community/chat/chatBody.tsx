@@ -83,7 +83,7 @@ const ChatBody = ({ typingStatus }: any) => {
     }, [details, msg])
 
     return (
-        <div className='z-50'>
+        <div className='z-40 smallScreenChatZ'>
             <ToastContainer />
             <UpdateGrpProfile />
             {opened && datas ?
@@ -142,7 +142,13 @@ const ChatBody = ({ typingStatus }: any) => {
                             </ScrollToBottom>
                         </div>
                     </div>
-                ) : null
+                ) : (
+                    <div className='w-full h-screen text-black flex flex-col justify-center items-center smallScreenSide bg-gray-300'>
+                        <img className='w-40' src="\src\assets\Images\pngegg.png" alt="" />
+                        <h1 className='text-2xl mb-5'>Crowd Cruisers Web</h1>
+                        <p>“The journey of a thousand miles begins with a single ignition.” </p>
+                    </div>
+                )
             }
         </div>
     )
