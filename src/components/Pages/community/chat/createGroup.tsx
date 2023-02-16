@@ -31,9 +31,9 @@ const CreateModal = () => {
             {opened ? (
                 <>
                     <div
-                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        className="justify-center items-center w-full h-screen flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                     >
-                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                        <div className="relative">
                             {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 <div className="flex w-full h-6 flex-row justify-end p-5">
@@ -53,10 +53,9 @@ const CreateModal = () => {
                                             </div>
                                         </div>
 
-                                        <div className="md:flex md:items-center">
-                                            <div className="md:w-1/3"></div>
+                                        <div className="md:flex md:items-center w-full flex flex-row justify-center">
                                             <div className="md:w-2/3">
-                                                <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                                                <button className="shadow bg-black focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
                                                     Create
                                                 </button>
                                             </div>
