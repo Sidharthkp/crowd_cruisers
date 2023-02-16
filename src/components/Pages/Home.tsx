@@ -121,7 +121,7 @@ const home = () => {
                                                                     <div className="mt-64">
                                                                         <div className='flex flex-col'>
                                                                             {p.regMembers.some((x: any) => x.email == username) ? (
-                                                                                <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
+                                                                                <button onClick={() => { openUnRegisterModal(p._id) }} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
                                                                             ) : (
                                                                                 <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 m-5 bg-green-600 font-bold" >Register Now</button>
                                                                             )}

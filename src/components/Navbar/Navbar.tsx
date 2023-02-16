@@ -46,14 +46,6 @@ const NavBar = () => {
         e.preventDefault()
         navigate('/profile')
     }
-    const events = (e: any) => {
-        e.preventDefault()
-        navigate('/events')
-    }
-    const rides = (e: any) => {
-        e.preventDefault()
-        navigate('/rides')
-    }
 
     const logout = () => {
         signOut(auth).then(() => {
@@ -77,8 +69,6 @@ const NavBar = () => {
                     <li><a className="cursor-pointer flex flex-row justify-center" onClick={home}><FaHome /></a></li>
                     <li><a className="cursor-pointer flex flex-row justify-center" onClick={maps}><FaMapMarkerAlt /></a></li>
                     <li><a className="cursor-pointer flex flex-row justify-center" onClick={community}><FaUsers /></a></li>
-                    <li><a className="cursor-pointer flex flex-row justify-center" onClick={rides}><FaMotorcycle /></a></li>
-                    <li><a className="cursor-pointer flex flex-row justify-center" onClick={events}><FaListAlt /></a></li>
                     {authenticated ?
                         <div>
                             <li><a className="cursor-pointer flex flex-row justify-center" onClick={wishlist}><FaHeartbeat /></a></li>

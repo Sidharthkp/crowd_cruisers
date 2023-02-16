@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import "../../styles/error.scss"
 
 const Errorfour = () => {
     const navigate = useNavigate()
@@ -8,25 +9,42 @@ const Errorfour = () => {
         navigate('/')
     }
     return (
-        <main className="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
-            <h1 className="text-9xl font-extrabold text-white tracking-widest">404</h1>
-            <div className="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
-                Page Not Found
-            </div>
-            <button className="mt-5">
-                <a
-                    className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
-                >
-                    <span
-                        className="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
-                    ></span>
+        <div className="box z-50">
+            <div className="box__ghost">
+                <div className="symbol"></div>
+                <div className="symbol"></div>
+                <div className="symbol"></div>
+                <div className="symbol"></div>
+                <div className="symbol"></div>
+                <div className="symbol"></div>
 
-                    <span onClick={homeButton} className="relative block px-10 py-1 bg-[#1A2238] border border-current">
-                        Go Home
-                    </span>
-                </a>
-            </button>
-        </main>
+                <div className="box__ghost-container">
+                    <div className="box__ghost-eyes">
+                        <div className="box__eye-left"></div>
+                        <div className="box__eye-right"></div>
+                    </div>
+                    <div className="box__ghost-bottom">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div className="box__ghost-shadow"></div>
+            </div>
+
+            <div className="box__description">
+                <div className="box__description-container">
+                    <div className="box__description-title">Whoops!</div>
+                    <div className="box__description-text">It seems like we couldn't find the page you were looking for</div>
+                </div>
+
+                <a  target="_blank" onClick={homeButton} className="cursor-pointer box__button">Go back</a>
+
+            </div>
+
+        </div>
     )
 }
 

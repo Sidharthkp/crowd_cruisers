@@ -11,8 +11,6 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase/config'
 import React, { useEffect } from "react"
 import Profile from "./components/Pages/profile/UserProfile"
-import Events from "./components/Pages/events/events"
-import Rides from "./components/Pages/rides/Rides"
 import NavBar from "./components/Navbar/Navbar"
 import Errorfour from "./components/Error/404Error"
 
@@ -44,8 +42,6 @@ const App = () => {
                     <Route path="/community" element={authenticated ? <ChatPage /> : <Login />} />
                     <Route path="/wishlist" element={authenticated ? <Whishlist /> : <Login />} />
                     <Route path="/profile" element={authenticated ? <Profile /> : <Login />} />
-                    <Route path="/events" element={authenticated ? <Events /> : <Login />} />
-                    <Route path="/rides" element={authenticated ? <Rides /> : <Login />} />
                     <Route path="*" element={<Errorfour />} />
                 </Routes>
             </BrowserRouter>
