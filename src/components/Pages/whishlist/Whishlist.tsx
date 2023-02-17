@@ -11,7 +11,7 @@ let currentDate = new Date();
 const Whishlist = () => {
     const [posts, setPosts] = useState({ wishList: [] });
     const [boolean, setBoolean] = useState(false);
-    
+
     const username = localStorage.getItem('email')
     const dispatch = useDispatch()
     const getPosts = async () => {
@@ -146,10 +146,10 @@ const Whishlist = () => {
                                             <div className="price">
                                                 <div className="mt-64">
                                                     <div className='flex flex-col'>
-                                                        {p.regMembers.email != username ? (
-                                                            <button onClick={() => openUnRegisterModal(p._id)} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
+                                                        {p.regMembers.some((x: any) => x.email == username) ? (
+                                                            <button onClick={() => { openUnRegisterModal(p._id) }} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
                                                         ) : (
-                                                            <button onClick={() => openRegisterModal(p._id)} className="w-32 h-6 m-5 bg-green-600 font-bold" >Register Now</button>
+                                                            <button onClick={() => { openRegisterModal(p._id) }} className="w-32 h-6 m-5 bg-green-600 font-bold" >Register Now</button>
                                                         )}
                                                     </div>
                                                 </div>
