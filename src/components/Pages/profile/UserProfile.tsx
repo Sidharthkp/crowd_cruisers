@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { FaUserEdit } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setEditDpSwitchOn } from "../../../redux/editDp";
 import { setEditUserSwitchOn } from "../../../redux/editUser";
 import { setSwitchOn } from "../../../redux/members";
@@ -22,6 +22,8 @@ const Profile = () => {
     const [calculatedFuel, setFuel] = useState(0);
     const dispatch = useDispatch()
 
+    const boolean = useSelector((state: any) => state.changeBoolean.boolean);
+
     const email = localStorage.getItem("email")
 
     useEffect(() => {
@@ -36,7 +38,7 @@ const Profile = () => {
         axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showJoinedEventsRides`)
             .then((res) => setJoinedEventsRides(res.data))
             .catch((err) => console.log(err));
-    }, [user])
+    }, [boolean])
 
     const printMembers = (data: any) => {
         dispatch(setSwitchOn(data))

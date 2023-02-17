@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setEditUserSwitchOff } from "../../../redux/editUser";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useState } from "react";
+import { booleanSwitch } from "../../../redux/boolean";
+import { toast } from "react-toastify";
 
 const UserProfileEdit = () => {
     const [userName, setUserName] = useState('')
@@ -18,11 +20,16 @@ const UserProfileEdit = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-    
+
 
         axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/profileEdit`, {details, userName})
-            .then((res) => console.log("datasend")
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/profileEdit`, { details, userName })
+            .then((res) => {
+                toast.success("Succesfully Updated !", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+                dispatch(booleanSwitch())
+            }
             )
             .catch((err) => console.log(err));
 
@@ -56,7 +63,7 @@ const UserProfileEdit = () => {
                                                     id="message" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your name..."></input>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="flex flex-row justify-center my-4">
                                             <div className="flex flex-col w-5/6">
                                                 <button className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">

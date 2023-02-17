@@ -2,6 +2,8 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
 import {useRef, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { booleanSwitch } from '../../../redux/boolean';
 import { setEditDpSwitchOff } from '../../../redux/editDp';
 
 const UpdateProfile = () => {
@@ -37,7 +39,12 @@ const UpdateProfile = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then((res) => console.log("datasend")
+            .then((res) => {
+                toast.success("Succesfully Updated !", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+                dispatch(booleanSwitch())
+            }
             )
             .catch((err) => console.log(err));
 
