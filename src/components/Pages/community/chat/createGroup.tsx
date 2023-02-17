@@ -2,6 +2,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify';
 import { booleanSwitch } from '../../../../redux/boolean';
 import { setCreateSwitchOff } from '../../../../redux/createModal';
 
@@ -21,7 +22,11 @@ const CreateModal = () => {
 
         axios
             .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/create`, { roomName, adminName })
-            .then((res) => console.log("datasend"))
+            .then((res) => {
+                toast.success("Created group successfully !", {
+                    position: toast.POSITION.TOP_CENTER,
+                  });
+            })
             .catch((err) => console.log(err));
 
         dispatch(setCreateSwitchOff())

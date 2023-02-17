@@ -4,6 +4,7 @@ import { setSwitchOff } from "../../../../redux/joinModal";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { booleanSwitch } from '../../../../redux/boolean';
+import { toast } from 'react-toastify';
 
 const JoinModalPage = () => {
     const [groups, setGroup] = useState([]);
@@ -19,7 +20,7 @@ const JoinModalPage = () => {
 
     const getGroups = async () => {
         try {
-            const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/getGroup`, {username})
+            const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/getGroup`, { username })
             setGroup(res.data)
         } catch (err) {
             console.log(err);
@@ -33,7 +34,11 @@ const JoinModalPage = () => {
         e.preventDefault()
         axios
             .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/join`, { selection, username })
-            .then((res) => console.log("datasend"))
+            .then((res) => {
+                toast.success("Joined Group successfully !", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            })
             .catch((err) => console.log(err));
 
         dispatch(setSwitchOff())
