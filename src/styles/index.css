@@ -429,3 +429,23 @@ input[type="checkbox"] {
     display: none;
   }
 }
+
+
+.profileSection{
+  width: 30%;
+}
+
+.profileElements{
+  width: 70%;
+}
+
+@media (max-width: 480px) {
+  .profileSection{
+    width: 100%;
+  }
+  
+  .profileElements{
+    width: 100%;
+    margin-top: 10px;
+  }
+}

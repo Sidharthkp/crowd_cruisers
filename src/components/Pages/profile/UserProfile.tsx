@@ -61,17 +61,17 @@ const Profile = () => {
         setCost(Math.round(tripCost));
     }
     return (
-        <div className="w-full absolute h-screen mt-16 flex md:flex-row flex-col">
+        <div className="w-full absolute h-screen flex md:flex-row flex-col">
             <Members />
             <UserJoined />
             <UpdateProfile />
             <UserProfileEdit />
-            <div className="w-2/6 h-full flex flex-row">
-                <div className="flex flex-col items-center w-full">
-                    <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer rounded-b-2xl w-full h-96">
+            <div className="profileSection w-full h-full flex flex-row">
+                <div className="flex flex-col items-center w-90">
+                    <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer rounded-b-2xl w-80">
                         {user?.profileImage ?
                             (
-                                <img className="rounded-xl inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
+                                <img className="rounded-xl inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
                                     src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/image?q=${user.profileImage}`}
                                     alt=""
                                 />
@@ -110,9 +110,9 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className="md:w-4/6 h-full flex flex-col overflow-y-auto scrollbar-hide">
-                <div className="m-5">
-                    <h1 className="font-bold text-lg mb-5">Fuel Cost Calculator</h1>
+            <div className="profileElements h-full flex w-full flex-col overflow-y-auto scrollbar-hide">
+                <div className="mt-4">
+                    <h1 className="font-bold text-lg mb-5">Your Community</h1>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -132,31 +132,35 @@ const Profile = () => {
                                     <th scope="col" className="px-6 py-3">
                                         Fuel required
                                     </th>
+                                    <th scope="col" className="px-6 py-3">
+
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td className="px-6 py-4">
-                                        <input type="number" value={distance} onChange={(e: any) => setDistance(e.target.value)} className="bg-gray-400 text text-black w-3/6 text-center" /> Km
+                                <tr className="bg-white border-b border-black">
+                                    <td>
+                                        <input type="number" value={distance} onChange={(e: any) => setDistance(e.target.value)} className="bg-gray-200 text mx-2 text-black w-3/6 text-center" /> Km
                                     </td>
-                                    <td className="px-6 py-4">
-                                        <input type="number" value={fuelEfficiency} onChange={(e: any) => setEfficiency(e.target.value)} className="bg-gray-400 text text-black w-3/6 text-center" /> Kmpl
+                                    <td>
+                                        <input type="number" value={fuelEfficiency} onChange={(e: any) => setEfficiency(e.target.value)} className="bg-gray-200 text mr-2 text-black w-3/6 text-center" /> Kmpl
                                     </td>
-                                    <td className="px-6 py-4">
-                                        <input type="number" value={fuelPrice} onChange={(e: any) => setPrice(e.target.value)} className="bg-gray-400 text text-black w-3/6 text-center" /> Rs
+                                    <td>
+                                        <input type="number" value={fuelPrice} onChange={(e: any) => setPrice(e.target.value)} className="bg-gray-200 text mr-2 text-black w-3/6 text-center" /> Rs
                                     </td>
-                                    <td className="px-6 py-4">
-                                        <input type="number" value={tripCost} className="bg-green-400 text text-black w-3/6 text-center" /> Rs
+                                    <td>
+                                        <input type="number" value={tripCost} className="bg-green-200 text mr-2 text-black w-3/6 text-center" /> Rs
                                     </td>
-                                    <td className="px-6 py-4">
-                                        <input type="number" value={calculatedFuel} className="bg-yellow-400 text text-black w-3/6 text-center" /> L
+                                    <td>
+                                        <input type="number" value={calculatedFuel} className="bg-yellow-200 mr-2 text text-black w-3/6 text-center" /> L
+                                    </td>
+                                    <td>
+                                        <button onClick={calculate} className="text-white block w-full my-2 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Calculate</button>
+
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div>
-                            <button onClick={calculate} className="text-white block w-full bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:focus:ring-blue-900 flex-row">Calculate</button>
-                        </div>
                     </div>
                 </div>
                 <div className='w-full flex flex-row justify-center items-center'>
@@ -165,7 +169,7 @@ const Profile = () => {
                     <div className='w-10 h-0.5 bg-gray-500' />
 
                 </div>
-                <div className="m-5">
+                <div className="mt-4">
                     <h1 className="font-bold text-lg mb-5">Your Community</h1>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -225,7 +229,7 @@ const Profile = () => {
 
                 </div>
 
-                <div className="m-5">
+                <div className="mt-4">
                     <h1 className="font-bold text-lg mb-5">Your Rides</h1>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -295,7 +299,7 @@ const Profile = () => {
                     <div className='w-10 h-0.5 bg-gray-500' />
 
                 </div>
-                <div className="m-5">
+                <div className="mt-4">
                     <h1 className="font-bold text-lg mb-5">Your Events</h1>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -364,7 +368,7 @@ const Profile = () => {
                     <div className='w-10 h-0.5 bg-gray-500' />
 
                 </div>
-                <div className="m-5">
+                <div className="mt-4">
                     <h1 className="font-bold text-lg mb-5">Joined Rides</h1>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -438,7 +442,7 @@ const Profile = () => {
                     <div className='w-10 h-0.5 bg-gray-500' />
 
                 </div>
-                <div className="m-5">
+                <div className="mt-4">
                     <h1 className="font-bold text-lg mb-5">Joined Events</h1>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
