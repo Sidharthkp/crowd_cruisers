@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setRegisterSwitchOn } from '../../redux/registerPage';
 import RegisterPage from './RegisterModal'
 import { ToastContainer, toast } from 'react-toastify'
@@ -13,6 +13,7 @@ const home = () => {
     const [posts, setPosts] = React.useState([]);
     const [saved, setSaved] = React.useState([{ _id: '' }]);
     const dispatch = useDispatch()
+    const boolean = useSelector((state: any) => state.changeBoolean.boolean);
     const customId = "custom-id-yes";
     const username = localStorage.getItem("email")
     const openRegisterModal = (id: any) => {
@@ -79,7 +80,7 @@ const home = () => {
     const getSaved = async () => {
         try {
             const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/savedItems`, { username });
-            setSaved(res.data);
+            setSaved(res.data.wishList);
 
         } catch (err) {
             console.log(err);
@@ -88,7 +89,7 @@ const home = () => {
     React.useEffect(() => {
         getPosts()
         getSaved()
-    }, [saved])
+    }, [boolean])
 
     return (
         <div className='z-20 h-screen'>

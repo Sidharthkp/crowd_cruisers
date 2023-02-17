@@ -4,12 +4,12 @@ export const registerUserSlice = createSlice({
   name: "showRegisterPage",
   initialState: {
     show: false,
-    id: ''
+    id: '',
   },
   reducers: {
     setRegisterSwitchOn: (state, id) => {
       state.show = true;
-      state.id = id.payload
+      state.id = id.payload;
     },
     setRegisterSwitchOff: (state) => {
       state.show = false;

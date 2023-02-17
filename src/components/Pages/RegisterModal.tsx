@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRegisterSwitchOff } from '../../redux/registerPage';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { booleanSwitch } from "../../redux/boolean";
 
 const Modal = () => {
+    
     const opened = useSelector((state: any) => state.showRegisterPage.show);
     const id = useSelector((state: any) => state.showRegisterPage.id);
     const dispatch = useDispatch();
 
     const username = localStorage.getItem("email");
-
 
     const closeModal = () => {
         dispatch(setRegisterSwitchOff())
@@ -22,9 +23,10 @@ const Modal = () => {
         axios
             .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/join`, { username, id })
             .then((res) =>
+                {dispatch(booleanSwitch())
                 toast.success("Registered...", {
                     position: toast.POSITION.TOP_CENTER
-                })
+                })}
             )
             .catch((err) => 
                 toast.warn("User already exist...", {

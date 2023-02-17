@@ -1,32 +1,53 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import { setRegisterSwitchOn } from "../../../redux/registerPage";
+import { setUnRegisterSwitchOn } from "../../../redux/unregister";
+import Unregister from "../UnRegisterModal";
+import RegisterPage from '../RegisterModal'
 let currentDate = new Date();
 const Whishlist = () => {
-    const [posts, setPosts] = useState([]);    
+    const [posts, setPosts] = useState({ wishList: [] });
+    const [boolean, setBoolean] = useState(false);
+    
     const username = localStorage.getItem('email')
-    useEffect(() => {
-        const getPosts = async () => {
-            try {
-                const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/savedItems`, { username });
-                setPosts(res.data);
-            } catch (err) {
-                console.log(err);
-            }
+    const dispatch = useDispatch()
+    const getPosts = async () => {
+        try {
+            const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/savedItems`, { username });
+            setPosts(res.data);
+
+        } catch (err) {
+            console.log(err);
         }
+    }
+    useEffect(() => {
         getPosts()
-    }, [posts])
+    }, [boolean])
 
-    const handleSubmit = (id: any) => {
-
-        axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/join`, { username, id })
-            .then((res) => console.log("datasend")
-            )
-            .catch((err) => console.log(err));
+    const openRegisterModal = (id: any) => {
+        if (username) {
+            dispatch(setRegisterSwitchOn(id))
+        } else {
+            toast.warn("Please login to continue..", {
+                position: toast.POSITION.TOP_CENTER,
+            })
+        }
+    }
+    const openUnRegisterModal = (id: any) => {
+        if (username) {
+            dispatch(setUnRegisterSwitchOn(id))
+        } else {
+            toast.warn("Please login to continue..", {
+                position: toast.POSITION.TOP_CENTER,
+            })
+        }
     }
 
     const remove = (id: any) => {
+        setBoolean(!boolean)
         axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeSaved`, { username, id })
             .then((res) => console.log("datasend")
             )
@@ -96,14 +117,15 @@ const Whishlist = () => {
         // </div>
 
         <div className='mt-5 relative p-10'>
+            <ToastContainer />
+            <RegisterPage />
+            <Unregister />
             <div className='text-white font-bold flex flex-row w-full justify-center p-5 text-3xl'>
                 <h1>Wish List</h1>
             </div>
             <div className='flex flex-row w-screen relative overflow-x-auto scrollbar-hide'>
                 {
-                    posts.length>0 && posts.map((p: any) => {
-                        console.log(p);
-                        
+                    posts.wishList.length > 0 && posts.wishList.map((p: any) => {
                         let newDate = new Date(p.expirationDate)
                         let difference = newDate.getTime() - currentDate.getTime();
                         let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
@@ -124,11 +146,11 @@ const Whishlist = () => {
                                             <div className="price">
                                                 <div className="mt-64">
                                                     <div className='flex flex-col'>
-                                                        {/* {p.regMembers.email != username ? (
-                                                            <button onClick={() => remove(p._id)} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
+                                                        {p.regMembers.email != username ? (
+                                                            <button onClick={() => openUnRegisterModal(p._id)} className="w-32 h-6 m-5 bg-red-600 font-bold" >Not Interested</button>
                                                         ) : (
-                                                            <button onClick={() => handleSubmit(p._id)} className="w-32 h-6 m-5 bg-green-600 font-bold" >Register Now</button>
-                                                        )} */}
+                                                            <button onClick={() => openRegisterModal(p._id)} className="w-32 h-6 m-5 bg-green-600 font-bold" >Register Now</button>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>

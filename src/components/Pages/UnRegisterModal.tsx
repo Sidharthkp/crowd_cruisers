@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterSwitchOff } from '../../redux/registerPage';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { setUnRegisterSwitchOff } from "../../redux/unregister";
+import { booleanSwitch } from "../../redux/boolean";
 
 const Unregister = () => {
     const opened = useSelector((state: any) => state.showUnRegisterPage.show);
@@ -22,12 +22,14 @@ const Unregister = () => {
 
         axios
             .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeAndAddInWishlist`, { username, id })
-            .then((res) =>
+            .then((res) => {
+                dispatch(booleanSwitch())
                 toast.success("Un Registered And Added To Wishlist", {
                     position: toast.POSITION.TOP_CENTER
                 })
+            }
             )
-            .catch((err) => 
+            .catch((err) =>
                 toast.warn("Already removed", {
                     position: toast.POSITION.TOP_CENTER
                 })
@@ -41,12 +43,14 @@ const Unregister = () => {
 
         axios
             .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/remove`, { username, id })
-            .then((res) =>
+            .then((res) => {
+                dispatch(booleanSwitch())
                 toast.success("Un Registered...", {
                     position: toast.POSITION.TOP_CENTER
                 })
+            }
             )
-            .catch((err) => 
+            .catch((err) =>
                 toast.warn("Already removed", {
                     position: toast.POSITION.TOP_CENTER
                 })

@@ -20,7 +20,7 @@ const NavBar = () => {
             .then((res) => setUser(res.data)
             )
             .catch((err) => console.log(err));
-    }, [user])
+    }, [])
 
     const community = (e: any) => {
         e.preventDefault()
