@@ -6,35 +6,28 @@ import axios from 'axios';
 import { booleanSwitch } from '../../../../redux/boolean';
 
 const JoinModalPage = () => {
-    const [groups, setGroup] = useState([{}]);
+    const [groups, setGroup] = useState([]);
     const [selection, setSelection] = useState('');
     const opened = useSelector((state: any) => state.showModal.show);
     const dispatch = useDispatch();
     const closeModal = () => {
         dispatch(setSwitchOff())
     }
-
+    const boolean = useSelector((state: any) => state.changeBoolean.boolean);
 
     const username = localStorage.getItem('email')
 
     const getGroups = async () => {
         try {
-            const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/get`);
-
-            res.data.map((x: any) => {
-                let variable = x.members.some((p: any) => p === username)
-                if (!variable) {
-                   setGroup([...groups, x]) 
-                }
-            })
-
+            const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/getGroup`, {username})
+            setGroup(res.data)
         } catch (err) {
             console.log(err);
         }
     }
     useEffect(() => {
         getGroups()
-    }, [])
+    }, [boolean])
 
     const submitAction = (e: any) => {
         e.preventDefault()
@@ -74,9 +67,9 @@ const JoinModalPage = () => {
                                                     value={selection}
                                                     onChange={(e: any) => setSelection(e.target.value)}>
                                                     <option className='hidden' value="">Select your room</option>
-                                                    {groups.map((p: any) =>
+                                                    {groups?.map((p: any) =>
                                                     (
-                                                        <option value={p._id} key={p._id}>{p.groupName}</option>
+                                                        <option value={p?._id} key={p?._id}>{p?.groupName}</option>
                                                     ))}
                                                 </select>
                                             </div>
