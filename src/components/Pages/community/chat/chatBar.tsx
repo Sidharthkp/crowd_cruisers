@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaHandshakeSlash, FaRegHandshake, FaSearch } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openGroupSwitch } from "../../../../redux/clickedGroup";
 import { setCreateSwitchOn } from "../../../../redux/createModal";
 import { setSwitchOn } from "../../../../redux/joinModal";
@@ -9,6 +9,9 @@ import { setSwitchOn } from "../../../../redux/joinModal";
 const ChatBar = () => {
   const [groups, setGroup] = useState([]);
   const dispatch = useDispatch()
+
+  const boolean = useSelector((state: any) => state.changeBoolean.boolean);
+
 
   const username = localStorage.getItem('email')
 
@@ -22,7 +25,7 @@ const ChatBar = () => {
   }
   useEffect(() => {
     getGroups()
-  }, [getGroups])
+  }, [boolean])
 
   const openModal = () => {
     dispatch(setSwitchOn())
@@ -66,17 +69,19 @@ const ChatBar = () => {
           </button>
         </div>
         <div className="divide-y divide-gray-200 chatStyle overflow-y-auto">
-          {groups.map((p: any) => (
-            <button key={p._id} onClick={() => { ClickedGroup(p._id) }} className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
-              <div className="flex items-center">
-                <img className="rounded-full items-start flex-shrink-0 mr-3" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} width="32" height="32" alt="Marie Zulfikar" />
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-900">{p.groupName}</h4>
-                  <div className="text-[13px]">The video chat ended · 2hrs</div>
+          {groups.map((p: any) =>
+            p.members.some((x: any) => x === username) &&
+            (
+              <button key={p._id} onClick={() => { ClickedGroup(p._id) }} className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
+                <div className="flex items-center">
+                  <img className="rounded-full items-start flex-shrink-0 mr-3" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} width="32" height="32" alt="Marie Zulfikar" />
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900">{p.groupName}</h4>
+                    <div className="text-[13px]">The video chat ended · 2hrs</div>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     socket.on('typingResponse', (data) => setTypingStatus(data));
-  }, [socket]);
+  }, []);
 
   return (
     <>

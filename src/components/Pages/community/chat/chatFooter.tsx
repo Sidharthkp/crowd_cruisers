@@ -34,12 +34,12 @@ const ChatFooter = ({ socket }: any) => {
                                 <div className="flex flex-row items-center">
                                     <input value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        className='w-full shadow-slate-800 rounded-xl bg-slate-300 p-2 h-14 mt-12 ml-6 text-black' type="text"
+                                        className='w-full shadow-slate-800 rounded-xl z-50 bg-slate-300 p-2 h-14 mt-12 ml-6 text-black' type="text"
                                         placeholder='Write Something....'
                                         onKeyDown={handleTyping}
                                     >
                                     </input>
-                                    <button className='cursor-pointer shadow-lg shadow-slate-800 rounded-full w-16 h-12 flex justify-center items-center mt-12 mx-2 bg-green-600'>
+                                    <button className='cursor-pointer shadow-lg shadow-slate-800 z-50 rounded-full w-16 h-12 flex justify-center items-center mt-12 mx-2 bg-green-600'>
                                         <FaRegPaperPlane />
                                     </button>
                                 </div>

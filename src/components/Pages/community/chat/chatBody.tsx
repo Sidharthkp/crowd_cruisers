@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { setEditGrpDpSwitchOn } from '../../../../redux/editGrpDp';
 import UpdateGrpProfile from './dpChange';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { booleanSwitch } from '../../../../redux/boolean';
 
 const ROOT_CSS = css({
     height: 400,
@@ -69,7 +70,9 @@ const ChatBody = ({ typingStatus }: any) => {
         try {
             axios
                 .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/message`, { details })
-                .then((res) => setMessage(res.data))
+                .then((res) => {   
+                    setMessage(res.data)
+                })
                 .catch((err) => console.log(err));
 
         } catch (err) {
@@ -80,7 +83,7 @@ const ChatBody = ({ typingStatus }: any) => {
     useEffect(() => {
         group()
         message()
-    }, [details, msg])
+    }, [msg])
 
     return (
         <div className='z-40 smallScreenChatZ'>

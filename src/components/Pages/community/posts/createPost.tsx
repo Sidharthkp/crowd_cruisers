@@ -29,9 +29,6 @@ const Modal = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-
-        console.log(date);
-        console.log(date?.toDateString());
         
 
         const formData = new FormData()
