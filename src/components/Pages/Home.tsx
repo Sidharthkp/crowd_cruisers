@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaHeart } from 'react-icons/fa';
 import { setUnRegisterSwitchOn } from '../../redux/unregister';
 import Unregister from './UnRegisterModal';
+import { booleanSwitch } from '../../redux/boolean';
 let currentDate = new Date();
 const home = () => {
     const [posts, setPosts] = React.useState([]);
@@ -40,11 +41,13 @@ const home = () => {
         try {
             if (username) {
                 axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/wishList`, { id, username })
-                    .then((res) =>
+                    .then((res) => {
+                        dispatch(booleanSwitch())
                         toast.success("Saved for later...", {
                             position: toast.POSITION.TOP_CENTER,
                             toastId: customId
                         })
+                    }
                     )
                     .catch((err) => console.log(err));
             } else {
@@ -60,10 +63,13 @@ const home = () => {
     const remove = (id: any) => {
         axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeSaved`, { username, id })
             .then((res) => {
-                toast.success("Succesfully removed from whishlist !", {
-                    position: toast.POSITION.TOP_CENTER,
-                    toastId: customId
-                });
+                {
+                    dispatch(booleanSwitch())
+                    toast.success("Succesfully removed from whishlist !", {
+                        position: toast.POSITION.TOP_CENTER,
+                        toastId: customId
+                    });
+                }
             })
             .catch((err) => console.log(err));
     }
