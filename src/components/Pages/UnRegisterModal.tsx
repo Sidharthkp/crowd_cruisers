@@ -8,14 +8,13 @@ import { useEffect, useState } from "react";
 
 const Unregister = () => {
     const [saved, setSaved] = useState([{ _id: '' }])
-    console.log(saved);
     
     const opened = useSelector((state: any) => state.showUnRegisterPage.show);
     const id = useSelector((state: any) => state.showUnRegisterPage.id);
     const dispatch = useDispatch();
     let showBoolean = false
 
-    for (let i = 0; i < saved.length; i++) {
+    for (let i = 0; i < saved?.length; i++) {
         if (saved[i]._id === id) {
             showBoolean = true;
             break;

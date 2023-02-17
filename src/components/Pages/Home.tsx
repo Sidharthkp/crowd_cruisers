@@ -122,7 +122,7 @@ const home = () => {
 
                                                 <div key={p._id}>
                                                     <div className='relative flex flex-row w-full justify-end'>
-                                                        {saved.some((x) => x._id == p._id)
+                                                        {saved?.some((x) => x._id == p._id)
                                                             ? (
                                                                 <a onClick={() => { remove(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
                                                             ) : (
@@ -178,7 +178,7 @@ const home = () => {
 
                                                 <div key={p._id}>
                                                     <div className='relative flex flex-row w-full justify-end'>
-                                                        {saved.some((x) => x._id == p._id)
+                                                        {saved?.some((x) => x._id == p._id)
                                                             ? (
                                                                 <a onClick={() => { remove(p._id) }} className="text-2xl absolute m-5 font-bold text-red-600" ><FaHeart className='cursor-pointer' /></a>
                                                             ) : (
