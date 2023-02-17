@@ -4,18 +4,42 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { setUnRegisterSwitchOff } from "../../redux/unregister";
 import { booleanSwitch } from "../../redux/boolean";
+import { useEffect, useState } from "react";
 
 const Unregister = () => {
+    const [saved, setSaved] = useState([{ _id: '' }])
+    console.log(saved);
+    
     const opened = useSelector((state: any) => state.showUnRegisterPage.show);
     const id = useSelector((state: any) => state.showUnRegisterPage.id);
     const dispatch = useDispatch();
+    let showBoolean = false
 
+    for (let i = 0; i < saved.length; i++) {
+        if (saved[i]._id === id) {
+            showBoolean = true;
+            break;
+        } else {
+            showBoolean = false
+        }
+    }
+
+    const boolean = useSelector((state: any) => state.changeBoolean.boolean);
     const username = localStorage.getItem("email");
 
 
     const closeModal = () => {
         dispatch(setUnRegisterSwitchOff())
     }
+
+    const savedGet = async () => {
+        const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/savedItems`, { username });
+        setSaved(res.data.wishList)
+    }
+
+    useEffect(() => {
+        savedGet()
+    }, [boolean])
 
     const handleSubmitWish = (e: any) => {
         e.preventDefault();
@@ -77,9 +101,16 @@ const Unregister = () => {
                                     <button onClick={handleSubmit} data-modal-hide="popup-modal" type="button" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                         Yes, remove
                                     </button>
-                                    <button onClick={handleSubmitWish} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                                        Add to wishlist and remove
-                                    </button>
+                                    {
+                                        showBoolean ?
+                                            (
+                                                null
+                                            ) : (
+                                                <button onClick={handleSubmitWish} data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                    Add to wishlist and remove
+                                                </button>
+                                            )
+                                    }
                                 </div>
                             </div>
                         </div>
