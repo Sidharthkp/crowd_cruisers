@@ -391,17 +391,17 @@ input[type="checkbox"] {
 }
 
 .chat {
-  height: 74vh;
+  height: 65vh;
 }
 
 
 @media (max-width: 480px) {
   .chatInput {
-    margin-top: -10%;
+    margin-top: -16%;
   }
 
   .chat {
-    height: 76vh;
+    height: 82vh;
   }
 }
 

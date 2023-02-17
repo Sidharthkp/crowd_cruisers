@@ -28,6 +28,7 @@ const ChatBody = ({ typingStatus }: any) => {
 
     const opened = useSelector((state: any) => state.showGroupPage.show);
     const details = useSelector((state: any) => state.showGroupPage.dataSave);
+    const boolean = useSelector((state: any) => state.changeBoolean.boolean);
 
     const handleLeaveChat = () => {
         dispatch(closeGroupSwitch());
@@ -83,7 +84,7 @@ const ChatBody = ({ typingStatus }: any) => {
     useEffect(() => {
         group()
         message()
-    }, [msg])
+    }, [msg, boolean])
 
     return (
         <div className='z-40 smallScreenChatZ'>
