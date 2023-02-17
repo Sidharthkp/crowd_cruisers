@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { booleanSwitch } from '../../../../redux/boolean';
 import { toast } from 'react-toastify';
+import { FaSearch } from 'react-icons/fa';
 
 const JoinModalPage = () => {
     const [groups, setGroup] = useState([]);
     const [selection, setSelection] = useState('');
+    const [search, setSearch] = useState("");
     const opened = useSelector((state: any) => state.showModal.show);
     const dispatch = useDispatch();
     const closeModal = () => {
@@ -16,7 +18,13 @@ const JoinModalPage = () => {
     }
     const boolean = useSelector((state: any) => state.changeBoolean.boolean);
 
-    const username = localStorage.getItem('email')
+    const username = localStorage.getItem('email');
+
+    const searchData = (data: any) => {
+        return search === ""
+            ? data
+            : data.groupName.toLowerCase().includes(search)
+    }
 
     const getGroups = async () => {
         try {
@@ -28,7 +36,7 @@ const JoinModalPage = () => {
     }
     useEffect(() => {
         getGroups()
-    }, [boolean])
+    }, [boolean, search])
 
     const submitAction = (e: any) => {
         e.preventDefault()
@@ -60,6 +68,15 @@ const JoinModalPage = () => {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
+                                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                                        Search Room:
+                                    </label>
+                                    <div className="relative text-gray-600 mb-5 flex flex-row">
+                                        <input onChange={(e: any) => {
+                                            let searchValue = e.target.value.toLocaleLowerCase();
+                                            setSearch(searchValue)
+                                        }} type="search" name="search" placeholder="Enter key words and click on select" className="bg-gray-200 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none z-50" />
+                                    </div>
                                     <form className="w-full max-w-sm" onSubmit={submitAction}>
                                         <div className="md:flex md:items-center mb-6">
                                             <div className="md:w-1/3">
@@ -72,7 +89,7 @@ const JoinModalPage = () => {
                                                     value={selection}
                                                     onChange={(e: any) => setSelection(e.target.value)}>
                                                     <option className='hidden' value="">Select your room</option>
-                                                    {groups?.map((p: any) =>
+                                                    {groups?.filter(searchData).map((p: any) =>
                                                     (
                                                         <option value={p?._id} key={p?._id}>{p?.groupName}</option>
                                                     ))}
