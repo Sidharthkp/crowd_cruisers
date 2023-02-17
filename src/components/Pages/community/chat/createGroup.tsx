@@ -2,6 +2,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { booleanSwitch } from '../../../../redux/boolean';
 import { setCreateSwitchOff } from '../../../../redux/createModal';
 
 const CreateModal = () => {
@@ -17,13 +18,14 @@ const CreateModal = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-    
+
         axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/create`, {roomName, adminName})
+            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/create`, { roomName, adminName })
             .then((res) => console.log("datasend"))
             .catch((err) => console.log(err));
 
         dispatch(setCreateSwitchOff())
+        dispatch(booleanSwitch())
     }
 
     return (
