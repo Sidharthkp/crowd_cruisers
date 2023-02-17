@@ -3,11 +3,15 @@ import Map, { GeolocateControl, Marker, Popup } from 'react-map-gl';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import axios from 'axios'
 import { format } from 'timeago.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { booleanSwitch } from '../../../redux/boolean';
 
 const MapPage = () => {
     if (localStorage.getItem("email") !== null) {
         var currentUser = localStorage.getItem("email")
     }
+
+    const dispatch = useDispatch()
     interface Place {
         longitude: number;
         latitude: number;
@@ -27,6 +31,7 @@ const MapPage = () => {
     const [newTitle, setNewTitle] = React.useState("");
     const [newDescription, setNewDescription] = React.useState("");
     const [newPlace, setNewPlace] = React.useState<Place | null>(null);
+    const boolean = useSelector((state: any) => state.changeBoolean.boolean);
 
     React.useEffect(() => {
         navigator.geolocation.getCurrentPosition((pos) => {
@@ -47,12 +52,15 @@ const MapPage = () => {
             }
         }
         getPins()
-    }, [pins])
+    }, [boolean])
 
     const handleShowPopup = async (id: any, latitude: any, longitude: any, username: any) => {
         if (username === currentUser) {
             try {
-                const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins/pinDelete`, { id });
+                await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins/pinDelete`, { id })
+                    .then(() =>
+                        dispatch(booleanSwitch())
+                    )
             } catch (err) {
                 console.log(err);
 
@@ -69,6 +77,7 @@ const MapPage = () => {
             latitude,
             longitude
         })
+        dispatch(booleanSwitch())
     }
 
     const handleSubmit = async (e: any) => {
@@ -85,6 +94,7 @@ const MapPage = () => {
             const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins`, newPin)
             setPins([...pins, res.data])
             setNewPlace(null);
+            dispatch(booleanSwitch())
         } catch (err) {
             console.log(err);
 
@@ -114,7 +124,7 @@ const MapPage = () => {
                         />
 
                         {newPlace &&
-                            <Popup longitude={newPlace.longitude} latitude={newPlace.latitude} onClose={() => setNewPlace(null)} closeOnClick={false} closeButton={true} className="text-black" anchor="bottom" >
+                            <Popup longitude={newPlace.longitude} latitude={newPlace.latitude} onClose={() => setNewPlace(null)} closeOnClick={false} closeButton={true} className="text-red-600" anchor="bottom" >
 
                                 <div className="max-w-sm rounded overflow-hidden shadow-lg text-black">
                                     <div className="w-full max-w-xs">
@@ -123,17 +133,17 @@ const MapPage = () => {
                                                 <label className="block text-gray-700 text-sm font-bold mb-2">
                                                     Title
                                                 </label>
-                                                <input onChange={(e) => setNewTitle(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title" />
+                                                <input onChange={(e) => setNewTitle(e.target.value)} className="shadow appearance-none border bg-gray-700 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title" />
                                             </div>
                                             <div className="mb-4">
                                                 <label className="block text-gray-700 text-sm font-bold mb-2">
                                                     Description
                                                 </label>
-                                                <input onChange={(e) => setNewDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tell me more about it" />
+                                                <input onChange={(e) => setNewDescription(e.target.value)} className="shadow appearance-none border bg-gray-700 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tell me more about it" />
                                             </div>
                                             <h1 className='text-red-600'>The pin will expire in 5m</h1>
                                             <div className='w-full flex justify-end'>
-                                                <button className='rounded-2xl bg-green-400 w-14 h-6 text-white' type='submit'>Share</button>
+                                                <button className='rounded-2xl bg-black w-14 h-6 text-white' type='submit'>Share</button>
                                             </div>
                                         </form>
                                     </div>
