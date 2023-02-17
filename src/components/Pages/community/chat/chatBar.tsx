@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaHandshakeSlash, FaRegHandshake, FaSearch } from "react-icons/fa";
+import { FaRegHandshake, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { booleanSwitch } from "../../../../redux/boolean";
 import { openGroupSwitch } from "../../../../redux/clickedGroup";
 import { setCreateSwitchOn } from "../../../../redux/createModal";
@@ -10,12 +9,20 @@ import { setSwitchOn } from "../../../../redux/joinModal";
 
 const ChatBar = () => {
   const [groups, setGroup] = useState([]);
+  const [search, setSearch] = useState("");
+
   const dispatch = useDispatch()
 
   const boolean = useSelector((state: any) => state.changeBoolean.boolean);
 
 
   const username = localStorage.getItem('email')
+
+  const searchData = (data: any) => {
+    return search === ""
+    ? data
+    : data.groupName.toLowerCase().includes(search)
+  }
 
   const getGroups = async () => {
     try {
@@ -27,7 +34,7 @@ const ChatBar = () => {
   }
   useEffect(() => {
     getGroups()
-  }, [boolean])
+  }, [boolean, search])
 
   const openModal = () => {
     dispatch(setSwitchOn())
@@ -50,7 +57,10 @@ const ChatBar = () => {
         <div className="flex flex-col w-full items-center">
           <h3 className="text-2xl mb-9 font-semibold uppercase text-gray-400">Chats</h3>
           <div className="relative text-gray-600 mb-5 flex flex-row">
-            <input type="search" name="serch" placeholder="Search" className="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none" />
+            <input onChange={(e: any)=>{
+              let searchValue = e.target.value.toLocaleLowerCase();
+              setSearch(searchValue)
+            }} type="search" name="search" placeholder="Search" className="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none z-50" />
             <div className="absolute flex flex-row w-full">
               <button type="submit" className="relative buttonSearch">
                 <FaSearch />
@@ -73,12 +83,12 @@ const ChatBar = () => {
           </button>
         </div>
         <div className="divide-y divide-gray-200 chatStyle overflow-y-auto">
-          {groups.map((p: any) =>
+          {groups.filter(searchData).map((p: any) =>
             p.members.some((x: any) => x === username) &&
             (
               <button key={p._id} onClick={() => { ClickedGroup(p._id) }} className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
                 <div className="flex items-center">
-                  <img className="rounded-full items-start flex-shrink-0 mr-3" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} width="32" height="32" alt="Marie Zulfikar" />
+                  <img className="rounded-full items-start flex-shrink-0 mr-3" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} width="32" height="32"/>
                   <div>
                     <h4 className="text-sm font-semibold text-gray-900">{p.groupName}</h4>
                     <div className="text-[13px]">The video chat ended · 2hrs</div>
