@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { setRegisterSwitchOn } from "../../../redux/registerPage";
 import { setUnRegisterSwitchOn } from "../../../redux/unregister";
 import Unregister from "../UnRegisterModal";
 import RegisterPage from '../RegisterModal'
+import { booleanSwitch } from "../../../redux/boolean";
 let currentDate = new Date();
 const Whishlist = () => {
     const [posts, setPosts] = useState({ wishList: [] });
-    const [boolean, setBoolean] = useState(false);
-
+    const boolean = useSelector((state: any) => state.changeBoolean.boolean);
     const username = localStorage.getItem('email')
     const dispatch = useDispatch()
     const getPosts = async () => {
@@ -47,9 +47,13 @@ const Whishlist = () => {
     }
 
     const remove = (id: any) => {
-        setBoolean(!boolean)
         axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeSaved`, { username, id })
-            .then((res) => console.log("datasend")
+            .then((res) => {
+                toast.warn("Removed from wishlist !", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+                dispatch(booleanSwitch())
+            }
             )
             .catch((err) => console.log(err));
     }
