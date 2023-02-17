@@ -104,7 +104,7 @@ const ChatBody = ({ typingStatus }: any) => {
                                         alt="" />
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas) }}>
+                                    <div className='font-bold text-2xl cursor-pointer z-40' onClick={() => { openModal(datas) }}>
                                         {datas.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>

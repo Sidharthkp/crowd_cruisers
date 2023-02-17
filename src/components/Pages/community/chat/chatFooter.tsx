@@ -34,7 +34,7 @@ const ChatFooter = ({ socket }: any) => {
                                 <div className="flex flex-row items-center">
                                     <input value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        className='w-full shadow-slate-800 rounded-xl z-50 bg-slate-300 p-2 h-14 mt-12 ml-6 text-black' type="text"
+                                        className='w-full rounded-xl z-50 bg-white p-2 h-14 mt-12 ml-6 text-black' type="text"
                                         placeholder='Write Something....'
                                         onKeyDown={handleTyping}
                                     >
