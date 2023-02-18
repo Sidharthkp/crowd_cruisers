@@ -10,17 +10,7 @@ import { FaHeartbeat, FaHome, FaListAlt, FaMapMarkerAlt, FaMotorcycle, FaPowerOf
 const NavBar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [user, setUser] = useState({ profileImage: '' })
     const authenticated = useSelector((state: any) => state.authentication.authenticated);
-
-    const email = localStorage.getItem("email")
-
-    useEffect(() => {
-        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showProfile`, { email })
-            .then((res) => setUser(res.data)
-            )
-            .catch((err) => console.log(err));
-    }, [])
 
     const community = (e: any) => {
         e.preventDefault()

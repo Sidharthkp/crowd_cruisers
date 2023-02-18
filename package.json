@@ -31,7 +31,6 @@
     "mapbox-gl": "^2.12.0",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",
-    "react-anime": "^4.1.1",
     "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
