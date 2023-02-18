@@ -32,7 +32,7 @@ const Unregister = () => {
     }
 
     const savedGet = async () => {
-        const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/savedItems`, { username });
+        const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username });
         setSaved(res.data.wishList)
     }
 
@@ -65,7 +65,7 @@ const Unregister = () => {
         e.preventDefault();
 
         axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/remove`, { username, id })
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/remove`, { username, id })
             .then((res) => {
                 dispatch(booleanSwitch())
                 toast.success("Un Registered...", {

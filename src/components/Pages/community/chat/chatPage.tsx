@@ -8,7 +8,7 @@ import JoinModalPage from './joinModal';
 import CreatePost from '../posts/createPost';
 import CreateModal from './createGroup';
 
-const socket = io(`http://${import.meta.env.VITE_IP_ADD}:3000`);
+const socket = io(`${import.meta.env.VITE_SERVER_CONFIG}`);
 
 const ChatPage = () => {
   const [typingStatus, setTypingStatus] = useState('');

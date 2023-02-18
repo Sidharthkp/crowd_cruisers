@@ -26,7 +26,7 @@ const ChatBar = () => {
 
   const getGroups = async () => {
     try {
-      const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/get`);
+      const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/get`);
       setGroup(res.data);
     } catch (err) {
       console.log(err);
@@ -88,7 +88,7 @@ const ChatBar = () => {
             (
               <button key={p._id} onClick={() => { ClickedGroup(p._id) }} className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
                 <div className="flex items-center">
-                  <img className="rounded-full items-start flex-shrink-0 mr-3" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} width="32" height="32"/>
+                  <img className="rounded-full items-start flex-shrink-0 mr-3" src={`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${p.image}`} width="32" height="32"/>
                   <div>
                     <h4 className="text-sm font-semibold text-gray-900">{p.groupName}</h4>
                     <div className="text-[13px]">The video chat ended · 2hrs</div>

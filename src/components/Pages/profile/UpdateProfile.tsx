@@ -34,7 +34,7 @@ const UpdateProfile = () => {
         formData.append('email', details)
 
         axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/editImage`, formData, {
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/editImage`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

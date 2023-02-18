@@ -40,7 +40,7 @@ const home = () => {
     const saveToWishlist = (id: any) => {
         try {
             if (username) {
-                axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/wishList`, { id, username })
+                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/wishList`, { id, username })
                     .then((res) => {
                         dispatch(booleanSwitch())
                         toast.success("Saved for later...", {
@@ -61,7 +61,7 @@ const home = () => {
         }
     }
     const remove = (id: any) => {
-        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeSaved`, { username, id })
+        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeSaved`, { username, id })
             .then((res) => {
                 {
                     dispatch(booleanSwitch())
@@ -76,7 +76,7 @@ const home = () => {
 
     const getPosts = async () => {
         try {
-            const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts`);
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts`);
             setPosts(res.data);
         } catch (err) {
             console.log(err);
@@ -85,7 +85,7 @@ const home = () => {
     }
     const getSaved = async () => {
         try {
-            const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/savedItems`, { username });
+            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username });
             setSaved(res.data.wishList);
 
         } catch (err) {
@@ -133,7 +133,7 @@ const home = () => {
                                                     <div className="nft">
                                                         <div className='main'>
                                                             <img className='tokenImage'
-                                                                src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                                src={`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/image?q=${p.image[0]}`}
                                                                 alt="NFT" />
                                                             <h2></h2>
                                                             <p className='description'>{p.description}</p>
@@ -189,7 +189,7 @@ const home = () => {
                                                     <div className="nft">
                                                         <div className='main'>
                                                             <img className='tokenImage'
-                                                                src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/image?q=${p.image[0]}`}
+                                                                src={`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/image?q=${p.image[0]}`}
                                                                 alt="NFT" />
                                                             <h2></h2>
                                                             <p className='description'>{p.description}</p>

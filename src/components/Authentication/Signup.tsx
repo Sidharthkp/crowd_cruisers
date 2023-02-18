@@ -49,7 +49,7 @@ const Signup = () => {
         signInWithPopup(auth, provider).then((data: any) => {
             localStorage.setItem("email", data.user.email)
             const uid = data.user.uid;
-            axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/addNew`, { uid, email: data.user.email })
+            axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email: data.user.email })
                 .then((res) => console.log(res)
                 )
                 .catch((err) => console.log(err));

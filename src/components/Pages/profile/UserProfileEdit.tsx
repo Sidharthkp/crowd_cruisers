@@ -23,7 +23,7 @@ const UserProfileEdit = () => {
 
 
         axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/profileEdit`, { details, userName })
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/profileEdit`, { details, userName })
             .then((res) => {
                 toast.success("Succesfully Updated !", {
                     position: toast.POSITION.TOP_CENTER,

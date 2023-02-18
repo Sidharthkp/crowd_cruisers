@@ -44,7 +44,7 @@ const MapPage = () => {
         });
         const getPins = async () => {
             try {
-                const res = await axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins`);
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins`);
                 setPins(res.data);
             } catch (err) {
                 console.log(err);
@@ -57,7 +57,7 @@ const MapPage = () => {
     const handleShowPopup = async (id: any, latitude: any, longitude: any, username: any) => {
         if (username === currentUser) {
             try {
-                await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins/pinDelete`, { id })
+                await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins/pinDelete`, { id })
                     .then(() =>
                         dispatch(booleanSwitch())
                     )
@@ -91,7 +91,7 @@ const MapPage = () => {
         }
 
         try {
-            const res = await axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/pins`, newPin)
+            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins`, newPin)
             setPins([...pins, res.data])
             setNewPlace(null);
             dispatch(booleanSwitch())

@@ -12,7 +12,7 @@ const Members = () => {
     
     useEffect(() => {
         console.log(data);
-        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showMembers`, { data })
+        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showMembers`, { data })
             .then((res) => setDetails(res.data.members))
             .catch((err) => console.log(err));
     }, [data])

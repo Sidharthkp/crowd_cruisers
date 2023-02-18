@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { setEditGrpDpSwitchOn } from '../../../../redux/editGrpDp';
 import UpdateGrpProfile from './dpChange';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
-import { booleanSwitch } from '../../../../redux/boolean';
 
 const ROOT_CSS = css({
     height: 400,
@@ -58,7 +57,7 @@ const ChatBody = ({ typingStatus }: any) => {
     const group = () => {
         try {
             axios
-                .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/open`, { details })
+                .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/open`, { details })
                 .then((res) => setData(res.data))
                 .catch((err) => console.log(err));
 
@@ -70,7 +69,7 @@ const ChatBody = ({ typingStatus }: any) => {
     const message = () => {
         try {
             axios
-                .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/message`, { details })
+                .post(`http://${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/message`, { details })
                 .then((res) => {   
                     setMessage(res.data)
                 })
@@ -101,7 +100,7 @@ const ChatBody = ({ typingStatus }: any) => {
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='mr-4 cursor-pointer rounded-full w-1/6 bg-black'>
                                     <img className='rounded-full w-20'
-                                        src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${datas.image}`}
+                                        src={`http://${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${datas.image}`}
                                         alt="" />
                                 </div>
                                 <div className='flex flex-col'>

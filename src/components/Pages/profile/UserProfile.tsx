@@ -27,15 +27,15 @@ const Profile = () => {
     const email = localStorage.getItem("email")
 
     useEffect(() => {
-        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showProfile`, { email })
+        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showProfile`, { email })
             .then((res) => setUser(res.data)
             )
             .catch((err) => console.log(err));
-        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showCommunity`, { email })
+        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showCommunity`, { email })
             .then((res) => setCommunity(res.data)
             )
             .catch((err) => console.log(err));
-        axios.get(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showJoinedEventsRides`)
+        axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showJoinedEventsRides`)
             .then((res) => setJoinedEventsRides(res.data))
             .catch((err) => console.log(err));
     }, [boolean])
@@ -74,7 +74,7 @@ const Profile = () => {
                         {user?.profileImage ?
                             (
                                 <img className="rounded-xl inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-                                    src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/image?q=${user.profileImage}`}
+                                    src={`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/image?q=${user.profileImage}`}
                                     alt=""
                                 />
                             ) : (

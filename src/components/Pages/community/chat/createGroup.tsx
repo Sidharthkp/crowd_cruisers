@@ -21,7 +21,7 @@ const CreateModal = () => {
         e.preventDefault();
 
         axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/create`, { roomName, adminName })
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/create`, { roomName, adminName })
             .then((res) => {
                 toast.success("Created group successfully !", {
                     position: toast.POSITION.TOP_CENTER,

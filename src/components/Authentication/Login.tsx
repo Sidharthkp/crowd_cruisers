@@ -4,9 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../../firebase/config';
 import { setAuthentication } from '../../redux/Authentication/reducer';
-import { LockClosedIcon } from '@heroicons/react/24/outline';
 import Error from '../Error/errorPage';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const Login = () => {
@@ -35,7 +34,7 @@ const Login = () => {
             } else {
                 localStorage.setItem("email", data.user.email)
                 const uid = data.user.uid;
-                axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/addNew`, { uid, email })
+                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email })
                     .then((res) => console.log(res)
                     )
                     .catch((err) => console.log(err));
@@ -65,7 +64,7 @@ const Login = () => {
         signInWithPopup(auth, provider).then((data: any) => {
             localStorage.setItem("email", data.user.email)
             const uid = data.user.uid;
-            axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/addNew`, { uid, email: data.user.email })
+            axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email: data.user.email })
                 .then((res) => console.log(res)
                 )
                 .catch((err) => alert(err.message));

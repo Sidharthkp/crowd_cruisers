@@ -10,7 +10,7 @@ const UserJoined = () => {
     const state = useSelector((state: any) => state.showJoinedMembers.show);
     const data = useSelector((state: any) => state.showJoinedMembers.data);
     useEffect(() => {
-        axios.post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/profile/showJoinedMembers`, { data })
+        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showJoinedMembers`, { data })
             .then((res) => setDetails(res.data))
             .catch((err) => console.log(err));
     }, [data])

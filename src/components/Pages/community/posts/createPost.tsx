@@ -45,7 +45,7 @@ const Modal = () => {
         }
 
         axios
-            .post("http://10.4.5.176:3000/api/userPosts/post", formData, {
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/post`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
