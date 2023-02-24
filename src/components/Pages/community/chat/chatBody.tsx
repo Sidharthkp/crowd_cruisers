@@ -14,6 +14,8 @@ import { FaArrowAltCircleLeft } from 'react-icons/fa';
 const ROOT_CSS = css({
     height: 400,
     width: "100%",
+    zIndex: 50,
+    position: 'relative',
     '@media (max-width: 480px)': {
         height: 600,
     }
@@ -70,7 +72,7 @@ const ChatBody = ({ typingStatus }: any) => {
         try {
             axios
                 .post(`http://${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/message`, { details })
-                .then((res) => {   
+                .then((res) => {
                     setMessage(res.data)
                 })
                 .catch((err) => console.log(err));
@@ -86,25 +88,29 @@ const ChatBody = ({ typingStatus }: any) => {
     }, [msg, boolean])
 
     return (
-        <div className='z-40 smallScreenChatZ'>
+        <div className='smallScreenChatZ z-50'>
             <ToastContainer />
             <UpdateGrpProfile />
             {opened && datas ?
                 (
 
                     <div key={datas._id}>
-                        <div className=' w-full flex flex-row items-center p-4 bg-gray-800'>
+                        <div className='w-full z-50 flex flex-row items-center p-4 bg-black'>
                             <div className="flex justify-end w-2/6 flex-row mr-3">
                                 <FaArrowAltCircleLeft onClick={handleLeaveChat} className="h-6 w-6 text-blue-500 cursor-pointer" />
                             </div>
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='mr-4 cursor-pointer rounded-full w-1/6 bg-black'>
-                                    <img className='rounded-full w-20'
-                                        src={`http://${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${datas.image}`}
-                                        alt="" />
+                                    {datas.image ? (
+                                        <img className='rounded-full z-50 w-20'
+                                            src={`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${datas.image}`}
+                                            alt="" />
+                                    ) : (
+                                        <img src="/src/assets/Images/PngItem_1370051.png" className="w-20 rounded-full" alt="" />
+                                    )}
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='font-bold text-2xl cursor-pointer z-40' onClick={() => { openModal(datas) }}>
+                                    <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas) }}>
                                         {datas.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>
@@ -116,12 +122,12 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
 
                         </div>
-                        <div className='z-50 bg-gray-300 chat'>
+                        <div className='bg-gray-200 z-40 chat'>
                             <ScrollToBottom className={ROOT_CSS}>
                                 {Array.isArray(msg) ? msg.map((message: any) =>
                                     message.name === localStorage.getItem('email') ? (
                                         <div key={message._id} className='w-full flex flex-row justify-end'>
-                                            <div className='rounded-xl bg-gray-800 max-w-xs text-black p-4 m-4'>
+                                            <div className='rounded-xl bg-black max-w-xs p-4 z-50 absolute m-4'>
                                                 <div className='flex flex-col justify-start'>
                                                     <div className='text-white'>
                                                         {message.text}
@@ -131,11 +137,11 @@ const ChatBody = ({ typingStatus }: any) => {
                                         </div>
                                     ) : (
                                         <div key={message._id} className='w-full flex flex-row justify-start'>
-                                            <div className='rounded-xl bg-gray-900 p-5 m-4'>
+                                            <div className='rounded-xl bg-gray-900 p-5 z-50 m-4'>
                                                 <div className='mb-4 text-red-600 font-bold'>
                                                     {message.name}
                                                 </div>
-                                                <div className='text-white'>
+                                                <div className='text-white z-50'>
                                                     {message.text}
                                                 </div>
                                             </div>

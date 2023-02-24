@@ -29,7 +29,7 @@ const ChatFooter = ({ socket }: any) => {
             {
                 opened ? (
                     <>
-                        <div className='w-full mt-auto flex justify-center z-40 h-full align-middle bg-gray-300'>
+                        <div className='w-full mt-auto flex justify-center z-40 h-full align-middle bg-gray-200'>
                             <form onSubmit={handleSendMessage} className="w-full chatInput">
                                 <div className="flex flex-row items-center">
                                     <input value={message}
