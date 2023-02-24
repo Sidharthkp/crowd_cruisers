@@ -88,14 +88,14 @@ const ChatBody = ({ typingStatus }: any) => {
     }, [msg, boolean])
 
     return (
-        <div className='smallScreenChatZ z-50'>
+        <div className='smallScreenChatZ z-40'>
             <ToastContainer />
             <UpdateGrpProfile />
             {opened && datas ?
                 (
 
                     <div key={datas._id}>
-                        <div className='w-full z-50 flex flex-row items-center p-4 bg-black'>
+                        <div className='w-full z-50 relative flex flex-row items-center p-4 bg-black'>
                             <div className="flex justify-end w-2/6 flex-row mr-3">
                                 <FaArrowAltCircleLeft onClick={handleLeaveChat} className="h-6 w-6 text-blue-500 cursor-pointer" />
                             </div>
