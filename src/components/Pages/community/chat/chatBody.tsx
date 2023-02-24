@@ -88,7 +88,7 @@ const ChatBody = ({ typingStatus }: any) => {
     }, [msg, boolean])
 
     return (
-        <div className='smallScreenChatZ z-50'>
+        <div className='smallScreenChatZ'>
             <ToastContainer />
             <UpdateGrpProfile />
             {opened && datas ?
