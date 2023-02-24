@@ -102,7 +102,7 @@ const ChatBody = ({ typingStatus }: any) => {
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='mr-4 cursor-pointer rounded-full w-1/6 bg-black'>
                                     {datas.image ? (
-                                        <img className='rounded-full z-50 w-20'
+                                        <img className='rounded-full z-40 w-20'
                                             src={`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${datas.image}`}
                                             alt="" />
                                     ) : (
