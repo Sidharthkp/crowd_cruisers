@@ -20,8 +20,8 @@ const ChatBar = () => {
 
   const searchData = (data: any) => {
     return search === ""
-    ? data
-    : data.groupName.toLowerCase().includes(search)
+      ? data
+      : data.groupName.toLowerCase().includes(search)
   }
 
   const getGroups = async () => {
@@ -55,12 +55,12 @@ const ChatBar = () => {
     <div className="w-full relative h-screen z-10">
       <div className="py-3 px-5 mt-6">
         <div className="flex flex-col w-full items-center">
-          <h3 className="text-2xl mb-9 font-semibold uppercase text-gray-400">Chats</h3>
-          <div className="relative text-gray-600 mb-5 flex flex-row">
-            <input onChange={(e: any)=>{
+          <h3 className="text-2xl mb-9 font-semibold uppercase text-white">Chats</h3>
+          <div className="relative text-gray-600 mb-5 w-full flex flex-row">
+            <input onChange={(e: any) => {
               let searchValue = e.target.value.toLocaleLowerCase();
               setSearch(searchValue)
-            }} type="search" name="search" placeholder="Search" className="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none z-50" />
+            }} type="search" name="search" placeholder="Search" className="bg-white h-10 px-5 pr-10 w-full rounded-full text-sm focus:outline-none z-50" />
             <div className="absolute flex flex-row w-full">
               <button type="submit" className="relative buttonSearch">
                 <FaSearch />
@@ -88,7 +88,11 @@ const ChatBar = () => {
             (
               <button key={p._id} onClick={() => { ClickedGroup(p._id) }} className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
                 <div className="flex items-center">
-                  <img className="rounded-full items-start flex-shrink-0 mr-3" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} width="32" height="32"/>
+                  {p.image ? (
+                    <img className="rounded-full items-start flex-shrink-0 mr-3" src={`http://${import.meta.env.VITE_IP_ADD}:3000/api/createGroup/image?q=${p.image}`} width="32" height="32" />
+                  ) : (
+                    <img src="/src/assets/Images/PngItem_1370051.png" className="w-8 mr-3" alt="" />
+                  )}
                   <div>
                     <h4 className="text-sm font-semibold text-gray-900">{p.groupName}</h4>
                     <div className="text-[13px]">The video chat ended · 2hrs</div>

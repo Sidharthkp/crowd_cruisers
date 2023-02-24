@@ -141,7 +141,7 @@ const MapPage = () => {
                                                 </label>
                                                 <input onChange={(e) => setNewDescription(e.target.value)} className="shadow appearance-none border bg-gray-700 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Tell me more about it" />
                                             </div>
-                                            <h1 className='text-red-600'>The pin will expire in 5m</h1>
+                                            <h1 className='text-red-600 text-sm'>The pin will expire in 5m</h1>
                                             <div className='w-full flex justify-end'>
                                                 <button className='rounded-2xl bg-black w-14 h-6 text-white' type='submit'>Share</button>
                                             </div>
