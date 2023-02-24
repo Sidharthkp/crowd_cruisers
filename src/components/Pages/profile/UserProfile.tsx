@@ -85,7 +85,7 @@ const Profile = () => {
                             )
                         }
                     </div>
-                    <div className="mt-5 w-full">
+                    <div className="mt-5 w-full p-2">
                         <div className="w-full flex flex-row justify-end text-lg">
                             <FaUserEdit className="cursor-pointer" onClick={() => openUserEdit(user.email)} />
                         </div>
