@@ -20,8 +20,8 @@ const ChatBar = () => {
 
   const searchData = (data: any) => {
     return search === ""
-    ? data
-    : data.groupName.toLowerCase().includes(search)
+      ? data
+      : data.groupName.toLowerCase().includes(search)
   }
 
   const getGroups = async () => {
@@ -55,12 +55,12 @@ const ChatBar = () => {
     <div className="w-full relative h-screen z-10">
       <div className="py-3 px-5 mt-6">
         <div className="flex flex-col w-full items-center">
-          <h3 className="text-2xl mb-9 font-semibold uppercase text-gray-400">Chats</h3>
-          <div className="relative text-gray-600 mb-5 flex flex-row">
-            <input onChange={(e: any)=>{
+          <h3 className="text-2xl mb-9 font-semibold uppercase text-white">Chats</h3>
+          <div className="relative text-gray-600 mb-5 w-full flex flex-row">
+            <input onChange={(e: any) => {
               let searchValue = e.target.value.toLocaleLowerCase();
               setSearch(searchValue)
-            }} type="search" name="search" placeholder="Search" className="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none z-50" />
+            }} type="search" name="search" placeholder="Search" className="bg-white h-10 px-5 pr-10 w-full rounded-full text-sm focus:outline-none z-50" />
             <div className="absolute flex flex-row w-full">
               <button type="submit" className="relative buttonSearch">
                 <FaSearch />
