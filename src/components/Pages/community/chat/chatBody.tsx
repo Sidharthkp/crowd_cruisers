@@ -122,12 +122,12 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
 
                         </div>
-                        <div className='bg-gray-200 z-40 chat'>
+                        <div className='bg-gray-200 chat'>
                             <ScrollToBottom className={ROOT_CSS}>
                                 {Array.isArray(msg) ? msg.map((message: any) =>
                                     message.name === localStorage.getItem('email') ? (
                                         <div key={message._id} className='w-full flex flex-row justify-end'>
-                                            <div className='rounded-xl bg-black max-w-xs p-4 z-50 absolute m-4'>
+                                            <div className='rounded-xl bg-black max-w-xs p-4 m-4'>
                                                 <div className='flex flex-col justify-start'>
                                                     <div className='text-white'>
                                                         {message.text}
