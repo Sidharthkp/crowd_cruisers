@@ -69,7 +69,7 @@ const Profile = () => {
             <UpdateProfile />
             <UserProfileEdit />
             <div className="profileSection w-full h-full justify-center flex flex-row">
-                <div className="flex flex-col items-center w-90">
+                <div className="flex flex-col items-center w-full">
                     <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer rounded-b-2xl w-80">
                         {user?.profileImage ?
                             (
@@ -85,16 +85,16 @@ const Profile = () => {
                             )
                         }
                     </div>
-                    <div className="mt-5">
+                    <div className="mt-5 w-full">
                         <div className="w-full flex flex-row justify-end text-lg">
                             <FaUserEdit className="cursor-pointer" onClick={() => openUserEdit(user.email)} />
                         </div>
                         <div className="flex flex-row items-center w-full px-5">
-                            <h1 className="mx-2 text-lg font-bold">Name:</h1>
-                            <h1>{user && user.userName ?
+                            <p className="mx-2 text-lg font-bold">Name:</p>
+                            <p>{user && user.userName ?
                                 <div>
 
-                                    <h1>{user.userName}</h1>
+                                    <p>{user.userName}</p>
 
                                 </div>
                                 :
@@ -103,11 +103,11 @@ const Profile = () => {
                                     <h1 className="text-gray-500">Please add your name</h1>
 
                                 </div>
-                            }</h1>
+                            }</p>
                         </div>
                         <div className="flex flex-row items-center w-full px-5">
-                            <h1 className="mx-2 text-lg font-bold">Email:</h1>
-                            <h1>{localStorage.getItem('email')}</h1>
+                            <p className="mx-2 text-lg font-bold">Email:</p>
+                            <p>{localStorage.getItem('email')}</p>
                         </div>
                     </div>
                 </div>
