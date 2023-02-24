@@ -44,7 +44,7 @@ const Unregister = () => {
         e.preventDefault();
 
         axios
-            .post(`http://${import.meta.env.VITE_IP_ADD}:3000/api/userPosts/removeAndAddInWishlist`, { username, id })
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeAndAddInWishlist`, { username, id })
             .then((res) => {
                 dispatch(booleanSwitch())
                 toast.success("Un Registered And Added To Wishlist", {
