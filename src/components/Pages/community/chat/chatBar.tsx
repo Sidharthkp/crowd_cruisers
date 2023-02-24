@@ -48,6 +48,7 @@ const ChatBar = () => {
 
   const ClickedGroup = (data: any) => {
     dispatch(openGroupSwitch(data))
+    dispatch(booleanSwitch())
   }
 
   return (
@@ -95,7 +96,7 @@ const ChatBar = () => {
                   )}
                   <div>
                     <h4 className="text-sm font-semibold text-gray-900">{p.groupName}</h4>
-                    <div className="text-[13px]">The video chat ended · 2hrs</div>
+                    <div className="text-[13px]">last message</div>
                   </div>
                 </div>
               </button>

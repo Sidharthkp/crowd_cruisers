@@ -71,7 +71,7 @@ const ChatBody = ({ typingStatus }: any) => {
     const message = () => {
         try {
             axios
-                .post(`http://${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/message`, { details })
+                .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/message`, { details })
                 .then((res) => {
                     setMessage(res.data)
                 })
@@ -102,7 +102,7 @@ const ChatBody = ({ typingStatus }: any) => {
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='mr-4 cursor-pointer rounded-full w-1/6 bg-black'>
                                     {datas.image ? (
-                                        <img className='rounded-full z-40 w-20'
+                                        <img className='rounded-full z-50 w-20'
                                             src={`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${datas.image}`}
                                             alt="" />
                                     ) : (
@@ -122,15 +122,17 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
 
                         </div>
-                        <div className='bg-gray-200 chat'>
+                        <div className='bg-gray-200 chat z-40'>
                             <ScrollToBottom className={ROOT_CSS}>
                                 {Array.isArray(msg) ? msg.map((message: any) =>
                                     message.name === localStorage.getItem('email') ? (
-                                        <div key={message._id} className='w-full flex flex-row justify-end'>
-                                            <div className='rounded-xl bg-black max-w-xs p-4 m-4'>
+                                        <div key={message._id} className='w-full flex flex-row z-40 justify-end'>
+                                            <div className='rounded-xl bg-black max-w-xs p-4 z-50 m-4'>
                                                 <div className='flex flex-col justify-start'>
                                                     <div className='text-white'>
                                                         {message.text}
+                                                        {console.log(message.text)
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,6 +142,8 @@ const ChatBody = ({ typingStatus }: any) => {
                                             <div className='rounded-xl bg-gray-900 p-5 z-50 m-4'>
                                                 <div className='mb-4 text-red-600 font-bold'>
                                                     {message.name}
+                                                    {console.log(message.text)
+                                                    }
                                                 </div>
                                                 <div className='text-white z-50'>
                                                     {message.text}
