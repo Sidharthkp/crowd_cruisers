@@ -127,9 +127,9 @@ const ChatBody = ({ typingStatus }: any) => {
                                 {Array.isArray(msg) ? msg.map((message: any) =>
                                     message.name === localStorage.getItem('email') ? (
                                         <div key={message._id} className='w-full flex flex-row z-40 justify-end'>
-                                            <div className='rounded-xl bg-black max-w-xs p-4 z-50 m-4'>
+                                            <div className='rounded-xl bg-green-200 max-w-xs p-4 z-50 m-4'>
                                                 <div className='flex flex-col justify-start'>
-                                                    <div className='text-white'>
+                                                    <div className='text-black'>
                                                         {message.text}
                                                         {console.log(message.text)
                                                         }
@@ -139,8 +139,8 @@ const ChatBody = ({ typingStatus }: any) => {
                                         </div>
                                     ) : (
                                         <div key={message._id} className='w-full flex flex-row justify-start'>
-                                            <div className='rounded-xl bg-gray-900 p-5 z-50 m-4'>
-                                                <div className='mb-4 text-red-600 font-bold'>
+                                            <div className='rounded-xl bg-green-600 p-5 z-50 m-4'>
+                                                <div className='mb-4 text-black font-bold text-sm'>
                                                     {message.name}
                                                     {console.log(message.text)
                                                     }
