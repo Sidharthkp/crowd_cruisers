@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FaRegPaperPlane } from "react-icons/fa"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { booleanSwitch } from "../../../../redux/boolean";
 
 const ChatFooter = ({ socket }: any) => {
+    const dispatch = useDispatch()
     const [message, setMessage] = useState('');
 
     const opened = useSelector((state: any) => state.showGroupPage.show);
@@ -23,6 +25,7 @@ const ChatFooter = ({ socket }: any) => {
             });
         }
         setMessage('');
+        dispatch(booleanSwitch())
     };
     return (
         <>

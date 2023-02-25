@@ -85,7 +85,7 @@ const ChatBody = ({ typingStatus }: any) => {
     useEffect(() => {
         group()
         message()
-    }, [msg, boolean])
+    }, [boolean])
 
     return (
         <div className='smallScreenChatZ z-40'>
@@ -131,8 +131,6 @@ const ChatBody = ({ typingStatus }: any) => {
                                                 <div className='flex flex-col justify-start'>
                                                     <div className='text-black'>
                                                         {message.text}
-                                                        {console.log(message.text)
-                                                        }
                                                     </div>
                                                 </div>
                                             </div>
