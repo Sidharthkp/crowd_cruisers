@@ -69,7 +69,7 @@ const Profile = () => {
             <UpdateProfile />
             <UserProfileEdit />
             <div className="profileSection w-full h-full justify-center flex flex-row">
-                <div className="flex flex-col items-center w-full">
+                <div className="flex flex-col items-center bg-black/40 backdrop-blur-2xl p-5 w-full">
                     <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer rounded-b-2xl w-80">
                         {user?.profileImage ?
                             (
