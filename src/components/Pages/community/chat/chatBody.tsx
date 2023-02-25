@@ -115,7 +115,7 @@ const ChatBody = ({ typingStatus }: any) => {
                                     </div>
                                     <div className='text-sm font-thin'>
                                         <div className="text-sm text-gray-200">
-                                            <p>{typingStatus}</p>
+                                            {/* <p>{typingStatus}</p> */}
                                         </div>
                                     </div>
                                 </div>
