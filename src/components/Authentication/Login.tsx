@@ -77,15 +77,15 @@ const Login = () => {
     return (
         <>
             <div className="w-full h-screen absolute">
-                <div className="flex relative backdrop-blur-2xl min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="w-full max-w-md space-y-8 shadow-2xl">
+                <div className="flex relative min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                    <div className="w-full max-w-md space-y-8 rounded-2xl bg-black/40 backdrop-blur-2xl p-5 shadow-2xl">
                         <div>
                             <img
                                 className="mx-auto h-12 w-auto rounded-2xl"
                                 src="src\assets\Logo\logo.jpg"
                                 alt="Your Company"
                             />
-                            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+                            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
                                 Sign In to your account
                             </h2>
                             <div className='flex justify-center my-2'>

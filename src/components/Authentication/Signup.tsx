@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux'
 import { setAuthentication } from '../../redux/Authentication/reducer';
 import { useNavigate } from 'react-router-dom';
 import 'firebase/auth'
-import { LockClosedIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Error from '../Error/errorPage';
+import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 
 
@@ -20,19 +20,47 @@ const Signup = () => {
     }
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [showButton, setButtonShow] = useState(false);
+    const [showSeconds, setSeconds] = useState(false);
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
     const [passwordType, setPasswordType] = useState('password');
     const email: string = useremail
     const password: string = userpassword
+
+    let seconds = 60;
+
+    const timeout = () => {
+        setSeconds(true)
+        const makeIteration = () => {
+            console.clear();
+            if (seconds > 0) {
+                console.log(seconds);
+                setTimeout(makeIteration, 1000); // 1 second waiting
+            }
+            seconds -= 1;
+        }
+        if (seconds === 0) {
+            setButtonShow(true)
+            setSeconds(false)
+        } else {
+            setTimeout(makeIteration, 1000); // 1 second waiting
+        }
+    }
+
+    console.log(showButton);
+    
+
     const handleSubmit = (event: any) => {
         event.preventDefault();
         createUserWithEmailAndPassword(auth, email, password).then((data: any) => {
             if (!data.user.emailVerified) {
                 sendEmailVerification(data.user)
                     .then(() => {
-                        console.log("email sent");
-                        navigate('/login')
+                        toast.success("Please check your mail !", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                        timeout()
                     })
                     .catch((err: any) => alert(err.message));
             } else {
@@ -73,20 +101,42 @@ const Signup = () => {
         navigate("/login");
     }
 
+    const resendButton = (e: any) => {
+        e.preventDefault()
+        setButtonShow(false)
+        if (auth.currentUser) {
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    toast.success("Please check your mail !", {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                    navigate('/login')
+                })
+                .catch((err: any) => alert(err.message));
+        } else {
+            alert("Something went wrong");
+        }
+        timeout()
+    }
+
 
     return (
         <>
+            <ToastContainer />
             <div className="w-full h-screen absolute">
-                <div className="flex relative backdrop-blur-2xl min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="w-full max-w-md space-y-8 shadow-2xl">
+                <div className="flex relative  min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                    <div className='text-white rounded-full p-5 w-10 h-10 text-2xl left-0 top-0 absolute'>
+                        {showSeconds ? seconds : null}
+                    </div>
+                    <div className="w-full max-w-md space-y-8 p-5 rounded-2xl bg-black/40 backdrop-blur-2xl shadow-2xl">
                         <div>
                             <img
                                 className="mx-auto h-12 w-auto rounded-2xl"
                                 src="src\assets\Logo\logo.jpg"
                                 alt="Your Company"
                             />
-                            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                                Sign In to your account
+                            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
+                                Sign Up to your account
                             </h2>
                             <div className='flex justify-center my-2'>
                                 <button className='border-2 border-gray-500 rounded-full p-3 mx-1 text-black hover:bg-black hover:text-white'>
@@ -153,6 +203,16 @@ const Signup = () => {
                                     Sign Up
                                 </button>
                             </div>
+                            {showButton ? (
+                                <div className='relative w-full flex p-5 flex-row justify-center'>
+                                    <button onClick={(e: any) => { resendButton(e) }} className='bg-black w-32'>
+                                        Resend
+                                    </button>
+                                </div>
+
+                            ) : (
+                                null
+                            )}
                             <div>
                                 <div className="text-sm">
                                     <a className="font-medium text-white">
