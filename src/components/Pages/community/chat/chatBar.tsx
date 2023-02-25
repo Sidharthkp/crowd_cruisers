@@ -26,6 +26,8 @@ const ChatBar = () => {
 
   const getGroups = async () => {
     try {
+      console.log(import.meta.env.VITE_SERVER_CONFIG);
+      
       const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/get`);
       setGroup(res.data);
     } catch (err) {

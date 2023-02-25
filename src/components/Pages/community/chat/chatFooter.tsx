@@ -24,8 +24,8 @@ const ChatFooter = ({ socket }: any) => {
                 groupId: details
             });
         }
-        setMessage('');
         dispatch(booleanSwitch())
+        setMessage('');
     };
     return (
         <>
