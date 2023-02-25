@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { booleanSwitch } from '../../../../redux/boolean';
 import { toast } from 'react-toastify';
-import { FaSearch } from 'react-icons/fa';
 
 const JoinModalPage = () => {
     const [groups, setGroup] = useState([]);
