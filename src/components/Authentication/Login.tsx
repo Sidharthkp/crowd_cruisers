@@ -7,6 +7,9 @@ import { setAuthentication } from '../../redux/Authentication/reducer';
 import Error from '../Error/errorPage';
 import { useState } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+
+let seconds = 60;
 
 const Login = () => {
     const [show, setShow] = useState(false)
@@ -17,6 +20,9 @@ const Login = () => {
     }
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [showButton, setButtonShow] = useState(false);
+    const [showSeconds, setSeconds] = useState(false);
+    const [display, setDisplay] = useState(60);
     const [useremail, setEmail] = useState('');
     const [userpassword, setPassword] = useState('');
     const [passwordType, setPasswordType] = useState('password');
@@ -28,9 +34,16 @@ const Login = () => {
             if (!data.user.emailVerified) {
                 sendEmailVerification(data.user)
                     .then(() => {
-                        console.log("email sent");
+                        toast.success("Please check your mail !", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                        timeout()
                     })
-                    .catch((err: any) => alert(err.message));
+                    .catch((err: any) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
             } else {
                 localStorage.setItem("email", data.user.email)
                 const uid = data.user.uid;
@@ -58,6 +71,46 @@ const Login = () => {
         }
     }
 
+    const timeout = () => {
+        setSeconds(true)
+        const makeIteration = () => {
+            console.clear();
+            if (seconds > 0) {
+                console.log(seconds);
+                setTimeout(makeIteration, 1000); // 1 second waiting
+            } else {
+                setButtonShow(true)
+                setSeconds(false)
+            }
+            seconds -= 1;
+            setDisplay(seconds)
+        }
+        setTimeout(makeIteration, 1000); // 1 second waiting
+    }
+
+    const resendButton = (e: any) => {
+        e.preventDefault()
+        setButtonShow(false)
+        if (auth.currentUser) {
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    toast.success("Please check your mail !", {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                    timeout()
+                })
+                .catch((err: any) => {
+                    toast.warn(err.message, {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                    timeout()
+                });
+        } else {
+            alert("Something went wrong");
+        }
+        timeout()
+    }
+
     //google
     const handleClick = (e: any) => {
         e.preventDefault()
@@ -76,8 +129,12 @@ const Login = () => {
     }
     return (
         <>
+            <ToastContainer />
             <div className="w-full h-screen absolute">
                 <div className="flex relative min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                    <div className='text-white rounded-full p-5 w-10 h-10 text-2xl left-0 top-0 absolute'>
+                        {showSeconds ? display : null}
+                    </div>
                     <div className="w-full max-w-md space-y-8 rounded-2xl bg-black/40 backdrop-blur-2xl p-5 shadow-2xl">
                         <div>
                             <img
@@ -153,12 +210,20 @@ const Login = () => {
                                     </a>
                                 </div>
                             </div>
+                            {showButton ? (
+                                <div className='relative w-full flex p-5 flex-row justify-center'>
+                                    <button onClick={(e: any) => { resendButton(e) }} className='bg-black w-32'>
+                                        Resend
+                                    </button>
+                                </div>
 
-                            <div className='relative w-full flex p-5 flex-row justify-center'>
-                                <button className='bg-black w-32'>
-                                    Sign In
-                                </button>
-                            </div>
+                            ) : (
+                                <div className='relative w-full flex p-5 flex-row justify-center'>
+                                    <button className='bg-black w-32'>
+                                        Sign In
+                                    </button>
+                                </div>
+                            )}
                             <div>
                                 <div className="text-sm">
                                     <a className="font-medium text-white">

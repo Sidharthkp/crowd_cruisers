@@ -10,6 +10,7 @@ import Error from '../Error/errorPage';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 
+let seconds = 60;
 
 const Signup = () => {
     const [show, setShow] = useState(false)
@@ -20,6 +21,7 @@ const Signup = () => {
     }
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [display, setDisplay] = useState(60);
     const [showButton, setButtonShow] = useState(false);
     const [showSeconds, setSeconds] = useState(false);
     const [useremail, setEmail] = useState('');
@@ -28,7 +30,6 @@ const Signup = () => {
     const email: string = useremail
     const password: string = userpassword
 
-    let seconds = 60;
 
     const timeout = () => {
         setSeconds(true)
@@ -37,19 +38,16 @@ const Signup = () => {
             if (seconds > 0) {
                 console.log(seconds);
                 setTimeout(makeIteration, 1000); // 1 second waiting
+            } else {
+                setButtonShow(true)
+                setSeconds(false)
             }
             seconds -= 1;
+            setDisplay(seconds)
         }
-        if (seconds === 0) {
-            setButtonShow(true)
-            setSeconds(false)
-        } else {
-            setTimeout(makeIteration, 1000); // 1 second waiting
-        }
+        setTimeout(makeIteration, 1000); // 1 second waiting
     }
 
-    console.log(showButton);
-    
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -62,13 +60,19 @@ const Signup = () => {
                         });
                         timeout()
                     })
-                    .catch((err: any) => alert(err.message));
+                    .catch((err: any) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
             } else {
                 dispatch(setAuthentication())
                 navigate("/");
             }
         }).catch((error) => {
-            alert(error.message);
+            toast.warn("Email already exist please login to continue", {
+                position: toast.POSITION.TOP_CENTER,
+            });
         })
     }
     //google
@@ -110,13 +114,16 @@ const Signup = () => {
                     toast.success("Please check your mail !", {
                         position: toast.POSITION.TOP_CENTER,
                     });
-                    navigate('/login')
+                    timeout()
                 })
-                .catch((err: any) => alert(err.message));
+                .catch((err: any) => {
+                    toast.warn(err.message, {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                });
         } else {
             alert("Something went wrong");
         }
-        timeout()
     }
 
 
@@ -126,7 +133,7 @@ const Signup = () => {
             <div className="w-full h-screen absolute">
                 <div className="flex relative  min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                     <div className='text-white rounded-full p-5 w-10 h-10 text-2xl left-0 top-0 absolute'>
-                        {showSeconds ? seconds : null}
+                        {showSeconds ? display : null}
                     </div>
                     <div className="w-full max-w-md space-y-8 p-5 rounded-2xl bg-black/40 backdrop-blur-2xl shadow-2xl">
                         <div>
@@ -198,11 +205,6 @@ const Signup = () => {
                                 </div>
                             </div>
 
-                            <div className='relative w-full flex p-5 flex-row justify-center'>
-                                <button className='bg-black w-32'>
-                                    Sign Up
-                                </button>
-                            </div>
                             {showButton ? (
                                 <div className='relative w-full flex p-5 flex-row justify-center'>
                                     <button onClick={(e: any) => { resendButton(e) }} className='bg-black w-32'>
@@ -211,7 +213,11 @@ const Signup = () => {
                                 </div>
 
                             ) : (
-                                null
+                                <div className='relative w-full flex p-5 flex-row justify-center'>
+                                    <button className='bg-black w-32'>
+                                        Sign Up
+                                    </button>
+                                </div>
                             )}
                             <div>
                                 <div className="text-sm">
