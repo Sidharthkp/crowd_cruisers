@@ -107,7 +107,7 @@ const home = () => {
 
                     <div className='relative'>
                         {/* ride */}
-                        <div className='mt-5 relative p-10'>
+                        <div className='mt-0 relative p-10'>
                             <div className='text-white font-bold flex flex-row w-full justify-center p-5 text-3xl'>
                                 <h1>Rides</h1>
                             </div>

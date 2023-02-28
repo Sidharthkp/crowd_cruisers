@@ -27,7 +27,7 @@ const JoinModalPage = () => {
 
     const getGroups = async () => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_IP_ADD}/api/createGroup/getGroup`, { username })
+            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/getGroup`, { username })
             setGroup(res.data)
         } catch (err) {
             console.log(err);

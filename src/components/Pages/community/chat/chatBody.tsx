@@ -85,7 +85,7 @@ const ChatBody = ({ typingStatus }: any) => {
     useEffect(() => {
         group()
         message()
-    }, [boolean])
+    }, [msg,boolean])
 
     return (
         <div className='smallScreenChatZ z-40'>
