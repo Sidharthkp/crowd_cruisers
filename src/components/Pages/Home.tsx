@@ -53,7 +53,7 @@ const home = () => {
     const saveToWishlist = (id: any) => {
         try {
             if (username) {
-                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/wishList`, { id, username })
+                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/wishList`, { id, email: username })
                     .then((res) => {
                         dispatch(booleanSwitch())
                         toast.success("Saved for later...", {
@@ -74,7 +74,7 @@ const home = () => {
         }
     }
     const remove = (id: any) => {
-        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeSaved`, { username, id })
+        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeSaved`, { email: username, id })
             .then((res) => {
                 {
                     dispatch(booleanSwitch())
@@ -100,7 +100,7 @@ const home = () => {
     }
     const getSaved = async () => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username });
+            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { email: username });
             setSaved(res.data.wishList);
 
         } catch (err: any) {

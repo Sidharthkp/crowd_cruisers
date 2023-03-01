@@ -21,7 +21,7 @@ const Modal = () => {
         e.preventDefault();
 
         axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/join`, { username, id })
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/join`, { email: username, id })
             .then((res) =>
                 {dispatch(booleanSwitch())
                 toast.success("Registered...", {

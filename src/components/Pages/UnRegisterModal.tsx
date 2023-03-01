@@ -32,7 +32,7 @@ const Unregister = () => {
     }
 
     const savedGet = async () => {
-        const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username });
+        const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { email: username });
         setSaved(res.data.wishList)
     }
 
@@ -44,7 +44,7 @@ const Unregister = () => {
         e.preventDefault();
 
         axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeAndAddInWishlist`, { username, id })
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeAndAddInWishlist`, { email: username, id })
             .then((res) => {
                 dispatch(booleanSwitch())
                 toast.success("Un Registered And Added To Wishlist", {
@@ -65,7 +65,7 @@ const Unregister = () => {
         e.preventDefault();
 
         axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/remove`, { username, id })
+            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/remove`, { email: username, id })
             .then((res) => {
                 dispatch(booleanSwitch())
                 toast.success("Un Registered...", {
