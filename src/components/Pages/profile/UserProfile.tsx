@@ -89,7 +89,7 @@ const Profile = () => {
                         <div className="w-full flex flex-row justify-end text-lg">
                             <FaUserEdit className="cursor-pointer" onClick={() => openUserEdit(user.email)} />
                         </div>
-                        <div className="flex flex-row items-center w-full px-5">
+                        <div className="flex flex-row items-center w-full">
                             <p className="mx-2 text-lg font-bold">Name:</p>
                             <p>{user && user.userName ?
                                 <div>
@@ -105,9 +105,9 @@ const Profile = () => {
                                 </div>
                             }</p>
                         </div>
-                        <div className="flex flex-row items-center w-full px-5">
+                        <div className="flex flex-row items-center w-full">
                             <p className="mx-2 text-lg font-bold">Email:</p>
-                            <p>{localStorage.getItem('email')}</p>
+                            <p className="text-sm">{localStorage.getItem('email')}</p>
                         </div>
                     </div>
                 </div>
