@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRegisterSwitchOn } from '../../redux/registerPage';
 import RegisterPage from './RegisterModal'
@@ -11,12 +11,25 @@ import Unregister from './UnRegisterModal';
 import { booleanSwitch } from '../../redux/boolean';
 let currentDate = new Date();
 const home = () => {
+    const [currentToastId, setCurrentToastId] = useState<any>(null);
     const [posts, setPosts] = React.useState([]);
     const [saved, setSaved] = React.useState([{ _id: '' }]);
     const dispatch = useDispatch()
     const boolean = useSelector((state: any) => state.changeBoolean.boolean);
     const customId = "custom-id-yes";
     const username = localStorage.getItem("email")
+
+    const generateError = (err: any) => {
+        if (currentToastId) {
+            // Hide the currently displayed toast
+            toast.dismiss(currentToastId);
+        }
+        const id = toast.error(err, {
+            position: "bottom-right",
+        })
+        setCurrentToastId(id);
+    }
+
     const openRegisterModal = (id: any) => {
         if (username) {
             dispatch(setRegisterSwitchOn(id))
@@ -49,15 +62,15 @@ const home = () => {
                         })
                     }
                     )
-                    .catch((err) => console.log(err));
+                    .catch((err) => generateError(err.message));
             } else {
                 toast.warn("Please login to continue..", {
                     position: toast.POSITION.TOP_CENTER,
                     toastId: customId
                 })
             }
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            generateError(err.message);
         }
     }
     const remove = (id: any) => {
@@ -71,15 +84,17 @@ const home = () => {
                     });
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => generateError(err.message));
     }
 
     const getPosts = async () => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts`);
             setPosts(res.data);
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+
+            generateError(err.message);
+
         }
 
     }
@@ -88,8 +103,8 @@ const home = () => {
             const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username });
             setSaved(res.data.wishList);
 
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            generateError(err.message);
         }
     }
     React.useEffect(() => {

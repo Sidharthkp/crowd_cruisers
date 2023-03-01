@@ -375,6 +375,14 @@ input[type="checkbox"] {
   width: full;
 }
 
+.chatColourSend {
+  background-color: #dcf8c6;
+}
+
+.chatColourRecieve {
+  background-color: #128c7e;
+}
+
 
 @media (max-width: 480px) {
   .chatStyle {
@@ -392,6 +400,11 @@ input[type="checkbox"] {
 
 .chat {
   height: 65vh;
+  background-color: #075e54;
+}
+
+.footerbg {
+  background-color: #075e54;
 }
 
 

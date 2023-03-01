@@ -17,7 +17,7 @@ const ROOT_CSS = css({
     zIndex: 50,
     position: 'relative',
     '@media (max-width: 480px)': {
-        height: 600,
+        height: "100%",
     }
 });
 
@@ -95,22 +95,22 @@ const ChatBody = ({ typingStatus }: any) => {
                 (
 
                     <div key={datas._id}>
-                        <div className='w-full z-50 relative flex flex-row items-center p-4 bg-black'>
+                        <div className='w-full z-50 relative flex flex-row items-center h-20 p-4 bg-black'>
                             <div className="flex justify-end w-2/6 flex-row mr-3">
                                 <FaArrowAltCircleLeft onClick={handleLeaveChat} className="h-6 w-6 text-blue-500 cursor-pointer" />
                             </div>
                             <div className="w-4/6 flex flex-row">
                                 <div onClick={() => { openDPModal(datas._id) }} className='mr-4 cursor-pointer rounded-full w-1/6 bg-black'>
                                     {datas.image ? (
-                                        <img className='rounded-full z-50 w-20'
+                                        <img className='rounded-full z-50 w-16'
                                             src={`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${datas.image}`}
                                             alt="" />
                                     ) : (
-                                        <img src="/src/assets/Images/PngItem_1370051.png" className="w-20 rounded-full" alt="" />
+                                        <img src="/src/assets/Images/PngItem_1370051.png" className="w-16 rounded-full" alt="" />
                                     )}
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='font-bold text-2xl cursor-pointer' onClick={() => { openModal(datas) }}>
+                                    <div className='font-bold text-xl cursor-pointer' onClick={() => { openModal(datas) }}>
                                         {datas.groupName}
                                     </div>
                                     <div className='text-sm font-thin'>
@@ -122,12 +122,12 @@ const ChatBody = ({ typingStatus }: any) => {
                             </div>
 
                         </div>
-                        <div className='bg-gray-200 chat z-40'>
+                        <div className='chat z-40'>
                             <ScrollToBottom className={ROOT_CSS}>
                                 {Array.isArray(msg) ? msg.map((message: any) =>
                                     message.name === localStorage.getItem('email') ? (
                                         <div key={message._id} className='w-full flex flex-row z-40 justify-end'>
-                                            <div className='rounded-xl bg-green-200 max-w-xs p-4 z-50 m-4'>
+                                            <div className='rounded-xl chatColourSend max-w-xs p-4 z-50 m-4'>
                                                 <div className='flex flex-col justify-start'>
                                                     <div className='text-black'>
                                                         {message.text}
@@ -137,7 +137,7 @@ const ChatBody = ({ typingStatus }: any) => {
                                         </div>
                                     ) : (
                                         <div key={message._id} className='w-full flex flex-row justify-start'>
-                                            <div className='rounded-xl bg-green-600 p-5 z-50 m-4'>
+                                            <div className='rounded-xl chatColourRecieve p-5 z-50 m-4'>
                                                 <div className='mb-4 text-black font-bold text-sm'>
                                                     {message.name}
                                                     {console.log(message.text)

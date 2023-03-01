@@ -69,7 +69,7 @@ const Whishlist = () => {
             </div>
             <div className='flex flex-row w-screen relative overflow-x-auto scrollbar-hide'>
                 {
-                    posts.wishList.length > 0 && posts.wishList.map((p: any) => {
+                    posts.wishList?.length > 0 && posts.wishList.map((p: any) => {
                         let newDate = new Date(p.expirationDate)
                         let difference = newDate.getTime() - currentDate.getTime();
                         let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
