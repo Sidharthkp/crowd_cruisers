@@ -63,7 +63,7 @@ const UpdateProfile = () => {
                             {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 <div className="flex w-full h-6 flex-row justify-end p-5">
-                                    <button onClick={closeModal}><HighlightOffIcon className="text-sm text-blue-500 cursor-pointer" /></button>
+                                    <button onClick={closeModal}><HighlightOffIcon className="text-sm text-black cursor-pointer" /></button>
                                 </div>
 
                                 <form onSubmit={handleSubmit}>
@@ -83,7 +83,7 @@ const UpdateProfile = () => {
                                         </div>
                                         <div className="flex flex-row justify-center my-4">
                                             <div className="flex flex-col w-5/6">
-                                                <button className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                                                <button className="shadow bg-red-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
                                                     Update
                                                 </button>
                                             </div>
