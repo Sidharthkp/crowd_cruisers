@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOff } from '../../../../redux/createPost';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast, ToastContainer } from 'react-toastify';
 
 const Modal = () => {
     const [event, setEvent] = useState('ride');
@@ -50,15 +51,24 @@ const Modal = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then((res) => console.log("datasend")
+            .then((res) => {
+                toast.success("Posted", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            }
             )
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
 
         dispatch(setCreateSwitchOff())
     }
 
     return (
         <>
+            <ToastContainer/>
             {opened ? (
                 <>
                     <div

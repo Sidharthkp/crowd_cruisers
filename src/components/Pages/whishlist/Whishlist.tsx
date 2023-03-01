@@ -19,8 +19,10 @@ const Whishlist = () => {
             const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username });
             setPosts(res.data);
 
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            toast.warn(err.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
         }
     }
     useEffect(() => {
@@ -55,7 +57,11 @@ const Whishlist = () => {
                 dispatch(booleanSwitch())
             }
             )
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
     }
 
     return (

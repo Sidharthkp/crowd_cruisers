@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { FaUserEdit } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 import { setEditDpSwitchOn } from "../../../redux/editDp";
 import { setEditUserSwitchOn } from "../../../redux/editUser";
 import { setSwitchOn } from "../../../redux/members";
@@ -30,14 +31,26 @@ const Profile = () => {
         axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showProfile`, { email })
             .then((res) => setUser(res.data)
             )
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
         axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showCommunity`, { email })
             .then((res) => setCommunity(res.data)
             )
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
         axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showJoinedEventsRides`)
             .then((res) => setJoinedEventsRides(res.data))
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
     }, [boolean])
 
     const printMembers = (data: any) => {
@@ -68,6 +81,7 @@ const Profile = () => {
             <UserJoined />
             <UpdateProfile />
             <UserProfileEdit />
+            <ToastContainer/>
             <div className="profileSection w-full h-full justify-center flex flex-row">
                 <div className="flex flex-col items-center bg-black/40 backdrop-blur-2xl p-5 w-full">
                     <div onClick={() => { user && openModal(user.email) }} className="group block cursor-pointer rounded-b-2xl w-80">

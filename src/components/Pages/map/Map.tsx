@@ -5,6 +5,7 @@ import axios from 'axios'
 import { format } from 'timeago.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { booleanSwitch } from '../../../redux/boolean';
+import { toast, ToastContainer } from 'react-toastify';
 
 const MapPage = () => {
     if (localStorage.getItem("email") !== null) {
@@ -46,8 +47,10 @@ const MapPage = () => {
             try {
                 const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins`);
                 setPins(res.data);
-            } catch (err) {
-                console.log(err);
+            } catch (err: any) {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
 
             }
         }
@@ -61,8 +64,10 @@ const MapPage = () => {
                     .then(() =>
                         dispatch(booleanSwitch())
                     )
-            } catch (err) {
-                console.log(err);
+            } catch (err: any) {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
 
             }
         } else {
@@ -95,14 +100,17 @@ const MapPage = () => {
             setPins([...pins, res.data])
             setNewPlace(null);
             dispatch(booleanSwitch())
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            toast.warn(err.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
 
         }
     }
 
     return (
         <>
+            <ToastContainer />
             <div className='mt-16'>
                 {viewPort.latitude && viewPort.longitude && (
                     <Map

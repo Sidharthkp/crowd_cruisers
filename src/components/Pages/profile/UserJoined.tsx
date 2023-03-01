@@ -1,24 +1,30 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import { toast, ToastContainer } from "react-toastify";
 import { setSwitchOff } from "../../../redux/usersJoined";
 
 const UserJoined = () => {
     const [details, setDetails] = useState([])
-    
+
     const dispatch = useDispatch()
     const state = useSelector((state: any) => state.showJoinedMembers.show);
     const data = useSelector((state: any) => state.showJoinedMembers.data);
     useEffect(() => {
         axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showJoinedMembers`, { data })
             .then((res) => setDetails(res.data))
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
     }, [data])
     const closeButton = () => {
         dispatch(setSwitchOff());
     }
     return (
         <>
+            <ToastContainer />
             {state ?
                 <div id="defaultModal" tabIndex={-1} aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                     <div className="relative w-full h-full max-w-2xl md:h-auto">
@@ -46,7 +52,7 @@ const UserJoined = () => {
                                         </thead>
                                         <tbody>
 
-                                            {details &&     details.length > 0 && details.map((data: any) => {
+                                            {details && details.length > 0 && details.map((data: any) => {
                                                 return (
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <td className="px-6 py-4">

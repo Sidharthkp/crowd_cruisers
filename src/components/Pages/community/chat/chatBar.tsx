@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaRegHandshake, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 import { booleanSwitch } from "../../../../redux/boolean";
 import { openGroupSwitch } from "../../../../redux/clickedGroup";
 import { setCreateSwitchOn } from "../../../../redux/createModal";
@@ -28,8 +29,10 @@ const ChatBar = () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/get`);
       setGroup(res.data);
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      toast.warn(err.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   }
   useEffect(() => {
@@ -54,6 +57,7 @@ const ChatBar = () => {
   return (
 
     <div className="w-full relative h-screen z-10">
+      <ToastContainer />
       <div className="py-3 px-5 mt-6">
         <div className="flex flex-col w-full items-center">
           <h3 className="text-2xl mb-9 font-semibold uppercase text-white">Chats</h3>

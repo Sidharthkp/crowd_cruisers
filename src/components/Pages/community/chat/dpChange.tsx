@@ -1,7 +1,8 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-import {useRef, useState} from 'react'
+import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
 import { setEditGrpDpSwitchOff } from '../../../../redux/editGrpDp';
 
 const UpdateGrpProfile = () => {
@@ -11,7 +12,7 @@ const UpdateGrpProfile = () => {
 
     const opened = useSelector((state: any) => state.showEditGrpDpModal.show);
     const details = useSelector((state: any) => state.showEditGrpDpModal.dataSave);
-    
+
 
     const fileInput = useRef<HTMLInputElement>(null);
 
@@ -37,9 +38,17 @@ const UpdateGrpProfile = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then((res) => console.log("datasend")
+            .then((res) => {
+                toast.success("Image edited", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            }
             )
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
 
         dispatch(setEditGrpDpSwitchOff())
     }
@@ -47,6 +56,7 @@ const UpdateGrpProfile = () => {
 
     return (
         <>
+            <ToastContainer />
             {opened ? (
                 <>
                     <div

@@ -63,8 +63,10 @@ const ChatBody = ({ typingStatus }: any) => {
                 .then((res) => setData(res.data))
                 .catch((err) => console.log(err));
 
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            toast.warn(err.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
         }
     }
 
@@ -75,17 +77,23 @@ const ChatBody = ({ typingStatus }: any) => {
                 .then((res) => {
                     setMessage(res.data)
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    toast.warn(err.message, {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                });
 
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            toast.warn(err.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
         }
     }
 
     useEffect(() => {
         group()
         message()
-    }, [msg,boolean])
+    }, [msg, boolean])
 
     return (
         <div className='smallScreenChatZ z-40'>

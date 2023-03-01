@@ -4,7 +4,7 @@ import { setEditUserSwitchOff } from "../../../redux/editUser";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useState } from "react";
 import { booleanSwitch } from "../../../redux/boolean";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const UserProfileEdit = () => {
     const [userName, setUserName] = useState('')
@@ -31,7 +31,11 @@ const UserProfileEdit = () => {
                 dispatch(booleanSwitch())
             }
             )
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
 
         dispatch(setEditUserSwitchOff())
     }
@@ -40,6 +44,7 @@ const UserProfileEdit = () => {
         <>
             {opened ? (
                 <>
+                <ToastContainer/>
                     <div
                         className="justify-center w-full items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                     >

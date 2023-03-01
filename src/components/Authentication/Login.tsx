@@ -106,7 +106,9 @@ const Login = () => {
                     timeout()
                 });
         } else {
-            alert("Something went wrong");
+            toast.warn("Something Went wrong", {
+                position: toast.POSITION.TOP_CENTER,
+            });
         }
         timeout()
     }
@@ -118,13 +120,23 @@ const Login = () => {
             localStorage.setItem("email", data.user.email)
             const uid = data.user.uid;
             axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email: data.user.email })
-                .then((res) => console.log(res)
+                .then((res) =>{
+                    toast.success("Succesfully logged in", {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                }
                 )
-                .catch((err) => alert(err.message));
+                .catch((err) => {
+                    toast.warn(err.message, {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                });
             dispatch(setAuthentication())
             navigate("/");
         }).catch((error) => {
-            alert(error);
+            toast.warn(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });;
         })
     }
     return (

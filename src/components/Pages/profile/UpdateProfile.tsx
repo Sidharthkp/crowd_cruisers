@@ -1,8 +1,8 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-import {useRef, useState} from 'react'
+import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { booleanSwitch } from '../../../redux/boolean';
 import { setEditDpSwitchOff } from '../../../redux/editDp';
 
@@ -13,7 +13,7 @@ const UpdateProfile = () => {
 
     const opened = useSelector((state: any) => state.showEditDpModal.show);
     const details = useSelector((state: any) => state.showEditDpModal.dataSave);
-    
+
 
     const fileInput = useRef<HTMLInputElement>(null);
 
@@ -46,7 +46,11 @@ const UpdateProfile = () => {
                 dispatch(booleanSwitch())
             }
             )
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
 
         dispatch(setEditDpSwitchOff())
     }
@@ -54,6 +58,7 @@ const UpdateProfile = () => {
 
     return (
         <>
+            <ToastContainer />
             {opened ? (
                 <>
                     <div

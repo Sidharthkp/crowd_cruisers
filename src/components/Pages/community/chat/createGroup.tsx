@@ -2,7 +2,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { booleanSwitch } from '../../../../redux/boolean';
 import { setCreateSwitchOff } from '../../../../redux/createModal';
 
@@ -25,9 +25,13 @@ const CreateModal = () => {
             .then((res) => {
                 toast.success("Created group successfully !", {
                     position: toast.POSITION.TOP_CENTER,
-                  });
+                });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.warn(err.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            });
 
         dispatch(setCreateSwitchOff())
         dispatch(booleanSwitch())
@@ -35,6 +39,7 @@ const CreateModal = () => {
 
     return (
         <>
+            <ToastContainer />
             {opened ? (
                 <>
                     <div
