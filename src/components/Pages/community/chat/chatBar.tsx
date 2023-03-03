@@ -1,8 +1,10 @@
 import axios from "axios";
+import { getIdToken, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { FaRegHandshake, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import { auth } from "../../../../firebase/config";
 import { booleanSwitch } from "../../../../redux/boolean";
 import { openGroupSwitch } from "../../../../redux/clickedGroup";
 import { setCreateSwitchOn } from "../../../../redux/createModal";
@@ -27,8 +29,17 @@ const ChatBar = () => {
 
   const getGroups = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/get`);
-      setGroup(res.data);
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const token = await getIdToken(user);
+          const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/get`, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            }
+          });
+          setGroup(res.data);
+        }
+      })
     } catch (err: any) {
       toast.warn(err.message, {
         position: toast.POSITION.TOP_CENTER,

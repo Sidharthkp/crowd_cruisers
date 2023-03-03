@@ -6,6 +6,8 @@ import { format } from 'timeago.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { booleanSwitch } from '../../../redux/boolean';
 import { toast, ToastContainer } from 'react-toastify';
+import { getIdToken, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../firebase/config';
 
 const MapPage = () => {
     if (localStorage.getItem("email") !== null) {
@@ -45,8 +47,17 @@ const MapPage = () => {
         });
         const getPins = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins`);
-                setPins(res.data);
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        const token = await getIdToken(user);
+                        const res = await axios.get(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins`, {
+                            headers: {
+                                authorization: `Bearer ${token}`,
+                            }
+                        });
+                        setPins(res.data);
+                    }
+                })
             } catch (err: any) {
                 toast.warn(err.message, {
                     position: toast.POSITION.TOP_CENTER,
@@ -60,10 +71,19 @@ const MapPage = () => {
     const handleShowPopup = async (id: any, latitude: any, longitude: any, username: any) => {
         if (username === currentUser) {
             try {
-                await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins/pinDelete`, { id })
-                    .then(() =>
-                        dispatch(booleanSwitch())
-                    )
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        const token = await getIdToken(user);
+                        await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins/pinDelete`, { id }, {
+                            headers: {
+                                authorization: `Bearer ${token}`,
+                            }
+                        })
+                            .then(() =>
+                                dispatch(booleanSwitch())
+                            )
+                    }
+                })
             } catch (err: any) {
                 toast.warn(err.message, {
                     position: toast.POSITION.TOP_CENTER,
@@ -96,10 +116,19 @@ const MapPage = () => {
         }
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins`, newPin)
-            setPins([...pins, res.data])
-            setNewPlace(null);
-            dispatch(booleanSwitch())
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const token = await getIdToken(user);
+                    const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/pins`, newPin, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    setPins([...pins, res.data])
+                    setNewPlace(null);
+                    dispatch(booleanSwitch())
+                }
+            })
         } catch (err: any) {
             toast.warn(err.message, {
                 position: toast.POSITION.TOP_CENTER,

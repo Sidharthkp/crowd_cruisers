@@ -1,7 +1,9 @@
 import axios from "axios";
+import { getIdToken, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { toast, ToastContainer } from "react-toastify";
+import { auth } from "../../../firebase/config";
 import { setSwitchOff } from "../../../redux/members";
 
 const Members = () => {
@@ -12,14 +14,22 @@ const Members = () => {
     const data = useSelector((state: any) => state.showMembers.data);
 
     useEffect(() => {
-        console.log(data);
-        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showMembers`, { data })
-            .then((res) => setDetails(res.data.members))
-            .catch((err) => {
-                toast.warn(err.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            });
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
+                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/showMembers`, { data }, {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    }
+                })
+                    .then((res) => setDetails(res.data.members))
+                    .catch((err) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
+            }
+        })
     }, [data])
     const closeButton = () => {
         dispatch(setSwitchOff());

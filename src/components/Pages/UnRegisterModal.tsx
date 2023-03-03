@@ -5,10 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { setUnRegisterSwitchOff } from "../../redux/unregister";
 import { booleanSwitch } from "../../redux/boolean";
 import { useEffect, useState } from "react";
+import { getIdToken, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
 
 const Unregister = () => {
     const [saved, setSaved] = useState([{ _id: '' }])
-    
+
     const opened = useSelector((state: any) => state.showUnRegisterPage.show);
     const id = useSelector((state: any) => state.showUnRegisterPage.id);
     const dispatch = useDispatch();
@@ -32,8 +34,17 @@ const Unregister = () => {
     }
 
     const savedGet = async () => {
-        const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { email: username });
-        setSaved(res.data.wishList)
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
+                const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { email: username }, {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    }
+                });
+                setSaved(res.data.wishList)
+            }
+        })
     }
 
     useEffect(() => {

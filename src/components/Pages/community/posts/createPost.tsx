@@ -6,6 +6,8 @@ import { setCreateSwitchOff } from '../../../../redux/createPost';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast, ToastContainer } from 'react-toastify';
+import { getIdToken, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../../firebase/config';
 
 const Modal = () => {
     const [event, setEvent] = useState('ride');
@@ -30,45 +32,52 @@ const Modal = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        
 
-        const formData = new FormData()
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
 
-        formData.append('description', description);
-        formData.append('details', details);
-        formData.append('event', event);
-        if (date) {
-            formData.append('registrationEndsOn', date.toISOString());
-        }
 
-        if (image) {
-            formData.append('postImage', image)
-        }
+                const formData = new FormData()
 
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/post`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                formData.append('description', description);
+                formData.append('details', details);
+                formData.append('event', event);
+                if (date) {
+                    formData.append('registrationEndsOn', date.toISOString());
                 }
-            })
-            .then((res) => {
-                toast.success("Posted", {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            }
-            )
-            .catch((err) => {
-                toast.warn(err.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            });
 
-        dispatch(setCreateSwitchOff())
+                if (image) {
+                    formData.append('postImage', image)
+                }
+
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/post`, formData, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        toast.success("Posted", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    }
+                    )
+                    .catch((err) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
+
+                dispatch(setCreateSwitchOff())
+            }
+        })
     }
 
     return (
         <>
-            <ToastContainer/>
+            <ToastContainer />
             {opened ? (
                 <>
                     <div

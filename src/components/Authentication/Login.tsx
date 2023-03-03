@@ -1,4 +1,4 @@
-import { sendEmailVerification, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { getIdToken, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { FaLinkedinIn, FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -45,14 +45,23 @@ const Login = () => {
                         });
                     });
             } else {
-                localStorage.setItem("email", data.user.email)
-                const uid = data.user.uid;
-                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email })
-                    .then((res) => console.log(res)
-                    )
-                    .catch((err) => console.log(err));
-                dispatch(setAuthentication())
-                navigate("/");
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        localStorage.setItem("email", data.user.email)
+                        const token = await getIdToken(user);
+                        const uid = data.user.uid;
+                        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email }, {
+                            headers: {
+                                authorization: `Bearer ${token}`,
+                            }
+                        })
+                            .then((res) => console.log(res)
+                            )
+                            .catch((err) => console.log(err));
+                        dispatch(setAuthentication())
+                        navigate("/");
+                    }
+                })
             }
         }).catch((error) => {
             alert(error.message);
@@ -117,22 +126,32 @@ const Login = () => {
     const handleClick = (e: any) => {
         e.preventDefault()
         signInWithPopup(auth, provider).then((data: any) => {
-            localStorage.setItem("email", data.user.email)
-            const uid = data.user.uid;
-            axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email: data.user.email })
-                .then((res) =>{
-                    toast.success("Succesfully logged in", {
-                        position: toast.POSITION.TOP_CENTER,
-                    });
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    localStorage.setItem("email", data.user.email)
+                    const token = await getIdToken(user);
+                    const uid = data.user.uid;
+                    axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email: data.user.email }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                        .then((res) => {
+                            toast.success("Succesfully logged in", {
+                                position: toast.POSITION.TOP_CENTER,
+                            });
+                        }
+                        )
+                        .catch((err) => {
+                            toast.warn(err.message, {
+                                position: toast.POSITION.TOP_CENTER,
+                            });
+                        });
+                    dispatch(setAuthentication())
+                    navigate("/");
                 }
-                )
-                .catch((err) => {
-                    toast.warn(err.message, {
-                        position: toast.POSITION.TOP_CENTER,
-                    });
-                });
-            dispatch(setAuthentication())
-            navigate("/");
+            })
+
         }).catch((error) => {
             toast.warn(error.message, {
                 position: toast.POSITION.TOP_CENTER,

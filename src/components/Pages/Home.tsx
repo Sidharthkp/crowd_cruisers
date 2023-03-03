@@ -9,6 +9,8 @@ import { FaHeart } from 'react-icons/fa';
 import { setUnRegisterSwitchOn } from '../../redux/unregister';
 import Unregister from './UnRegisterModal';
 import { booleanSwitch } from '../../redux/boolean';
+import { auth } from '../../firebase/config';
+import { getIdToken, onAuthStateChanged } from 'firebase/auth';
 let currentDate = new Date();
 const home = () => {
     const [currentToastId, setCurrentToastId] = useState<any>(null);
@@ -53,16 +55,25 @@ const home = () => {
     const saveToWishlist = (id: any) => {
         try {
             if (username) {
-                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/wishList`, { id, email: username })
-                    .then((res) => {
-                        dispatch(booleanSwitch())
-                        toast.success("Saved for later...", {
-                            position: toast.POSITION.TOP_CENTER,
-                            toastId: customId
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        const token = await getIdToken(user);
+                        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/wishList`, { id, email: username }, {
+                            headers: {
+                                authorization: `Bearer ${token}`,
+                            }
                         })
+                            .then((res) => {
+                                dispatch(booleanSwitch())
+                                toast.success("Saved for later...", {
+                                    position: toast.POSITION.TOP_CENTER,
+                                    toastId: customId
+                                })
+                            }
+                            )
+                            .catch((err) => generateError(err.message));
                     }
-                    )
-                    .catch((err) => generateError(err.message));
+                })
             } else {
                 toast.warn("Please login to continue..", {
                     position: toast.POSITION.TOP_CENTER,
@@ -74,17 +85,26 @@ const home = () => {
         }
     }
     const remove = (id: any) => {
-        axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeSaved`, { email: username, id })
-            .then((res) => {
-                {
-                    dispatch(booleanSwitch())
-                    toast.success("Succesfully removed from whishlist !", {
-                        position: toast.POSITION.TOP_CENTER,
-                        toastId: customId
-                    });
-                }
-            })
-            .catch((err) => generateError(err.message));
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
+                axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeSaved`, { email: username, id }, {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    }
+                })
+                    .then((res) => {
+                        {
+                            dispatch(booleanSwitch())
+                            toast.success("Succesfully removed from whishlist !", {
+                                position: toast.POSITION.TOP_CENTER,
+                                toastId: customId
+                            });
+                        }
+                    })
+                    .catch((err) => generateError(err.message));
+            }
+        })
     }
 
     const getPosts = async () => {
@@ -100,8 +120,17 @@ const home = () => {
     }
     const getSaved = async () => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { email: username });
-            setSaved(res.data.wishList);
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const token = await getIdToken(user);
+                    const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { email: username }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    });
+                    setSaved(res.data.wishList);
+                }
+            })
 
         } catch (err: any) {
             generateError(err.message);

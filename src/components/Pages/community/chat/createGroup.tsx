@@ -1,8 +1,10 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
+import { getIdToken, onAuthStateChanged } from 'firebase/auth';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from 'react-toastify';
+import { auth } from '../../../../firebase/config';
 import { booleanSwitch } from '../../../../redux/boolean';
 import { setCreateSwitchOff } from '../../../../redux/createModal';
 
@@ -14,27 +16,35 @@ const CreateModal = () => {
         dispatch(setCreateSwitchOff())
     }
 
-    const adminName = localStorage.getItem('email') || ''
+    const adminName = localStorage.getItem('email') || '';
 
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/create`, { roomName, adminName }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((res) => {
+                        toast.success("Created group successfully !", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    })
+                    .catch((err) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
 
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/create`, { roomName, adminName })
-            .then((res) => {
-                toast.success("Created group successfully !", {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            })
-            .catch((err) => {
-                toast.warn(err.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            });
-
-        dispatch(setCreateSwitchOff())
-        dispatch(booleanSwitch())
+                dispatch(setCreateSwitchOff())
+                dispatch(booleanSwitch())
+            }
+        })
     }
 
     return (

@@ -1,8 +1,10 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
+import { getIdToken, onAuthStateChanged } from 'firebase/auth';
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
+import { auth } from '../../../firebase/config';
 import { booleanSwitch } from '../../../redux/boolean';
 import { setEditDpSwitchOff } from '../../../redux/editDp';
 
@@ -24,35 +26,41 @@ const UpdateProfile = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
 
-        const formData = new FormData()
+                const formData = new FormData()
 
-        if (image) {
-            formData.append('postImage', image)
-        }
-
-        formData.append('email', details)
-
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/editImage`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                if (image) {
+                    formData.append('postImage', image)
                 }
-            })
-            .then((res) => {
-                toast.success("Succesfully Updated !", {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-                dispatch(booleanSwitch())
-            }
-            )
-            .catch((err) => {
-                toast.warn(err.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            });
 
-        dispatch(setEditDpSwitchOff())
+                formData.append('email', details)
+
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/editImage`, formData, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        toast.success("Succesfully Updated !", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                        dispatch(booleanSwitch())
+                    }
+                    )
+                    .catch((err) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
+
+                dispatch(setEditDpSwitchOff())
+            }
+        })
     }
 
 

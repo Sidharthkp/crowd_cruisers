@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { booleanSwitch } from '../../../../redux/boolean';
 import { toast, ToastContainer } from 'react-toastify';
+import { getIdToken, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../../firebase/config';
 
 const JoinModalPage = () => {
     const [groups, setGroup] = useState([]);
@@ -27,8 +29,17 @@ const JoinModalPage = () => {
 
     const getGroups = async () => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/getGroup`, { username })
-            setGroup(res.data)
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const token = await getIdToken(user);
+                    const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/getGroup`, { username }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    setGroup(res.data)
+                }
+            })
         } catch (err: any) {
             toast.warn(err.message, {
                 position: toast.POSITION.TOP_CENTER,
@@ -41,21 +52,30 @@ const JoinModalPage = () => {
 
     const submitAction = (e: any) => {
         e.preventDefault()
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/join`, { selection, username })
-            .then((res) => {
-                toast.success("Joined Group successfully !", {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            })
-            .catch((err) => {
-                toast.warn(err.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            });
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/join`, { selection, username }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((res) => {
+                        toast.success("Joined Group successfully !", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    })
+                    .catch((err) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
 
-        dispatch(setSwitchOff())
-        dispatch(booleanSwitch())
+                dispatch(setSwitchOff())
+                dispatch(booleanSwitch())
+            }
+        })
     }
 
     return (

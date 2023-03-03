@@ -1,6 +1,6 @@
 import { FaLinkedinIn, FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { auth, provider } from '../../firebase/config'
-import { createUserWithEmailAndPassword, signInWithPopup, sendEmailVerification } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, sendEmailVerification, onAuthStateChanged, getIdToken } from 'firebase/auth';
 import { useDispatch } from 'react-redux'
 import { setAuthentication } from '../../redux/Authentication/reducer';
 import { useNavigate } from 'react-router-dom';
@@ -79,14 +79,24 @@ const Signup = () => {
     const handleClick = (e: any) => {
         e.preventDefault()
         signInWithPopup(auth, provider).then((data: any) => {
-            localStorage.setItem("email", data.user.email)
-            const uid = data.user.uid;
-            axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email: data.user.email })
-                .then((res) => console.log(res)
-                )
-                .catch((err) => console.log(err));
-            dispatch(setAuthentication())
-            navigate("/");
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    localStorage.setItem("email", data.user.email)
+                    const token = await getIdToken(user);
+                    const uid = data.user.uid;
+                    axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/addNew`, { uid, email: data.user.email }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                        .then((res) => console.log(res)
+                        )
+                        .catch((err) => console.log(err));
+                    dispatch(setAuthentication())
+                    navigate("/");
+                }
+            })
+
         }).catch((error) => {
             alert(error.message);
         })

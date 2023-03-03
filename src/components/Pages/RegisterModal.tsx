@@ -4,9 +4,11 @@ import { setRegisterSwitchOff } from '../../redux/registerPage';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { booleanSwitch } from "../../redux/boolean";
+import { getIdToken, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
 
 const Modal = () => {
-    
+
     const opened = useSelector((state: any) => state.showRegisterPage.show);
     const id = useSelector((state: any) => state.showRegisterPage.id);
     const dispatch = useDispatch();
@@ -20,21 +22,32 @@ const Modal = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/join`, { email: username, id })
-            .then((res) =>
-                {dispatch(booleanSwitch())
-                toast.success("Registered...", {
-                    position: toast.POSITION.TOP_CENTER
-                })}
-            )
-            .catch((err) => 
-                toast.warn("User already exist...", {
-                    position: toast.POSITION.TOP_CENTER
-                })
-            );
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
 
-        dispatch(setRegisterSwitchOff())
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/join`, { email: username, id }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((res) => {
+                        dispatch(booleanSwitch())
+                        toast.success("Registered...", {
+                            position: toast.POSITION.TOP_CENTER
+                        })
+                    }
+                    )
+                    .catch((err) =>
+                        toast.warn("User already exist...", {
+                            position: toast.POSITION.TOP_CENTER
+                        })
+                    );
+
+                dispatch(setRegisterSwitchOff())
+            }
+        })
     }
 
     return (

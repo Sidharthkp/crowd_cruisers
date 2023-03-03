@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { setEditGrpDpSwitchOn } from '../../../../redux/editGrpDp';
 import UpdateGrpProfile from './dpChange';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { getIdToken, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../../firebase/config';
 
 const ROOT_CSS = css({
     height: 400,
@@ -58,10 +60,19 @@ const ChatBody = ({ typingStatus }: any) => {
 
     const group = () => {
         try {
-            axios
-                .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/open`, { details })
-                .then((res) => setData(res.data))
-                .catch((err) => console.log(err));
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const token = await getIdToken(user);
+                    axios
+                        .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/open`, { details }, {
+                            headers: {
+                                authorization: `Bearer ${token}`,
+                            }
+                        })
+                        .then((res) => setData(res.data))
+                        .catch((err) => console.log(err));
+                }
+            })
 
         } catch (err: any) {
             toast.warn(err.message, {
@@ -72,16 +83,25 @@ const ChatBody = ({ typingStatus }: any) => {
 
     const message = () => {
         try {
-            axios
-                .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/message`, { details })
-                .then((res) => {
-                    setMessage(res.data)
-                })
-                .catch((err) => {
-                    toast.warn(err.message, {
-                        position: toast.POSITION.TOP_CENTER,
-                    });
-                });
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const token = await getIdToken(user);
+                    axios
+                        .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/message`, { details }, {
+                            headers: {
+                                authorization: `Bearer ${token}`,
+                            }
+                        })
+                        .then((res) => {
+                            setMessage(res.data)
+                        })
+                        .catch((err) => {
+                            toast.warn(err.message, {
+                                position: toast.POSITION.TOP_CENTER,
+                            });
+                        });
+                }
+            })
 
         } catch (err: any) {
             toast.warn(err.message, {

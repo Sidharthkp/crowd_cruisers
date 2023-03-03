@@ -8,6 +8,8 @@ import { setUnRegisterSwitchOn } from "../../../redux/unregister";
 import Unregister from "../UnRegisterModal";
 import RegisterPage from '../RegisterModal'
 import { booleanSwitch } from "../../../redux/boolean";
+import { getIdToken, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase/config";
 let currentDate = new Date();
 const Whishlist = () => {
     const [posts, setPosts] = useState({ wishList: [] });
@@ -16,8 +18,17 @@ const Whishlist = () => {
     const dispatch = useDispatch()
     const getPosts = async () => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username });
-            setPosts(res.data);
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const token = await getIdToken(user);
+                    const res = await axios.post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/savedItems`, { username }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    });
+                    setPosts(res.data);
+                }
+            })
 
         } catch (err: any) {
             toast.warn(err.message, {

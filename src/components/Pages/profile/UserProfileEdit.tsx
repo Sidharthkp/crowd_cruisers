@@ -5,6 +5,8 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useState } from "react";
 import { booleanSwitch } from "../../../redux/boolean";
 import { toast, ToastContainer } from "react-toastify";
+import { getIdToken, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase/config";
 
 const UserProfileEdit = () => {
     const [userName, setUserName] = useState('')
@@ -21,30 +23,39 @@ const UserProfileEdit = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
 
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/profileEdit`, { details, userName })
-            .then((res) => {
-                toast.success("Succesfully Updated !", {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-                dispatch(booleanSwitch())
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/profile/profileEdit`, { details, userName }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((res) => {
+                        toast.success("Succesfully Updated !", {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                        dispatch(booleanSwitch())
+                    }
+                    )
+                    .catch((err) => {
+                        toast.warn(err.message, {
+                            position: toast.POSITION.TOP_CENTER,
+                        });
+                    });
+
+                dispatch(setEditUserSwitchOff())
             }
-            )
-            .catch((err) => {
-                toast.warn(err.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            });
-
-        dispatch(setEditUserSwitchOff())
+        })
     }
 
     return (
         <>
             {opened ? (
                 <>
-                <ToastContainer/>
+                    <ToastContainer />
                     <div
                         className="justify-center w-full items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                     >
