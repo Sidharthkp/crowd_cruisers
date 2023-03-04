@@ -53,44 +53,63 @@ const Unregister = () => {
 
     const handleSubmitWish = (e: any) => {
         e.preventDefault();
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
 
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeAndAddInWishlist`, { email: username, id })
-            .then((res) => {
-                dispatch(booleanSwitch())
-                toast.success("Un Registered And Added To Wishlist", {
-                    position: toast.POSITION.TOP_CENTER
-                })
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/removeAndAddInWishlist`, { email: username, id }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((res) => {
+                        dispatch(booleanSwitch())
+                        toast.success("Un Registered And Added To Wishlist", {
+                            position: toast.POSITION.TOP_CENTER
+                        })
+                    }
+                    )
+                    .catch((err) =>
+                        toast.warn("Already removed", {
+                            position: toast.POSITION.TOP_CENTER
+                        })
+                    );
+
+                dispatch(setUnRegisterSwitchOff())
             }
-            )
-            .catch((err) =>
-                toast.warn("Already removed", {
-                    position: toast.POSITION.TOP_CENTER
-                })
-            );
-
-        dispatch(setUnRegisterSwitchOff())
+        })
     }
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        axios
-            .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/remove`, { email: username, id })
-            .then((res) => {
-                dispatch(booleanSwitch())
-                toast.success("Un Registered...", {
-                    position: toast.POSITION.TOP_CENTER
-                })
-            }
-            )
-            .catch((err) =>
-                toast.warn("Already removed", {
-                    position: toast.POSITION.TOP_CENTER
-                })
-            );
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const token = await getIdToken(user);
 
-        dispatch(setUnRegisterSwitchOff())
+                axios
+                    .post(`${import.meta.env.VITE_SERVER_CONFIG}/api/userPosts/remove`, { email: username, id }, {
+                        headers: {
+                            authorization: `Bearer ${token}`,
+                        }
+                    })
+                    .then((res) => {
+                        dispatch(booleanSwitch())
+                        toast.success("Un Registered...", {
+                            position: toast.POSITION.TOP_CENTER
+                        })
+                    }
+                    )
+                    .catch((err) =>
+                        toast.warn("Already removed", {
+                            position: toast.POSITION.TOP_CENTER
+                        })
+                    );
+
+                dispatch(setUnRegisterSwitchOff())
+            }
+        })
     }
 
     return (
