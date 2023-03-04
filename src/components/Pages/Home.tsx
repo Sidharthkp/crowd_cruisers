@@ -12,6 +12,7 @@ import { booleanSwitch } from '../../redux/boolean';
 import { auth } from '../../firebase/config';
 import { getIdToken, onAuthStateChanged } from 'firebase/auth';
 let currentDate = new Date();
+
 const home = () => {
     const [currentToastId, setCurrentToastId] = useState<any>(null);
     const [posts, setPosts] = React.useState([]);
