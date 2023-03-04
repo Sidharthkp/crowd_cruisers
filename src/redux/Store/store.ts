@@ -12,6 +12,7 @@ import showEditGrpDpSlice from '../editGrpDp'
 import showEditUserSlice from '../editUser'
 import showUnRegisterSlice from '../unregister'
 import booleanSlice from '../boolean'
+import showEditGrpNameSlice from '../grpName'
 
 export default configureStore({
     reducer: {
@@ -28,5 +29,6 @@ export default configureStore({
         showEditUserModal: showEditUserSlice,
         showUnRegisterPage: showUnRegisterSlice,
         changeBoolean: booleanSlice,
+        showEditGrpName: showEditGrpNameSlice
     },
 })

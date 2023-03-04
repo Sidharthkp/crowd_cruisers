@@ -9,9 +9,11 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { setEditGrpDpSwitchOn } from '../../../../redux/editGrpDp';
 import UpdateGrpProfile from './dpChange';
-import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleLeft, FaRegEdit, FaRegStickyNote } from 'react-icons/fa';
 import { getIdToken, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../../../firebase/config';
+import { setEditGrpNameSwitchOn } from '../../../../redux/grpName';
+import EditGrpName from './grpNameEdit';
 
 const ROOT_CSS = css({
     height: 400,
@@ -53,6 +55,16 @@ const ChatBody = ({ typingStatus }: any) => {
             dispatch(setEditGrpDpSwitchOn(id))
         } else {
             toast.warn("Only Admin can Edit DP...", {
+                position: toast.POSITION.TOP_CENTER
+            })
+        }
+    }
+
+    const openNameEdit = (id: any) => {
+        if (localStorage.getItem("email") === id.admin) {
+            dispatch(setEditGrpNameSwitchOn(id))
+        } else {
+            toast.warn("Only Admin can Edit Grp Name...", {
                 position: toast.POSITION.TOP_CENTER
             })
         }
@@ -119,6 +131,7 @@ const ChatBody = ({ typingStatus }: any) => {
         <div className='smallScreenChatZ z-40'>
             <ToastContainer />
             <UpdateGrpProfile />
+            <EditGrpName />
             {opened && datas ?
                 (
 
@@ -128,7 +141,7 @@ const ChatBody = ({ typingStatus }: any) => {
                                 <FaArrowAltCircleLeft onClick={handleLeaveChat} className="h-6 w-6 text-blue-500 cursor-pointer" />
                             </div>
                             <div className="w-4/6 flex flex-row">
-                                <div onClick={() => { openDPModal(datas._id) }} className='mr-4 cursor-pointer rounded-full w-1/6 bg-black'>
+                                <div onClick={() => { openDPModal(datas) }} className='mr-4 cursor-pointer rounded-full w-1/6 bg-black'>
                                     {datas.image ? (
                                         <img className='rounded-full z-50 w-16'
                                             src={`${import.meta.env.VITE_SERVER_CONFIG}/api/createGroup/image?q=${datas.image}`}
@@ -138,8 +151,13 @@ const ChatBody = ({ typingStatus }: any) => {
                                     )}
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='font-bold text-xl cursor-pointer' onClick={() => { openModal(datas) }}>
-                                        {datas.groupName}
+                                    <div className='font-bold text-xl flex flex-row cursor-pointer'>
+                                        <div onClick={() => { openModal(datas) }}>
+                                            {datas.groupName}
+                                        </div>
+                                        <button className='ml-4 mt-1' onClick={() => { openNameEdit(datas) }}>
+                                            <FaRegEdit />
+                                        </button>
                                     </div>
                                     <div className='text-sm font-thin'>
                                         <div className="text-sm text-gray-200">
