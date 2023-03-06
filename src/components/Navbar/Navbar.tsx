@@ -5,6 +5,7 @@ import { auth } from "../../firebase/config";
 import { setNotAuthenticated } from "../../redux/Authentication/reducer";
 import { FaHeartbeat, FaHome, FaMapMarkerAlt, FaPowerOff, FaUserAlt, FaUsers } from "react-icons/fa";
 import { useState } from "react";
+import { booleanSwitch } from "../../redux/boolean";
 
 const NavBar = () => {
     const navigate = useNavigate()
@@ -45,6 +46,7 @@ const NavBar = () => {
     const logout = () => {
         signOut(auth).then(() => {
             localStorage.clear();
+            dispatch(booleanSwitch())
             dispatch(setNotAuthenticated())
             navigate("/");
         })
