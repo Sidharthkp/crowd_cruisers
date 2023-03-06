@@ -111,10 +111,7 @@ const Profile = () => {
                                     alt=""
                                 />
                             ) : (
-                                <img className="rounded-xl inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-                                    src="/src/assets/Images/PngItem_1370051.png"
-                                    alt=""
-                                />
+                                <img className="rounded-xl inset-0 h-full object-cover opacity-75 transition-opacity group-hover:opacity-50" src="https://www.transparentpng.com/thumb/user/blak-frame-user-profile-png-icon--cupR3D.png" alt="blak frame user profile png icon @transparentpng.com" />
                             )
                         }
                     </div>
@@ -133,7 +130,7 @@ const Profile = () => {
                                 :
                                 <div>
 
-                                    <h1 className="text-gray-500">Please add your name</h1>
+                                    <p className="text-gray-500">Please add your name</p>
 
                                 </div>
                             }</p>
