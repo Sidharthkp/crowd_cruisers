@@ -57,14 +57,20 @@ const Login = () => {
                         })
                             .then((res) => console.log(res)
                             )
-                            .catch((err) => console.log(err));
+                            .catch((err) => {
+                                toast.warn(err.message, {
+                                    position: toast.POSITION.TOP_CENTER,
+                                });
+                            });
                         dispatch(setAuthentication())
                         navigate("/");
                     }
                 })
             }
         }).catch((error) => {
-            alert(error.message);
+            toast.warn(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
         })
     }
     const signup = (e: any) => {
