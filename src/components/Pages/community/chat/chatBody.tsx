@@ -82,7 +82,11 @@ const ChatBody = ({ typingStatus }: any) => {
                             }
                         })
                         .then((res) => setData(res.data))
-                        .catch((err) => console.log(err));
+                        .catch((err) => {
+                            toast.warn(err.message, {
+                                position: toast.POSITION.TOP_CENTER,
+                            });
+                        });
                 }
             })
 
@@ -186,8 +190,6 @@ const ChatBody = ({ typingStatus }: any) => {
                                             <div className='rounded-xl chatColourRecieve p-5 z-50 m-4'>
                                                 <div className='mb-4 text-black font-bold text-sm'>
                                                     {message.name}
-                                                    {console.log(message.text)
-                                                    }
                                                 </div>
                                                 <div className='text-white z-50'>
                                                     {message.text}
