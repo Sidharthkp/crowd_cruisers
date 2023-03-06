@@ -142,7 +142,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className="profileElements h-full flex w-full flex-col overflow-y-auto scrollbar-hide">
+            <div className="profileElements p-12 h-full flex w-full flex-col overflow-y-auto scrollbar-hide">
                 <div className="mt-4">
                     <h1 className="font-bold text-lg mb-5">Your Community</h1>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
