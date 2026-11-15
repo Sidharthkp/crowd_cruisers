@@ -2,7 +2,7 @@
 
 **A motorcycle community evolving into a smarter way to plan and ride together.**
 
-Crowd Cruisers began as a community-focused motorcycle web app. This repository preserves that early project and provides a starting point for a more useful, modern product: helping riders discover rides, organize groups, and prepare for journeys with confidence.
+Crowd Cruisers began as a community-focused motorcycle web app. Its original implementation is split across a frontend and a companion server. Together, they provide a starting point for a more useful, modern product: helping riders discover rides, organize groups, and prepare for journeys with confidence.
 
 > **Project status:** Early-stage concept and legacy prototype. The product direction below is a proposal for the next version—not a claim that these capabilities are already implemented.
 
@@ -36,20 +36,18 @@ A great group ride takes more than a map link. Riders need to know what they are
 
 ## Existing project: the starting point
 
-The original application is a React and TypeScript single-page web app. Its current codebase includes routes and screens for:
+The original product consists of two repositories:
 
-- A home page and navigation
-- Account registration, login, and Firebase authentication state
-- A map page
-- A community chat page
-- A wishlist page
-- A user profile page
+- **Frontend:** [`Sidharthkp/crowd_cruisers`](https://github.com/Sidharthkp/crowd_cruisers) — a React and TypeScript single-page web app.
+- **Server:** [`Sidharthkp/server_of_crowd-cruisers`](https://github.com/Sidharthkp/server_of_crowd-cruisers) — a JavaScript and Express server that provides API routes, data models, and Socket.IO messaging.
 
-These are features visible in the legacy codebase; they are not necessarily the recommended scope for the next version. The refreshed product should retain or replace parts only when they support the focused ride-planning direction above.
+The frontend code includes a home page and navigation, registration/login with Firebase authentication, a map page, community chat, wishlist, and profile pages. The server code includes API areas for map pins, posts and rides/events, groups, and user profiles. It uses MongoDB through Mongoose for application data and Firebase Admin middleware for authentication on protected routes. The server also uses Socket.IO for chat-related real-time messaging and Multer for image uploads.
+
+These are features visible in the legacy codebases—not a requirement to retain every feature. The refreshed product should keep, replace, or remove parts only when they support the focused ride-planning direction above.
 
 ## Proposed MVP
 
-Start with a focused, testable version rather than rebuilding every legacy screen:
+Start with a focused, testable version rather than rebuilding every legacy screen or endpoint:
 
 - Browse and create community rides
 - View ride details, including route/map link, meetup point, date, distance, and pace
@@ -69,21 +67,29 @@ Start with a focused, testable version rather than rebuilding every legacy scree
 
 ## Technology
 
-The existing prototype uses:
+### Frontend
 
 - **React 18** and **TypeScript**
 - **Vite** for development and builds
 - **React Router** for page navigation
 - **Redux Toolkit / React Redux** for application state
-- **Firebase** for authentication and related backend integration in the existing code
+- **Firebase** for authentication integration
 - **Mapbox GL** and **react-map-gl** for map-related UI
 - **Tailwind CSS**, **Sass**, and component libraries for styling and interface elements
 
-The repository's language composition is primarily TypeScript, with JavaScript, SCSS, CSS, and HTML also present. The stack describes the current codebase; it is not a commitment that every dependency will remain in a future rebuild.
+### Server
 
-## Run the existing project
+- **Node.js** and **Express** for the HTTP API
+- **MongoDB** with **Mongoose** for data persistence
+- **Firebase Admin** middleware for authentication on protected routes
+- **Socket.IO** for real-time chat events
+- **Multer** for image upload handling
 
-You need Node.js and npm installed.
+The frontend repository's language composition is primarily TypeScript, with JavaScript, SCSS, CSS, and HTML also present. The server repository is JavaScript. These describe the current codebases; they are not a commitment that every dependency or architectural choice will remain in a future rebuild.
+
+## Run the existing frontend
+
+You need Node.js and npm installed. From the frontend repository:
 
 ```bash
 npm install
@@ -96,7 +102,20 @@ To create a production build:
 npm run build
 ```
 
-Vite prints the local development URL in the terminal. Some existing features may require project-specific Firebase or map configuration; review the application configuration before expecting those integrations to work in a fresh environment. Never commit private credentials or API secrets.
+Vite prints the local development URL in the terminal. Some frontend features require project-specific Firebase or map configuration.
+
+## Run the existing server
+
+The server is maintained in the separate [`server_of_crowd-cruisers`](https://github.com/Sidharthkp/server_of_crowd-cruisers) repository. It expects a MongoDB connection string in `MONGO_URL` and listens on port `3000` in the current implementation.
+
+From that repository, install dependencies and start the development server:
+
+```bash
+npm install
+npm run dev
+```
+
+Configure required Firebase Admin credentials and other service settings securely for your environment. The existing server configuration should be reviewed before deployment; do not commit credentials or API secrets. The legacy server currently configures permissive CORS, so production deployment requires an explicit origin allowlist and a security review.
 
 ## Suggested next steps
 
@@ -104,7 +123,7 @@ Vite prints the local development URL in the terminal. Some existing features ma
 2. Choose one community and geography for an initial pilot.
 3. Prototype the ride listing, ride details, and RSVP flow before expanding scope.
 4. Define privacy defaults and moderation expectations before adding location or messaging features.
-5. Modernize dependencies and configuration as part of implementation, with tests and documentation.
+5. Review the frontend/server integration, modernize dependencies and configuration, and add tests and documentation.
 6. Measure whether the product helps riders find and successfully coordinate rides, then decide what to build next.
 
 ## Vision
